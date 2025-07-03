@@ -1,6 +1,6 @@
 <x-app-layout>
     <!-- Profile Header -->
-    <div class="relative bg-gradient-to-r from-[#016DAE] to-[#00ADE5] h-52 shadow-sm">
+    <div class="relative bg-gradient-to-r from-[#016DAE] to-[#00ADE5] h-40 shadow-sm -mt-4">
         <div class="absolute -bottom-16 left-8">
             <div class="relative group">
                 <div class="w-32 h-32 rounded-full border-4 border-white shadow-md bg-gray-100 overflow-hidden">
