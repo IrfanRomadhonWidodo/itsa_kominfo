@@ -14,20 +14,6 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         
-        <!-- Theme Script - Load immediately to prevent flash -->
-        <script>
-            (function() {
-                const savedTheme = localStorage.getItem('theme') || 'system';
-                const isDark = savedTheme === 'dark' || 
-                              (savedTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-                
-                if (isDark) {
-                    document.documentElement.classList.add('dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                }
-            })();
-        </script>
     </head>
     <body class="font-sans antialiased bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
         <div class="min-h-screen">
@@ -43,45 +29,12 @@
             @endif
 
             <!-- Page Content -->
-            <main class="py-12">
+            <main>
                 {{ $slot }}
             </main>
+
+            @include('layouts.footer')
         </div>
 
-        <!-- Theme Switcher Script -->
-        <script>
-            document.addEventListener('alpine:init', () => {
-                Alpine.data('themeSwitcher', () => ({
-                    theme: localStorage.getItem('theme') || 'system',
-                    
-                    init() {
-                        this.applyTheme();
-                        
-                        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-                            if (this.theme === 'system') {
-                                this.applyTheme();
-                            }
-                        });
-                    },
-                    
-                    setTheme(newTheme) {
-                        this.theme = newTheme;
-                        localStorage.setItem('theme', newTheme);
-                        this.applyTheme();
-                    },
-                    
-                    applyTheme() {
-                        const isDark = this.theme === 'dark' || 
-                                      (this.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-                        
-                        if (isDark) {
-                            document.documentElement.classList.add('dark');
-                        } else {
-                            document.documentElement.classList.remove('dark');
-                        }
-                    }
-                }));
-            });
-        </script>
     </body>
 </html>

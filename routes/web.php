@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Pages\ContactController;
+use App\Http\Controllers\Pages\TentangKamiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,4 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+//Pages Routes
+Route::get('/kontak', [ContactController::class, 'index'])->name('contact');
+Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tentang-kami');
 require __DIR__.'/auth.php';
