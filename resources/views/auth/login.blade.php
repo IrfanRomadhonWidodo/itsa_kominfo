@@ -11,13 +11,14 @@
             <!-- Left Panel - Logo & Branding -->
             <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-[#016DAE] to-[#00ADE5] p-12 flex-col justify-center items-center text-white relative">
                 <!-- Floating elements -->
-                <div class="absolute inset-0 overflow-hidden">
-                    <div class="absolute top-1/4 left-1/4 w-16 h-16 bg-white/10 rounded-full animate-pulse"></div>
-                    <div class="absolute bottom-1/3 right-1/4 w-12 h-12 bg-white/5 rounded-full animate-bounce"></div>
-                    <div class="absolute top-2/3 left-1/6 w-20 h-20 bg-white/5 rounded-full animate-pulse delay-1000"></div>
-                </div>
+            <div class="absolute inset-0 overflow-hidden">
+                <div class="absolute top-1/4 left-1/4 w-16 h-16 bg-white/10 rounded-full animate-float"></div>
+                <div class="absolute bottom-1/3 right-1/4 w-12 h-12 bg-white/5 rounded-full animate-float-slow"></div>
+                <div class="absolute top-2/3 left-1/6 w-20 h-20 bg-white/5 rounded-full animate-float delay-1000"></div>
+            </div>
 
-                <div class="text-center z-10">
+
+        <div class="text-center z-10 animate-fadeInUp">
                     <!-- Logo -->
                     <div class="mb-8">
                         <div class="w-32 h-32 bg-white/20 rounded-full mx-auto mb-6 flex items-center justify-center shadow-xl backdrop-blur-sm">
@@ -39,7 +40,7 @@
                     <!-- Subtitle -->
                     <div class="mt-8 p-4 bg-white/10 rounded-lg backdrop-blur-sm">
                         <p class="text-sm opacity-80">
-                            Computer Security Incident Response Team
+                            Information Technology Security Assessment
                         </p>
                     </div>
                 </div>
@@ -160,35 +161,32 @@
         </div>
     </div>
 
-    <style>
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 0.3;
-            }
-            50% {
-                opacity: 0.1;
-            }
-        }
-        
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-        
-        .animate-pulse {
-            animation: pulse 3s ease-in-out infinite;
-        }
-        
-        .animate-bounce {
-            animation: bounce 2s ease-in-out infinite;
-        }
-        
-        .delay-1000 {
-            animation-delay: 1s;
-        }
-    </style>
+<style>
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+    }
+
+    @keyframes fadeInUp {
+        0% { opacity: 0; transform: translateY(30px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .animate-float-slow {
+        animation: float 10s ease-in-out infinite;
+    }
+
+    .animate-fadeInUp {
+        animation: fadeInUp 1s ease-out forwards;
+    }
+
+    .delay-1000 {
+        animation-delay: 1s;
+    }
+</style>
+
 </x-guest-layout>
