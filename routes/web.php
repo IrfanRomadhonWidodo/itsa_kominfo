@@ -27,6 +27,6 @@ Route::middleware('auth')->group(function () {
 Route::get('/kontak', [ContactController::class, 'index'])->name('contact');
 Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tentang-kami');
     // dokumen download
-    Route::get('/download', [DownloadController::class, 'index'])->name('download.index');
+    Route::get('/download', [DownloadController::class, 'index'])->name('download');
     Route::get('/download/word', [DownloadController::class, 'downloadWord'])->name('download.word');
 require __DIR__.'/auth.php';
