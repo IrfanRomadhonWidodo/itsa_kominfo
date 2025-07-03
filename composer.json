@@ -5,10 +5,17 @@
     "description": "The skeleton application for the Laravel framework.",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
+     "repositories": [
+        {
+            "type": "composer",
+            "url": "http://repo.packagist.org"
+        }
+    ],
     "require": {
         "php": "^8.2",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
+        "laravel/tinker": "^2.10.1",
+        "phpoffice/phpword": "^1.4"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
