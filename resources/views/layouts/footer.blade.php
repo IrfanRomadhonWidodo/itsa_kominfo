@@ -2,7 +2,8 @@
     <div class="container mx-auto px-6 md:px-10 grid grid-cols-1 md:grid-cols-4 gap-8">
         <!-- Logo -->
         <div class="flex items-start justify-start md:justify-center">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-20">
+            <img src="{{ asset('image/logo_banyumas.png') }}" alt="Logo" class="h-20">
+            <img src="{{ asset('image/LOGO_BARU.png') }}" alt="Logo" class="h-20">
         </div>
 
         <!-- Kolom: Empresa -->
