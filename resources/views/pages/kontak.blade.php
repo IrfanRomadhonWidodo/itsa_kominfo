@@ -5,49 +5,47 @@
 
             <!-- Contact Information and Feedback Form -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-<!-- Contact Information -->
-<div class="bg-gradient-to-br from-[#00ADE5] to-[#016DAE] rounded-2xl p-8 text-white shadow-xl relative overflow-hidden">
-    <div class="flex items-center mb-6">
-        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mr-4">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-            </svg>
-        </div>
-        <h2 class="text-2xl font-bold">Kontak Informasi</h2>
-    </div>
-    <p class="text-blue-100 mb-8">Katakan sesuatu untuk memulai daralan langsungi</p>
-    
-    <div class="space-y-6">
-        <div class="flex items-center">
-            <svg class="w-5 h-5 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-            </svg>
-            <span>(0281) 642765</span>
-        </div>
-        
-        <div class="flex items-center">
-            <svg class="w-5 h-5 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-            </svg>
-            <span>dinkaminfo@banyumaskab.gold</span>
-        </div>
-        
-        <div class="flex items-start">
-            <svg class="w-5 h-5 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-            <span>Jl. Masjid No. 8, Sokanegara, Kac.<br>Purivokerto Timur, Kabupaten Banyumas,<br>Jawa Tengah 53115</span>
-        </div>
-    </div>
+            <!-- Contact Information -->
+            <div class="bg-gradient-to-br from-[#00ADE5] to-[#016DAE] rounded-2xl p-8 text-white shadow-xl relative overflow-hidden">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mr-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold">Kontak Informasi</h2>
+                </div>
+                <p class="text-blue-100 mb-8">Katakan sesuatu untuk memulai daralan langsungi</p>
+                
+                <div class="space-y-6">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                        </svg>
+                        <span>(0281) 642765</span>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        <span>dinkominfo@banyumaskab.gold</span>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <svg class="w-5 h-5 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span>Jl. Masjid No. 8, Sokanegara, Kec.<br>Purwokerto Timur, Kabupaten Banyumas,<br>Jawa Tengah 53115</span>
+                    </div>
+                </div>
 
-    <!-- Lingkaran Dekoratif -->
-<!-- Lingkaran Dekoratif -->
-<div class="absolute bottom right-3 w-80 h-80 bg-[#51cef887] rounded-full"></div>
-<div class="absolute bottom-20 left-40 w-40 h-40 bg-[#51cef887] rounded-full"></div>
-
-
-</div>
+                <!-- Lingkaran Dekoratif -->
+            <!-- Lingkaran Dekoratif -->
+            <div class="absolute bottom right-3 w-80 h-80 bg-[#51cef887] rounded-full"></div>
+            <div class="absolute bottom-20 left-40 w-40 h-40 bg-[#51cef887] rounded-full"></div>
+            </div>
 
                 <!-- Feedback Form -->
                 <div class="bg-white rounded-2xl p-8 shadow-xl">
