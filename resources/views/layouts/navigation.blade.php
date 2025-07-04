@@ -103,13 +103,13 @@
                     </a>
 
                     <!-- Kontak -->
-                    <a href="{{ route('contact') }}" 
+                    <a href="{{ route('kontak') }}" 
                        class="relative px-4 py-2 text-sm font-semibold transition-all duration-300 rounded-lg group
-                              {{ request()->routeIs('contact') 
+                              {{ request()->routeIs('kontak') 
                                  ? 'text-[#016DAE] bg-[#00ADE5]/10' 
                                  : 'text-gray-600 hover:text-[#016DAE] hover:bg-[#00ADE5]/5' }}">
                         <span class="relative z-10">{{ __('Kontak') }}</span>
-                        @if(request()->routeIs('contact'))
+                        @if(request()->routeIs('kontak'))
                         <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#00ADE5] to-[#016DAE] rounded-full"></div>
                         @endif
                     </a>
@@ -295,7 +295,7 @@
                 {{ __('Tentang Kami') }}
             </a>
 
-            <a href="{{ route('contact') }}" class="flex items-center px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-300">
+            <a href="{{ route('kontak') }}" class="flex items-center px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-300">
                 <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                 </svg>

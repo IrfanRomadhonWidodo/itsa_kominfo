@@ -12,13 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('feedbacks', function (Blueprint $table) {
-        $table->id();
-        $table->string('name');
-        $table->string('email');
-        $table->string('telpon');
-        $table->string('subject');
-        $table->text('message');
-        $table->timestamps();
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->enum('subjek', ['masalah_teknis', 'keluhan_layanan', 'saran_pengembangan', 'pertanyaan_informasi']);
+            $table->text('pesan');
+            $table->enum('status', ['pending', 'processed', 'resolved'])->default('pending');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('feedbacks');
     }
 };
