@@ -25,6 +25,7 @@ class KontakController extends Controller
      */
     public function storeFeedback(Request $request)
     {
+        
         $validator = Validator::make($request->all(), [
             'subjek' => 'required|in:masalah_teknis,keluhan_layanan,saran_pengembangan,pertanyaan_informasi',
             'pesan' => 'required|string|min:10',

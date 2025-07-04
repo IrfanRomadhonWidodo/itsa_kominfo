@@ -25,7 +25,10 @@ Route::middleware('auth')->group(function () {
 
 //Pages Routes
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
-Route::post('/kontak/feedback', [KontakController::class, 'storeFeedback'])->name('kontak.feedback');
+Route::middleware(['auth'])->group(function() {
+    Route::post('/kontak/feedback', [KontakController::class, 'storeFeedback'])
+        ->name('kontak.feedback');
+});
 
 Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tentang-kami');
 Route::get('/download', [DownloadController::class, 'index'])->name('download');

@@ -67,7 +67,7 @@
                             @csrf
                             <div>
                                 <label for="subjek" class="block text-sm font-medium text-gray-700 mb-2">Pilih Subjek</label>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3" required>
                                     <label class="flex items-center p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
                                         <input type="radio" name="subjek" value="masalah_teknis" {{ old('subjek') == 'masalah_teknis' ? 'checked' : '' }} 
                                                class="mr-3 text-[#00ADE5] focus:ring-[#00ADE5]">
@@ -144,7 +144,6 @@
             <!-- Location Section -->
             <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
                 <div class="p-8">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Lokasi Kami</h2>
                     <p class="text-gray-600 mb-6">
                         Dinas Komunikasi dan Informatika Bidang Persandian dan Telekomunikasi Banyumas
                     </p>

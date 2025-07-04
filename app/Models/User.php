@@ -46,8 +46,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function feedbacks()
-{
-    return $this->hasMany(Feedback::class);
-}
+        public function feedbacks()
+    {
+        return $this->hasMany(Feedback::class);
+    }
 }
