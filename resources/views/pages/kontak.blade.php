@@ -52,17 +52,16 @@
                     
                     @auth
                         @if(session('success'))
-                            <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                            <div id="flash-message" class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
                                 <p class="text-green-800">{{ session('success') }}</p>
                             </div>
                         @endif
 
                         @if(session('error'))
-                            <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                            <div id="flash-message" class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
                                 <p class="text-red-800">{{ session('error') }}</p>
                             </div>
                         @endif
-
                         <form action="{{ route('kontak.feedback') }}" method="POST" class="space-y-6">
                             @csrf
                             <div>
@@ -112,7 +111,7 @@
                                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent @error('pesan') border-red-500 @enderror" 
                                           placeholder="Tuliskan pesan Anda...">{{ old('pesan') }}</textarea>
                                 @error('pesan')
-                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                    <p class="mt-1 text-sm text-red-600">{{ $messages }}</p>
                                 @enderror
                             </div>
 
@@ -182,4 +181,17 @@
             </div>
         </div>
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const flash = document.getElementById('flash-message');
+        if (flash) {
+            setTimeout(() => {
+                flash.classList.add('opacity-0', 'transition-opacity', 'duration-500');
+                setTimeout(() => flash.remove(), 500); // Setelah animasi selesai, hapus elemen
+            }, 5000); // 5000 ms = 5 detik
+        }
+    });
+</script>
+
 </x-app-layout>

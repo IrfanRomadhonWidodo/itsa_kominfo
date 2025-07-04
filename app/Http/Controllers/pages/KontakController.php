@@ -51,7 +51,6 @@ class KontakController extends Controller
 
             return redirect()->back()->with('success', 'Feedback berhasil dikirim! Terima kasih atas masukan Anda.');
         } catch (\Exception $e) {
-            \Log::error('Error saving feedback: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Terjadi kesalahan. Silakan coba lagi.');
         }
     }
