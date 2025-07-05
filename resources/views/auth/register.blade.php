@@ -52,7 +52,7 @@
                 </div>
 
                 <!-- Header -->
-                <div class="mb-2 relative">
+                <div class="mb-4 relative">
                     <h2 class="text-3xl font-bold text-slate-900 mb-2">Daftar Akun</h2>
                     <p class="text-gray-600">Daftarkan akun Anda untuk mengakses layanan ITSA Dinkominfo</p>
                     <!-- Floating Info Box -->
@@ -92,20 +92,48 @@
                     </div>
 
                     <!-- Password -->
-                    <div>
+                    <div class="relative">
                         <label for="password" class="block text-sm font-medium text-slate-800 mb-2">Kata Sandi</label>
                         <input id="password" name="password" type="password" required autocomplete="new-password"
-                            class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-300 rounded-lg text-slate-800 placeholder-gray-500 focus:outline-none focus:border-[#016DAE] focus:bg-white focus:ring-4 focus:ring-[#016DAE]/10 transition-all duration-300" />
+                            class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-300 rounded-lg text-slate-800 placeholder-gray-500 focus:outline-none focus:border-[#016DAE] focus:bg-white focus:ring-4 focus:ring-[#016DAE]/10 transition-all duration-300 pr-10" />
+                        
+                        <!-- Eye toggle -->
+                        <button type="button" onclick="togglePassword()" id="togglePasswordBtn"
+                            class="absolute right-3 top-11 text-gray-500 hover:text-[#016DAE] focus:outline-none hidden">
+                            <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                        </button>
+
                         <x-input-error :messages="$errors->get('password')" class="mt-2 text-red-600 text-sm" />
                     </div>
 
                     <!-- Confirm Password -->
-                    <div>
+                    <div class="relative">
                         <label for="password_confirmation" class="block text-sm font-medium text-slate-800 mb-2">Konfirmasi Kata Sandi</label>
                         <input id="password_confirmation" name="password_confirmation" type="password" required autocomplete="new-password"
-                            class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-300 rounded-lg text-slate-800 placeholder-gray-500 focus:outline-none focus:border-[#016DAE] focus:bg-white focus:ring-4 focus:ring-[#016DAE]/10 transition-all duration-300" />
+                            class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-300 rounded-lg text-slate-800 placeholder-gray-500 focus:outline-none focus:border-[#016DAE] focus:bg-white focus:ring-4 focus:ring-[#016DAE]/10 transition-all duration-300 pr-10" />
+
+                        <!-- Eye toggle -->
+                        <button type="button" onclick="togglePassword()" id="togglePasswordBtn"
+                            class="absolute right-3 top-11 text-gray-500 hover:text-[#016DAE] focus:outline-none hidden">
+                            <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                        </button>
+
+
                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2 text-red-600 text-sm" />
                     </div>
+
 
                     <!-- Submit -->
                     <div>
@@ -156,4 +184,73 @@
             animation-delay: 1s;
         }
     </style>
+
+<script>
+    function togglePassword() {
+        const input = document.getElementById("password");
+        const icon = document.getElementById("eyeIcon");
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.outerHTML = `<svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a10.054 10.054 0 012.158-3.114M6.1 6.1a9.953 9.953 0 0111.8 0m2.04 2.04A10.053 10.053 0 0121.542 12c-1.274 4.057-5.064 7-9.542 7-1.057 0-2.074-.163-3.025-.464M3 3l18 18"/>
+                </svg>`;
+        } else {
+            input.type = "password";
+            icon.outerHTML = `<svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>`;
+        }
+    }
+
+    function togglePasswordConfirmation() {
+        const input = document.getElementById("password_confirmation");
+        const icon = document.getElementById("eyeIconConfirmation");
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.outerHTML = `<svg id="eyeIconConfirmation" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a10.054 10.054 0 012.158-3.114M6.1 6.1a9.953 9.953 0 0111.8 0m2.04 2.04A10.053 10.053 0 0121.542 12c-1.274 4.057-5.064 7-9.542 7-1.057 0-2.074-.163-3.025-.464M3 3l18 18"/>
+                </svg>`;
+        } else {
+            input.type = "password";
+            icon.outerHTML = `<svg id="eyeIconConfirmation" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>`;
+        }
+    }
+
+    // Tampilkan icon saat input tidak kosong
+    document.getElementById("password").addEventListener("input", function () {
+        const btn = document.getElementById("togglePasswordBtn");
+        if (this.value.length > 0) {
+            btn.classList.remove("hidden");
+        } else {
+            btn.classList.add("hidden");
+        }
+    });
+
+    document.getElementById("password_confirmation").addEventListener("input", function () {
+        const btn = document.getElementById("togglePasswordConfirmationBtn");
+        if (this.value.length > 0) {
+            btn.classList.remove("hidden");
+        } else {
+            btn.classList.add("hidden");
+        }
+    });
+</script>
+
+
 </x-guest-layout>
