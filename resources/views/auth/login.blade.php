@@ -116,7 +116,7 @@
                             required 
                             autofocus 
                             autocomplete="username"
-                            placeholder="contoh@gmail.com"
+                            {{-- placeholder="contoh@gmail.com" --}}
                             class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-300 rounded-lg text-slate-800 placeholder-gray-500 focus:outline-none focus:border-[#016DAE] focus:bg-white focus:ring-4 focus:ring-[#016DAE]/10 transition-all duration-300"
                         />
                         <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-600 text-sm" />
@@ -133,7 +133,7 @@
                             type="password" 
                             required 
                             autocomplete="current-password"
-                            placeholder="••••••"
+                            {{-- placeholder="••••••" --}}
                             class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-300 rounded-lg text-slate-800 placeholder-gray-500 focus:outline-none focus:border-[#016DAE] focus:bg-white focus:ring-4 focus:ring-[#016DAE]/10 transition-all duration-300 pr-10"
                         />
                         <!-- Eye toggle -->
