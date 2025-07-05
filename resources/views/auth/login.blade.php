@@ -59,11 +59,26 @@
                     <h2 class="text-2xl font-bold text-slate-800">Dinkominfo Kab. Banyumas</h2>
                 </div>
 
-                <!-- Login Header -->
-                <div class="mb-8">
-                    <h2 class="text-3xl font-bold text-slate-800 mb-2">Login</h2>
-                    <p class="text-gray-600">Log in to access all of our content</p>
+                <!-- Header -->
+                <div class="mb-2 relative">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-2">Login</h2>
+                    <p class="text-gray-600">Masuk untuk mengakses layanan ITSA Dinkominfo</p>
+                    <!-- Floating Info Box -->
+                    <div class="absolute -top-2 right-0">
+                        <div class="relative group">
+                            <button class="text-blue-500 hover:text-blue-600">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z" clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                            <div class="hidden group-hover:block absolute right-0 mt-2 w-64 bg-white p-3 rounded-lg shadow-lg border border-gray-200 z-10">
+                                <p class="text-sm text-gray-700 font-medium">Info Login</p>
+                                <p class="text-xs text-gray-600 mt-1">Pastikan akun Anda telah disetujui oleh admin sebelum login.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
 
                 <!-- Session Status -->
 
@@ -91,7 +106,7 @@
                         @endif
 
                         <label for="email" class="block text-sm font-medium text-slate-800 mb-2">
-                            E-mail
+                            Email
                         </label>
                         <input 
                             id="email" 
@@ -110,7 +125,7 @@
                     <!-- Password -->
                     <div>
                         <label for="password" class="block text-sm font-medium text-slate-800 mb-2">
-                            Password
+                            Kata Sandi
                         </label>
                         <input 
                             id="password" 
@@ -142,7 +157,7 @@
                         <a href="{{ route('google.login') }}"
                             class="w-full inline-flex justify-center items-center px-6 py-3 bg-white border border-gray-300 rounded-lg shadow-sm text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-all duration-300">
                             <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" class="w-5 h-5 mr-3">
-                            Sign in with Google
+                            Masuk dengan Google
                         </a>
                     </div>
                     <div>
@@ -150,7 +165,7 @@
                             type="submit" 
                             class="w-full bg-gradient-to-r from-[#016DAE] to-[#00ADE5] hover:from-[#00ADE5] hover:to-[#016DAE] text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-[#016DAE]/30"
                         >
-                            Sign In.
+                            Masuk
                         </button>
                     </div>
 
@@ -161,7 +176,7 @@
                                 href="{{ route('password.request') }}" 
                                 class="text-sm text-gray-600 hover:text-[#016DAE] transition-colors duration-300"
                             >
-                                Forgot password?
+                                Lupa kata sandi?
                             </a>
                         @endif
                     </div>
@@ -170,12 +185,12 @@
                     <div class="text-center">
                         @if (Route::has('register'))
                             <p class="text-sm text-gray-600">
-                                Don't have an account? 
+                                Belum punya akun?  
                                 <a 
                                     href="{{ route('register') }}" 
                                     class="text-[#016DAE] hover:text-[#00ADE5] font-medium transition-colors duration-300"
                                 >
-                                    Sign up here
+                                    Daftar di sini
                                 </a>
                             </p>
                         @endif

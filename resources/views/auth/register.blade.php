@@ -52,15 +52,23 @@
                 </div>
 
                 <!-- Header -->
-                <div class="mb-2">
-                    <h2 class="text-3xl font-bold text-slate-800 mb-2">Register</h2>
-                </div>
-
-                <!-- Info Box -->
-                <div class="mb-2 p-4 bg-blue-50 border border-blue-200 text-blue-800 rounded text-sm">
-                    Setelah mendaftar, akun Anda akan diproses terlebih dahulu oleh admin. 
-                    Notifikasi persetujuan akan dikirimkan melalui email. 
-                    Anda tidak dapat login sebelum akun disetujui.
+                <div class="mb-2 relative">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-2">Daftar Akun</h2>
+                    <p class="text-gray-600">Daftarkan akun Anda untuk mengakses layanan ITSA Dinkominfo</p>
+                    <!-- Floating Info Box -->
+                    <div class="absolute -top-2 right-0">
+                        <div class="relative group">
+                            <button class="text-blue-500 hover:text-blue-600">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z" clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                            <div class="hidden group-hover:block absolute right-0 mt-2 w-64 bg-white p-3 rounded-lg shadow-lg border border-gray-200 z-10">
+                                <p class="text-sm text-gray-700 font-medium">Info Pendaftaran</p>
+                                <p class="text-xs text-gray-600 mt-1">Akun akan aktif setelah diverifikasi admin. Proses ini membutuhkan waktu 1x24 jam.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Form -->
@@ -69,7 +77,7 @@
                     
                     <!-- Name -->
                     <div>
-                        <label for="name" class="block text-sm font-medium text-slate-800 mb-2">Name</label>
+                        <label for="name" class="block text-sm font-medium text-slate-800 mb-2">Nama</label>
                         <input id="name" name="name" type="text" value="{{ old('name') }}" required autofocus autocomplete="name"
                             class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-300 rounded-lg text-slate-800 placeholder-gray-500 focus:outline-none focus:border-[#016DAE] focus:bg-white focus:ring-4 focus:ring-[#016DAE]/10 transition-all duration-300" />
                         <x-input-error :messages="$errors->get('name')" class="mt-2 text-red-600 text-sm" />
@@ -85,7 +93,7 @@
 
                     <!-- Password -->
                     <div>
-                        <label for="password" class="block text-sm font-medium text-slate-800 mb-2">Password</label>
+                        <label for="password" class="block text-sm font-medium text-slate-800 mb-2">Kata Sandi</label>
                         <input id="password" name="password" type="password" required autocomplete="new-password"
                             class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-300 rounded-lg text-slate-800 placeholder-gray-500 focus:outline-none focus:border-[#016DAE] focus:bg-white focus:ring-4 focus:ring-[#016DAE]/10 transition-all duration-300" />
                         <x-input-error :messages="$errors->get('password')" class="mt-2 text-red-600 text-sm" />
@@ -93,7 +101,7 @@
 
                     <!-- Confirm Password -->
                     <div>
-                        <label for="password_confirmation" class="block text-sm font-medium text-slate-800 mb-2">Confirm Password</label>
+                        <label for="password_confirmation" class="block text-sm font-medium text-slate-800 mb-2">Konfirmasi Kata Sandi</label>
                         <input id="password_confirmation" name="password_confirmation" type="password" required autocomplete="new-password"
                             class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-300 rounded-lg text-slate-800 placeholder-gray-500 focus:outline-none focus:border-[#016DAE] focus:bg-white focus:ring-4 focus:ring-[#016DAE]/10 transition-all duration-300" />
                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2 text-red-600 text-sm" />
@@ -103,16 +111,16 @@
                     <div>
                         <button type="submit"
                             class="w-full bg-gradient-to-r from-[#016DAE] to-[#00ADE5] hover:from-[#00ADE5] hover:to-[#016DAE] text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-[#016DAE]/30">
-                            Register
+                            Daftar Akun
                         </button>
                     </div>
 
                     <!-- Link to login -->
                     <div class="text-center">
                         <p class="text-sm text-gray-600">
-                            Already have an account?
+                            Sudah punya akun?
                             <a href="{{ route('login') }}" class="text-[#016DAE] hover:text-[#00ADE5] font-medium transition-colors duration-300">
-                                Sign in here
+                                Masuk di sini
                             </a>
                         </p>
                     </div>
