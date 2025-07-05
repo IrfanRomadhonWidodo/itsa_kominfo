@@ -52,15 +52,21 @@
                 </div>
 
                 <!-- Header -->
-                <div class="mb-8">
+                <div class="mb-2">
                     <h2 class="text-3xl font-bold text-slate-800 mb-2">Register</h2>
-                    <p class="text-gray-600">Create a new account to get started</p>
+                </div>
+
+                <!-- Info Box -->
+                <div class="mb-2 p-4 bg-blue-50 border border-blue-200 text-blue-800 rounded text-sm">
+                    Setelah mendaftar, akun Anda akan diproses terlebih dahulu oleh admin. 
+                    Notifikasi persetujuan akan dikirimkan melalui email. 
+                    Anda tidak dapat login sebelum akun disetujui.
                 </div>
 
                 <!-- Form -->
                 <form method="POST" action="{{ route('register') }}" class="space-y-4">
                     @csrf
-
+                    
                     <!-- Name -->
                     <div>
                         <label for="name" class="block text-sm font-medium text-slate-800 mb-2">Name</label>

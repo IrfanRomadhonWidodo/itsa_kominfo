@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Pages\KontakController;
 use App\Http\Controllers\Pages\TentangKamiController;
 use App\Http\Controllers\Pages\DownloadController;
+use App\Http\Controllers\Auth\GoogleController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -33,4 +34,9 @@ Route::middleware(['auth'])->group(function() {
 Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tentang-kami');
 Route::get('/download', [DownloadController::class, 'index'])->name('download');
 Route::get('/download/word', [DownloadController::class, 'downloadWord'])->name('download.word');
+
+
+Route::get('/auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
 require __DIR__.'/auth.php';

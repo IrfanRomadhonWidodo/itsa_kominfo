@@ -66,13 +66,30 @@
                 </div>
 
                 <!-- Session Status -->
-                <x-auth-session-status class="mb-4" :status="session('status')" />
 
                 <form method="POST" action="{{ route('login') }}" class="space-y-4">
                     @csrf
 
                     <!-- Email Address -->
                     <div>
+                            <!-- Custom Status Messages -->
+                        @if (session('warning'))
+                            <div class="mb-4 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded auto-dismiss">
+                                <p>{{ session('warning') }}</p>
+                            </div>
+                        @endif
+
+                        @if (session('error'))
+                            <div class="mb-4 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded auto-dismiss">
+                                <p>{{ session('error') }}</p>
+                            </div>
+                        @endif
+                            @if (session('status'))
+                            <div class="mb-4 p-4 bg-blue-100 border-l-4 border-blue-500 text-blue-800 rounded auto-dismiss">
+                                <p>{{ session('status') }}</p>
+                            </div>
+                        @endif
+
                         <label for="email" class="block text-sm font-medium text-slate-800 mb-2">
                             E-mail
                         </label>
@@ -121,6 +138,13 @@
                     </div>
 
                     <!-- Submit Button -->
+                    <div class="mt-6">
+                        <a href="{{ route('google.login') }}"
+                            class="w-full inline-flex justify-center items-center px-6 py-3 bg-white border border-gray-300 rounded-lg shadow-sm text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-all duration-300">
+                            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" class="w-5 h-5 mr-3">
+                            Sign in with Google
+                        </a>
+                    </div>
                     <div>
                         <button 
                             type="submit" 
@@ -188,5 +212,16 @@
         animation-delay: 1s;
     }
 </style>
+
+<script>
+    // Setelah 5 detik, sembunyikan alert (jika ada)
+    setTimeout(() => {
+        document.querySelectorAll('.auto-dismiss').forEach(el => {
+            el.classList.add('opacity-0', 'transition-opacity', 'duration-500');
+            setTimeout(() => el.remove(), 500); // hapus dari DOM setelah fade-out
+        });
+    }, 5000);
+</script>
+
 
 </x-guest-layout>

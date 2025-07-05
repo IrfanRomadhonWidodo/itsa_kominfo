@@ -11,6 +11,9 @@ class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+    const STATUS_PROCESSED = 'disetujui';
+    const STATUS_APPROVED = 'disetujui';
+    const STATUS_REJECTED = 'ditolak';
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +23,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'status',
         'password',
     ];
 

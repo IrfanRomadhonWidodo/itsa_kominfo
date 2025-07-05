@@ -23,13 +23,34 @@ class AuthenticatedSessionController extends Controller
      * Handle an incoming authentication request.
      */
     public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
+{
+    $credentials = $request->only('email', 'password');
 
+    // Coba login tanpa langsung login (gunakan attempt)
+    if (Auth::attempt($credentials)) {
+        $user = Auth::user();
+
+        if ($user->status === 'ditolak') {
+            Auth::logout();
+            return back()->with('error', 'Akun Anda telah ditolak. Silakan hubungi administrator.');
+        }
+
+        if ($user->status === 'diproses') {
+            Auth::logout();
+            return back()->with('warning', 'Akun Anda sedang diproses. Silakan tunggu verifikasi administrator.');
+        }
+
+        // Hanya jika status disetujui
         $request->session()->regenerate();
-
         return redirect()->intended(route('dashboard', absolute: false));
     }
+
+    // Kalau login gagal
+    return back()->withErrors([
+        'email' => 'Email atau password salah.',
+    ]);
+}
+
 
     /**
      * Destroy an authenticated session.
@@ -43,5 +64,21 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->status === 'ditolak') {
+            Auth::logout();
+            return back()->with('error', 'Akun Anda telah ditolak. Silakan hubungi administrator.');
+        }
+
+        if ($user->status === 'diproses') {
+            Auth::logout();
+            return back()->with('warning', 'Akun Anda sedang diproses. Silakan tunggu verifikasi administrator.');
+        }
+
+        // Jika status disetujui, lanjutkan ke dashboard
+        return redirect()->intended(route('dashboard'));
     }
 }
