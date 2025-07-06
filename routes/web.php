@@ -59,7 +59,7 @@ Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tent
 
 //Download PDF
 Route::get('/download', [DownloadController::class, 'index'])->name('download');
-Route::get('/download/word', [DownloadController::class, 'downloadWord'])->name('download.word');
+Route::get('/download/file', [DownloadController::class, 'download'])->name('download.file');
 
 //Login dengan Google
 Route::get('/auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
