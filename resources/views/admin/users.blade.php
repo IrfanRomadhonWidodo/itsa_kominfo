@@ -22,11 +22,7 @@
             <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-3 md:space-y-0">
                 <div class="flex items-center space-x-4">
                     <div class="flex items-center space-x-2">
-                        <span class="text-sm font-medium text-gray-700">Total: <span class="text-blue-600">{{ $users->total() }}</span> pengguna</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-                        <span class="text-sm text-gray-600">Status sistem normal</span>
+                        <span class="text-sm font-medium text-gray-700">Total: <span class="text-orange-400">{{ $users->total() }}</span> pengguna</span>
                     </div>
                 </div>
                 <form action="{{ route('admin.users.index') }}" method="GET" class="flex items-center space-x-3">
