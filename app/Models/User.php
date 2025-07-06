@@ -14,6 +14,8 @@ class User extends Authenticatable
     const STATUS_PROCESSED = 'disetujui';
     const STATUS_APPROVED = 'disetujui';
     const STATUS_REJECTED = 'ditolak';
+    const ROLE_USER = 'user';
+    const ROLE_ADMIN = 'admin';
 
     /**
      * The attributes that are mass assignable.
@@ -24,6 +26,7 @@ class User extends Authenticatable
         'name',
         'email',
         'status',
+        'role',
         'password',
     ];
 
@@ -53,5 +56,9 @@ class User extends Authenticatable
         public function feedbacks()
     {
         return $this->hasMany(Feedback::class);
+    }
+        public function isAdmin()
+    {
+        return $this->role === self::ROLE_ADMIN;
     }
 }
