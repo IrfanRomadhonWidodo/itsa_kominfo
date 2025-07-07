@@ -16,11 +16,11 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->enum('subjek', ['masalah_teknis', 'keluhan_layanan', 'saran_pengembangan', 'pertanyaan_informasi']);
             $table->text('pesan');
-            $table->enum('status', ['pending', 'processed', 'resolved'])->default('pending');
+            $table->text('balasan_admin')->nullable(); 
+            $table->enum('status', ['diproses', 'selesai'])->default('diproses');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */

@@ -46,7 +46,7 @@ class KontakController extends Controller
                 'user_id' => Auth::id(),
                 'subjek' => $request->subjek,
                 'pesan' => $request->pesan,
-                'status' => 'pending'
+                'status' => 'diproses'
             ]);
 
             return redirect()->back()->with('success', 'Feedback berhasil dikirim! Terima kasih atas masukan Anda.');

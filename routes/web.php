@@ -7,6 +7,7 @@ use App\Http\Controllers\Pages\DownloadController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserAdminController;
+use App\Http\Controllers\Admin\FeedbackAdminController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,10 +18,10 @@ Route::get('/', function () {
 // Admin Routes (terproteksi dengan middleware auth dan verified)
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-    
+
     // Tambahkan route admin lainnya di sini
     Route::resource('users', UserAdminController::class);
-    // Route::resource('content', AdminContentController::class);
+    Route::resource('feedbacks', FeedbackAdminController::class);
     // Route::get('settings', [AdminSettingsController::class, 'index'])->name('settings');
     // Route::get('reports', [AdminReportsController::class, 'index'])->name('reports');
 });
@@ -34,7 +35,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
 });
 
 //Lupa Password Kirim Email
@@ -49,7 +49,7 @@ Route::post('/forgot-password', [\App\Http\Controllers\Auth\PasswordResetLinkCon
 
 //Feedback dan Kontak
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['auth'])->group(function () {
     Route::post('/kontak/feedback', [KontakController::class, 'storeFeedback'])
         ->name('kontak.feedback');
 });
@@ -65,4 +65,4 @@ Route::get('/download/file', [DownloadController::class, 'download'])->name('dow
 Route::get('/auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
