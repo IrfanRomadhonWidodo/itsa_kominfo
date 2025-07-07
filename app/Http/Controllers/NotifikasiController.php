@@ -49,8 +49,8 @@ class NotifikasiController extends Controller
     public function markAllAsRead()
     {
         Notifikasi::where('user_id', Auth::id())
-                ->where('is_read', false)
-                ->update(['is_read' => true]);
+            ->where('is_read', 0) // gunakan 0 jika di database nilainya 0/1
+            ->update(['is_read' => 1]);
 
         return response()->json(['success' => true]);
     }
@@ -61,9 +61,9 @@ class NotifikasiController extends Controller
     public function show($id)
     {
         $notifikasi = Notifikasi::with('feedback')
-                               ->where('id', $id)
-                               ->where('user_id', Auth::id())
-                               ->firstOrFail();
+                            ->where('id', $id)
+                            ->where('user_id', Auth::id())
+                            ->firstOrFail();
 
         // Tandai sebagai sudah dibaca
         if (!$notifikasi->is_read) {

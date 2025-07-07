@@ -7,6 +7,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UserApprovedMail;
+use App\Mail\UserRejectedMail;
 
 class UserAdminController extends Controller
 {
@@ -63,30 +66,43 @@ class UserAdminController extends Controller
      * Memperbarui data pengguna yang ada.
      */
     public function update(Request $request, User $user)
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
-            'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', 'in:user,admin'],
-            'status' => ['required', 'in:diproses,disetujui,ditolak'],
-        ]);
+{
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
+        'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
+        'role' => ['required', 'in:user,admin'],
+        'status' => ['required', 'in:diproses,disetujui,ditolak'],
+    ]);
 
-        $data = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'role' => $request->role,
-            'status' => $request->status,
-        ];
+    // Simpan status lama sebelum update
+    $oldStatus = $user->status;
 
-        if ($request->filled('password')) {
-            $data['password'] = Hash::make($request->password);
-        }
+    $data = [
+        'name' => $request->name,
+        'email' => $request->email,
+        'role' => $request->role,
+        'status' => $request->status,
+    ];
 
-        $user->update($data);
-
-        return redirect()->route('admin.users.index')->with('success', 'User berhasil diupdate.');
+    if ($request->filled('password')) {
+        $data['password'] = Hash::make($request->password);
     }
+
+    $user->update($data);
+
+    // Kirim email jika status berubah ke disetujui atau ditolak
+    if ($oldStatus !== $request->status) {
+        if ($request->status === 'disetujui') {
+            Mail::to($user->email)->send(new UserApprovedMail($user));
+        } elseif ($request->status === 'ditolak') {
+            Mail::to($user->email)->send(new UserRejectedMail($user));
+        }
+    }
+
+    return redirect()->route('admin.users.index')->with('success', 'User berhasil diupdate.');
+}
+
 
     /**
      * Menghapus pengguna dari database.
