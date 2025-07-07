@@ -49,11 +49,8 @@ class NotifikasiController extends Controller
     public function markAllAsRead()
     {
         Notifikasi::where('user_id', Auth::id())
-                  ->where('is_read', false)
-                  ->update([
-                      'is_read' => true,
-                      'read_at' => now(),
-                  ]);
+                ->where('is_read', false)
+                ->update(['is_read' => true]);
 
         return response()->json(['success' => true]);
     }
