@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Feedback;
+use App\Models\Notifikasi;
 use Illuminate\Http\Request;
 
 class FeedbackAdminController extends Controller
@@ -58,7 +59,17 @@ class FeedbackAdminController extends Controller
             'status' => 'selesai', // Otomatis set ke selesai jika sudah ada balasan
         ]);
 
-        return redirect()->route('admin.feedbacks.index')->with('success', 'Feedback berhasil dibalas.');
+        // Buat notifikasi untuk user
+        Notifikasi::create([
+            'user_id' => $feedback->user_id,
+            'judul' => 'Balasan Feedback: ' . $feedback->subjek_label,
+            'pesan' => 'Admin telah memberikan balasan untuk feedback Anda mengenai "' . $feedback->subjek_label . '".',
+            'type' => 'feedback',
+            'feedback_id' => $feedback->id,
+            'is_read' => false,
+        ]);
+
+        return redirect()->route('admin.feedbacks.index')->with('success', 'Feedback berhasil dibalas dan notifikasi telah dikirim ke user.');
     }
 
     /**

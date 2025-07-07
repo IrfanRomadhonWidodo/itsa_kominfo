@@ -61,4 +61,20 @@ class User extends Authenticatable
     {
         return $this->role === self::ROLE_ADMIN;
     }
+
+    /**
+     * Relasi ke notifikasi yang diterima user.
+     */
+    public function notifikasi()
+    {
+        return $this->hasMany(Notifikasi::class);
+    }
+
+    /**
+     * Get unread notifications count.
+     */
+    public function getUnreadNotificationsCountAttribute()
+    {
+        return $this->notifikasi()->where('is_read', false)->count();
+    }
 }
