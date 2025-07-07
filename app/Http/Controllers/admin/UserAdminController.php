@@ -17,11 +17,18 @@ class UserAdminController extends Controller
     {
         $query = User::query();
 
-        // Logika untuk pencarian
+        // Pencarian berdasarkan nama, email
         if ($request->has('search') && $request->search != '') {
             $searchTerm = '%' . $request->search . '%';
-            $query->where('name', 'like', $searchTerm)
-                  ->orWhere('email', 'like', $searchTerm);
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('name', 'like', $searchTerm)
+                ->orWhere('email', 'like', $searchTerm);
+            });
+        }
+
+        // Filter berdasarkan status (dari dropdown)
+        if ($request->has('status') && $request->status != '') {
+            $query->where('status', $request->status);
         }
 
         $users = $query->latest()->paginate(10);

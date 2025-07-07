@@ -15,7 +15,8 @@ class Feedback extends Model
         'user_id',
         'subjek',
         'pesan',
-        'status'
+        'balasan_admin',
+        'status',
     ];
 
     protected $casts = [
@@ -24,7 +25,7 @@ class Feedback extends Model
     ];
 
     /**
-     * Get the user that owns the feedback.
+     * Relasi ke user pengirim feedback.
      */
     public function user()
     {
@@ -32,7 +33,7 @@ class Feedback extends Model
     }
 
     /**
-     * Get the subject label for display.
+     * Label untuk subjek (digunakan di tampilan).
      */
     public function getSubjekLabelAttribute()
     {
@@ -40,23 +41,10 @@ class Feedback extends Model
             'masalah_teknis' => 'Masalah Teknis',
             'keluhan_layanan' => 'Keluhan Layanan',
             'saran_pengembangan' => 'Saran Pengembangan',
-            'pertanyaan_informasi' => 'Pertanyaan Informasi'
+            'pertanyaan_informasi' => 'Pertanyaan Informasi',
         ];
 
         return $labels[$this->subjek] ?? $this->subjek;
     }
 
-    /**
-     * Get the status label for display.
-     */
-    public function getStatusLabelAttribute()
-    {
-        $labels = [
-            'pending' => 'Menunggu',
-            'processed' => 'Diproses',
-            'resolved' => 'Selesai'
-        ];
-
-        return $labels[$this->status] ?? $this->status;
-    }
 }

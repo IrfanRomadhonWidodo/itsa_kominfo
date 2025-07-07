@@ -104,7 +104,7 @@
                             <!-- Feedback -->
                             <a href="{{ route('admin.feedbacks.index') }}"
                                 class="flex items-center text-gray-700 rounded-lg transition-all duration-300 group relative py-3 px-4 text-sm hover:bg-gradient-to-r hover:from-red-50 hover:to-yellow-50 hover:text-red-800 hover:translate-x-1
-                                    {{ request()->routeIs('admin.feedback.*') ? 'bg-gradient-to-r from-red-50 to-yellow-50 text-red-800' : '' }}">
+                                    {{ request()->routeIs('admin.feedbacks.*') ? 'bg-gradient-to-r from-red-50 to-yellow-50 text-red-800' : '' }}">
                                 <div class="flex items-center justify-center w-4 h-4 mr-2">
                                     <svg class="w-5 h-5 opacity-70 group-hover:opacity-100 transition-transform"
                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -113,7 +113,7 @@
                                     </svg>
                                 </div>
                                 <span class="font-medium" x-show="!sidebarCollapsed"
-                                    x-transition>{{ __('Feedback') }}</span>
+                                    x-transition>{{ __('Feedbacks') }}</span>
                             </a>
                             {{-- <!-- Content Management -->
                             <a href="#" 
@@ -175,7 +175,7 @@
                                         d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m0 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10M9 21h6">
                                     </path>
                                 </svg>
-                                <span class="font-medium">Back to Main</span>
+                                <span class="font-medium">Kembali</span>
                             </a>
 
                             <!-- Collapsed version -->
@@ -189,7 +189,7 @@
                                 </svg>
                                 <div
                                     class="absolute left-16 bg-gray-900 text-white px-2 py-1 rounded-md text-xs whitespace-nowrap z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                                    Back to Main Dashboard
+                                    Back to Main 
                                 </div>
                             </a>
 
