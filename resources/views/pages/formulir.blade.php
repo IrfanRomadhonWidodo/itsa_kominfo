@@ -76,7 +76,7 @@
 
             <div class="md:col-span-2">
                 <label class="block text-sm font-semibold text-gray-700 mb-2">
-                    Domain Aplikasi <span class="text-red-500">*</span>
+                    Domain Aplikasi <span class="text-red-600">*</span>
                 </label>
                 <input type="text" name="domain_aplikasi" id="domain_aplikasi" required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
@@ -85,7 +85,7 @@
             </div>
 
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-3">Jenis IP <span class="text-red-500">*</span></label>
+                <label class="block text-sm font-semibold text-gray-700 mb-3">Jenis IP <span class="text-red-600">*</span></label>
                 <div class="flex space-x-6">
                     <label class="flex items-center">
                         <input type="radio" name="ip_jenis" value="lokal" class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500" required>
@@ -100,7 +100,7 @@
             </div>
 
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">IP Address Server <span class="text-red-500">*</span></label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">IP Address Server <span class="text-red-600">*</span></label>
                 <input type="text" name="ip_address" id="ip_address" required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                     placeholder="Contoh: 192.168.1.1">
@@ -109,7 +109,7 @@
         </div>
         
         <div class="mt-6 text-xs text-gray-500">
-            <span class="text-red-500">*</span> Semua kolom pada bagian ini wajib diisi.
+            <span class="text-red-600">*</span> Semua kolom pada bagian ini wajib diisi.
         </div>
     </div>
 
@@ -125,7 +125,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="md:col-span-2">
                 <label class="block text-sm font-semibold text-gray-700 mb-2">
-                    Nama Pejabat <span class="text-red-500">*</span>
+                    Nama Pejabat <span class="text-red-600">*</span>
                 </label>
                 <input type="text" name="pejabat_nama" id="pejabat_nama" required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
@@ -135,7 +135,7 @@
 
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">
-                    NIP <span class="text-red-500">*</span>
+                    NIP <span class="text-red-600">*</span>
                 </label>
                 <input type="text" name="pejabat_nip" id="pejabat_nip" required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
@@ -145,7 +145,7 @@
 
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">
-                    Pangkat <span class="text-red-500">*</span>
+                    Pangkat <span class="text-red-600">*</span>
                 </label>
                 <input type="text" name="pejabat_pangkat" id="pejabat_pangkat" required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
@@ -155,7 +155,7 @@
 
             <div class="md:col-span-2">
                 <label class="block text-sm font-semibold text-gray-700 mb-2">
-                    Jabatan <span class="text-red-500">*</span>
+                    Jabatan <span class="text-red-600">*</span>
                 </label>
                 <input type="text" name="pejabat_jabatan" id="pejabat_jabatan" required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
@@ -165,7 +165,7 @@
         </div>
         
         <div class="mt-6 text-xs text-gray-500">
-            <span class="text-red-500">*</span> Semua kolom pada bagian ini wajib diisi.
+            <span class="text-red-600">*</span> Semua kolom pada bagian ini wajib diisi.
         </div>
     </div>
 
@@ -180,7 +180,7 @@
 
         <div class="space-y-6">
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">Tujuan Sistem <span class="text-red-500">*</span></label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Tujuan Sistem <span class="text-red-600">*</span></label>
                 <textarea name="tujuan_sistem" id="tujuan_sistem" rows="4" required
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                         placeholder="Jelaskan tujuan dari sistem yang akan diaudit"></textarea>
@@ -188,7 +188,7 @@
             </div>
 
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">Pengguna Sistem <span class="text-red-500">*</span></label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Pengguna Sistem <span class="text-red-600">*</span></label>
                 <textarea name="pengguna_sistem" id="pengguna_sistem" rows="3" required
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                         placeholder="Jelaskan siapa saja yang akan menggunakan sistem"></textarea>
@@ -196,7 +196,7 @@
             </div>
 
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">Hosting <span class="text-red-500">*</span></label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Hosting <span class="text-red-600">*</span></label>
                 <textarea name="hosting" id="hosting" rows="3" required
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                         placeholder="Jelaskan detail hosting (cloud, on-premise, dll)"></textarea>
@@ -204,7 +204,7 @@
             </div>
 
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">Framework <span class="text-red-500">*</span></label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Framework <span class="text-red-600">*</span></label>
                 <input type="text" name="framework" id="framework" required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                     placeholder="Contoh: Laravel, React, Vue.js">
@@ -212,7 +212,7 @@
             </div>
 
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">Pengelola Sistem <span class="text-red-500">*</span></label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Pengelola Sistem <span class="text-red-600">*</span></label>
                 <textarea name="pengelola_sistem" id="pengelola_sistem" rows="3" required
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                         placeholder="Jelaskan siapa yang mengelola sistem"></textarea>
@@ -221,7 +221,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Jumlah Roles <span class="text-red-500">*</span></label>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Jumlah Roles <span class="text-red-600">*</span></label>
                     <input type="number" name="jumlah_roles" id="jumlah_roles" min="0" required
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                         placeholder="Masukkan jumlah roles">
@@ -229,7 +229,7 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Nama Roles <span class="text-red-500">*</span></label>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Nama Roles <span class="text-red-600">*</span></label>
                     <input type="text" name="nama_roles" id="nama_roles" required
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                         placeholder="Contoh: Admin, User, Moderator">
@@ -238,7 +238,7 @@
             </div>
 
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">Mekanisme Account <span class="text-red-500">*</span></label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Mekanisme Account <span class="text-red-600">*</span></label>
                 <textarea name="mekanisme_account" id="mekanisme_account" rows="3" required
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                         placeholder="Jelaskan mekanisme pembuatan dan pengelolaan account"></textarea>
@@ -246,7 +246,7 @@
             </div>
 
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">Mekanisme Kredensial <span class="text-red-500">*</span></label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Mekanisme Kredensial <span class="text-red-600">*</span></label>
                 <textarea name="mekanisme_kredensial" id="mekanisme_kredensial" rows="3" required
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                         placeholder="Jelaskan mekanisme autentikasi dan otorisasi"></textarea>
@@ -255,7 +255,7 @@
 
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-3">
-                    Sistem memiliki fitur reset password <span class="text-red-500">*</span>
+                    Sistem memiliki fitur reset password <span class="text-red-600">*</span>
                 </label>
                 <div class="flex space-x-6">
                     <label class="flex items-center">
@@ -275,7 +275,7 @@
             </div>
 
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">PIC Pengelola <span class="text-red-500">*</span></label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">PIC Pengelola <span class="text-red-600">*</span></label>
                 <input type="text" name="pic_pengelola" id="pic_pengelola" required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                     placeholder="Nama PIC yang bertanggung jawab">
@@ -291,7 +291,7 @@
         </div>
         
         <div class="mt-6 text-xs text-gray-500">
-            <span class="text-red-500">*</span> Wajib diisi. Hanya kolom "Keterangan Tambahan" dan "Fitur Reset Password" yang bersifat opsional.
+            <span class="text-red-600">*</span> Wajib diisi. Hanya kolom "Keterangan Tambahan" dan "Fitur Reset Password" yang bersifat opsional.
         </div>
     </div>
                 <!-- Navigation Buttons -->
