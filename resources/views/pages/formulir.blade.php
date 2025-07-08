@@ -66,7 +66,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="md:col-span-2">
                 <label class="block text-sm font-semibold text-gray-700 mb-2">
-                    Nama Aplikasi <span class="text-red-500">*</span>
+                    Nama Aplikasi <span class="text-red-600">*</span>
                 </label>
                 <input type="text" name="nama_aplikasi" id="nama_aplikasi" required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
