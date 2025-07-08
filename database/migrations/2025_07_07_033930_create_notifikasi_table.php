@@ -16,12 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('judul');
             $table->text('pesan');
-            $table->string('type')->default('feedback'); // jenis notifikasi
-            $table->unsignedBigInteger('feedback_id')->nullable(); // referensi ke feedback
+            $table->string('type')->default('feedback');
+            $table->unsignedBigInteger('feedback_id')->nullable(); 
             $table->boolean('is_read')->default(false);
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
-
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('feedback_id')->references('id')->on('feedbacks')->onDelete('cascade');
             

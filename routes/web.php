@@ -33,10 +33,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/notifikasi/{id}', [NotifikasiController::class, 'show'])->name('notifikasi.show');
     Route::post('/notifikasi/{id}/mark-read', [NotifikasiController::class, 'markAsRead'])->name('notifikasi.mark-read');
     Route::post('/notifikasi/mark-all-read', [NotifikasiController::class, 'markAllAsRead'])->name('notifikasi.mark-all-read');
-
-    // fitur formulir
-    Route::resource('formulir', FormulirController::class);
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -68,6 +66,24 @@ Route::middleware(['auth'])->group(function () {
 
 //Tentang ITSA
 Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tentang-kami');
+
+//Untuk Formulir
+Route::middleware(['auth'])->group(function () {
+    // Halaman formulir
+    Route::get('/formulir', [FormulirController::class, 'index'])->name('formulir.index');
+    
+    // API endpoints untuk formulir
+    Route::post('/formulir/store', [FormulirController::class, 'store'])->name('formulir.store');
+    Route::post('/formulir/auto-save', [FormulirController::class, 'autoSave'])->name('formulir.auto-save');
+    Route::get('/formulir/data', [FormulirController::class, 'getData'])->name('formulir.data');
+    Route::post('/formulir/preview', [FormulirController::class, 'preview'])->name('formulir.preview');
+    Route::post('/formulir/submit', [FormulirController::class, 'submit'])->name('formulir.submit');
+    
+    // Halaman sukses (opsional)
+    Route::get('/formulir/success', function () {
+        return view('pages.formulir-success');
+    })->name('formulir.success');
+});
 
 //Download PDF
 Route::get('/download', [DownloadController::class, 'index'])->name('download');

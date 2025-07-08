@@ -6,59 +6,218 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Formulir;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class FormulirController extends Controller
 {
     public function index()
     {
-        $formulir = Formulir::where('user_id', Auth::id())->get();
-        return view('pages.formulir.index', compact('formulir'));
-    }
-
-    public function create()
-    {
-        return view('pages.formulir.create');
+        return view('pages.formulir');
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
+            // Step 1: Data Sistem
             'nama_aplikasi' => 'required|string|max:255',
-            // Tambahkan semua field validasi yang kamu butuhkan
+            'domain_aplikasi' => 'nullable|string|max:255',
+            'ip_jenis' => 'nullable|in:lokal,public',
+            'ip_address' => 'nullable|ip',
+
+            // Step 2: Data Pejabat Penandatangan NDA
+            'pejabat_nama' => 'required|string|max:255',
+            'pejabat_nip' => 'required|string|max:255',
+            'pejabat_pangkat' => 'required|string|max:255',
+            'pejabat_jabatan' => 'required|string|max:255',
+
+            // Step 3: Teknis dan Keamanan
+            'tujuan_sistem' => 'nullable|string',
+            'pengguna_sistem' => 'nullable|string',
+            'hosting' => 'nullable|string',
+            'framework' => 'nullable|string|max:255',
+            'pengelola_sistem' => 'nullable|string',
+            'jumlah_roles' => 'nullable|integer|min:0',
+            'nama_roles' => 'nullable|string|max:255',
+            'mekanisme_account' => 'nullable|string',
+            'mekanisme_kredensial' => 'nullable|string',
+            'fitur_reset_password' => 'boolean',
+            'pic_pengelola' => 'nullable|string|max:255',
+            'keterangan_tambahan' => 'nullable|string',
         ]);
 
-        $validated['user_id'] = Auth::id();
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
 
-        Formulir::create($validated);
+        try {
+            // Update hanya draft yang belum disubmit
+            $formulir = Formulir::updateOrCreate(
+                [
+                    'user_id' => Auth::id(),
+                    'status' => 'draft'
+                ],
+                array_merge($request->all(), [
+                    'user_id' => Auth::id(),
+                    'fitur_reset_password' => $request->has('fitur_reset_password'),
+                    'status' => 'draft'
+                ])
+            );
 
-        return redirect()->route('formulir.index')->with('status', 'Formulir berhasil dikirim.');
+            return response()->json([
+                'success' => true,
+                'message' => 'Formulir berhasil disimpan',
+                'data' => $formulir
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan saat menyimpan formulir'
+            ], 500);
+        }
     }
 
-    public function show(Formulir $formulir)
+    public function autoSave(Request $request)
     {
-        return view('pages.formulir.show', compact('formulir'));
+        try {
+            // Auto save hanya untuk draft
+            $formulir = Formulir::updateOrCreate(
+                [
+                    'user_id' => Auth::id(),
+                    'status' => 'draft'
+                ],
+                array_merge($request->all(), [
+                    'user_id' => Auth::id(),
+                    'fitur_reset_password' => $request->has('fitur_reset_password'),
+                    'status' => 'draft'
+                ])
+            );
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Auto save berhasil',
+                'data' => $formulir
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Auto save gagal'
+            ], 500);
+        }
     }
 
-    public function edit(Formulir $formulir)
+    public function getData()
     {
-        return view('pages.formulir.edit', compact('formulir'));
+        // Ambil draft yang belum disubmit untuk di-load ke form
+        $formulir = Formulir::where('user_id', Auth::id())
+                           ->where('status', 'draft')
+                           ->first();
+        
+        return response()->json([
+            'success' => true,
+            'data' => $formulir
+        ]);
     }
 
-    public function update(Request $request, Formulir $formulir)
+    public function preview(Request $request)
     {
-        $validated = $request->validate([
+        $formulir = Formulir::where('user_id', Auth::id())
+                           ->where('status', 'draft')
+                           ->first();
+        
+        if (!$formulir) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data formulir tidak ditemukan'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $formulir
+        ]);
+    }
+
+    public function submit(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
             'nama_aplikasi' => 'required|string|max:255',
+            'pejabat_nama' => 'required|string|max:255',
+            'pejabat_nip' => 'required|string|max:255',
+            'pejabat_pangkat' => 'required|string|max:255',
+            'pejabat_jabatan' => 'required|string|max:255',
         ]);
 
-        $formulir->update($validated);
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
 
-        return redirect()->route('formulir.index')->with('status', 'Formulir diperbarui.');
+        try {
+            // Selalu buat record baru untuk setiap submission
+            $formulir = Formulir::create(array_merge($request->all(), [
+                'user_id' => Auth::id(),
+                'fitur_reset_password' => $request->has('fitur_reset_password'),
+                'status' => 'diproses'
+            ]));
+
+            // Hapus draft setelah berhasil submit
+            Formulir::where('user_id', Auth::id())
+                   ->where('status', 'draft')
+                   ->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Formulir berhasil dikirim dan sedang diproses',
+                'data' => $formulir
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan saat mengirim formulir'
+            ], 500);
+        }
     }
 
-    public function destroy(Formulir $formulir)
+    /**
+     * Menampilkan daftar formulir yang sudah disubmit oleh user
+     */
+    public function history()
     {
-        $formulir->delete();
+        $formulir = Formulir::where('user_id', Auth::id())
+                           ->where('status', '!=', 'draft')
+                           ->orderBy('created_at', 'desc')
+                           ->get();
 
-        return redirect()->route('formulir.index')->with('status', 'Formulir dihapus.');
+        return response()->json([
+            'success' => true,
+            'data' => $formulir
+        ]);
+    }
+
+    /**
+     * Menampilkan detail formulir berdasarkan ID
+     */
+    public function show($id)
+    {
+        $formulir = Formulir::where('user_id', Auth::id())
+                           ->where('id', $id)
+                           ->first();
+
+        if (!$formulir) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Formulir tidak ditemukan'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $formulir
+        ]);
     }
 }

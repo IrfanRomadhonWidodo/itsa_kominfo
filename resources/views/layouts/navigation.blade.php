@@ -73,7 +73,7 @@
                             <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-200 group">
                                 <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                                 <span class="font-medium">Alur Layanan</span>
-                            <a href="{{ route('formulir.create') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-200 group">
+                            <a href="{{ route('formulir.index') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-200 group">
                                 <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                                 <span class="font-medium">Formulir</span>
                             </a>
@@ -299,7 +299,7 @@
                         <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3"></div>
                         Alur Layanan
                     </a>
-                    <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-600 hover:text-[#016DAE] hover:bg-[#00ADE5]/5 rounded-lg transition-all duration-200">
+                    <a href="{{ route('formulir.index') }}" class="flex items-center px-4 py-2 text-sm text-gray-600 hover:text-[#016DAE] hover:bg-[#00ADE5]/5 rounded-lg transition-all duration-200">
                         <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3"></div>
                         Formulir
                     </a>

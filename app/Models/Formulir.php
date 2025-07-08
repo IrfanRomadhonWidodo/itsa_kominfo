@@ -9,7 +9,6 @@ class Formulir extends Model
 {
     use HasFactory;
 
-    
     protected $table = 'formulir';
 
     protected $fillable = [
@@ -34,5 +33,16 @@ class Formulir extends Model
         'fitur_reset_password',
         'pic_pengelola',
         'keterangan_tambahan',
+        'balasan_admin',
+        'status',
+        'file_hasil_itsa',
     ];
+
+    /**
+     * Relasi ke model User (many-to-one)
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

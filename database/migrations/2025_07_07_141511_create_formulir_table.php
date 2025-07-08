@@ -45,6 +45,11 @@ return new class extends Migration {
             // 13. Keterangan tambahan
             $table->text('keterangan_tambahan')->nullable();
 
+            // 14. Umpan balik
+            $table->text('balasan_admin')->nullable(); // Umpan balik/komentar admin
+            $table->enum('status', ['diproses', 'revisi', 'selesai'])->default('diproses'); // Status permohonan
+            $table->string('file_hasil_itsa')->nullable(); // File hasil ITSA dari admin (PDF)
+
             $table->timestamps();
         });
     }
