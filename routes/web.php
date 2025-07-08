@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\Admin\FeedbackAdminController;
 use App\Http\Controllers\NotifikasiController;
+use App\Http\Controllers\Pages\FormulirController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -32,6 +33,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/notifikasi/{id}', [NotifikasiController::class, 'show'])->name('notifikasi.show');
     Route::post('/notifikasi/{id}/mark-read', [NotifikasiController::class, 'markAsRead'])->name('notifikasi.mark-read');
     Route::post('/notifikasi/mark-all-read', [NotifikasiController::class, 'markAllAsRead'])->name('notifikasi.mark-all-read');
+
+    // fitur formulir
+    Route::resource('formulir', FormulirController::class);
 });
 
 Route::get('/dashboard', function () {

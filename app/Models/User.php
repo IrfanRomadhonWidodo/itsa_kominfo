@@ -77,4 +77,10 @@ class User extends Authenticatable
     {
         return $this->notifikasi()->where('is_read', false)->count();
     }
+
+    public function formulir()
+    {
+        return $this->hasMany(Formulir::class);
+    }
+
 }
