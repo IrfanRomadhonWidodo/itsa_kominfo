@@ -75,11 +75,13 @@
             </div>
 
             <div class="md:col-span-2">
-                <label class="block text-sm font-semibold text-gray-700 mb-2">Domain Aplikasi</label>
-                <input type="text" name="domain_aplikasi" id="domain_aplikasi" 
+                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                    Domain Aplikasi <span class="text-red-500">*</span>
+                </label>
+                <input type="text" name="domain_aplikasi" id="domain_aplikasi" required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                     placeholder="Contoh: example.com">
-                <div id="domain_aplikasi_error" class="text-red-500 text-sm mt-1 hidden"></div>
+                <div id="domain_aplikasi_error" class="text-red-500 text-sm mt-1 hidden">Domain aplikasi wajib diisi</div>
             </div>
 
             <div>
@@ -107,7 +109,7 @@
         </div>
         
         <div class="mt-6 text-xs text-gray-500">
-            <span class="text-red-500">*</span> Wajib diisi. Hanya kolom "Domain Aplikasi" yang bersifat opsional.
+            <span class="text-red-500">*</span> Semua kolom pada bagian ini wajib diisi.
         </div>
     </div>
 
@@ -448,46 +450,57 @@ function updateStepDisplay() {
     submitBtn.classList.toggle('hidden', currentStep !== totalSteps);
 }
     
-        function validateCurrentStep() {
-        const currentStepElement = document.getElementById(`step-${currentStep}`);
-        let isValid = true;
-        
-        // Clear previous errors
-        currentStepElement.querySelectorAll('.invalid-feedback').forEach(feedback => {
-            feedback.classList.add('hidden');
-        });
-        
-        currentStepElement.querySelectorAll('input, textarea').forEach(field => {
-            field.classList.remove('border-red-500');
-        });
-        
-        // Validasi khusus untuk step 1 (radio button)
-        if (currentStep === 1) {
-            const radioGroup = document.querySelectorAll('input[name="ip_jenis"]:checked');
-            if (radioGroup.length === 0) {
-                document.getElementById('ip_jenis_error').classList.remove('hidden');
-                isValid = false;
+function validateCurrentStep() {
+    const currentStepElement = document.getElementById(`step-${currentStep}`);
+    let isValid = true;
+    
+    // Clear previous errors
+    currentStepElement.querySelectorAll('.text-red-500').forEach(error => {
+        error.classList.add('hidden');
+    });
+    
+    currentStepElement.querySelectorAll('input, textarea').forEach(field => {
+        field.classList.remove('border-red-500');
+    });
+    
+    // Validasi field text/textarea yang required
+    const requiredFields = currentStepElement.querySelectorAll('input[required]:not([type="radio"]), textarea[required]');
+    
+    requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+            field.classList.add('border-red-500');
+            const errorId = `${field.id}_error`;
+            const errorElement = document.getElementById(errorId);
+            if (errorElement) {
+                errorElement.classList.remove('hidden');
             }
+            isValid = false;
         }
-        
-        // Validasi field required lainnya
-        const requiredFields = currentStepElement.querySelectorAll('input[required]:not([type="radio"]), textarea[required], select[required]');
-        
-        requiredFields.forEach(field => {
-            if (!field.value.trim()) {
-                field.classList.add('border-red-500');
-                const errorId = `${field.id}_error`;
-                const feedback = document.getElementById(errorId) || field.parentElement.querySelector('.invalid-feedback');
-                if (feedback) {
-                    feedback.textContent = 'Kolom ini wajib diisi';
-                    feedback.classList.remove('hidden');
-                }
-                isValid = false;
+    });
+    
+    // Validasi khusus untuk radio button groups
+    const radioGroups = {};
+    currentStepElement.querySelectorAll('input[type="radio"][required]').forEach(radio => {
+        if (!radioGroups[radio.name]) {
+            radioGroups[radio.name] = [];
+        }
+        radioGroups[radio.name].push(radio);
+    });
+    
+    Object.keys(radioGroups).forEach(groupName => {
+        const checkedRadio = currentStepElement.querySelector(`input[name="${groupName}"]:checked`);
+        if (!checkedRadio) {
+            const errorId = `${groupName}_error`;
+            const errorElement = document.getElementById(errorId);
+            if (errorElement) {
+                errorElement.classList.remove('hidden');
             }
-        });
-        
-        return isValid;
-    }
+            isValid = false;
+        }
+    });
+    
+    return isValid;
+}
     
     function autoSave() {
         const formData = new FormData(form);
@@ -545,57 +558,90 @@ function updateStepDisplay() {
             });
     }
     
-    function showPreview() {
-        const formData = new FormData(form);
-        const previewContent = document.getElementById('preview-content');
+function showPreview() {
+    // Validasi semua step sebelum menampilkan preview
+    let allStepsValid = true;
+    
+    for (let step = 1; step <= totalSteps; step++) {
+        const tempCurrentStep = currentStep;
+        currentStep = step;
         
-        let html = `
-            <div class="space-y-6">
-                <div class="bg-blue-50 p-4 rounded-lg">
-                    <h4 class="font-semibold text-blue-800 mb-3">Data Sistem</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                        <div><span class="font-medium">Nama Aplikasi:</span> ${formData.get('nama_aplikasi') || '-'}</div>
-                        <div><span class="font-medium">Domain:</span> ${formData.get('domain_aplikasi') || '-'}</div>
-                        <div><span class="font-medium">Jenis IP:</span> ${formData.get('ip_jenis') || '-'}</div>
-                        <div><span class="font-medium">IP Address:</span> ${formData.get('ip_address') || '-'}</div>
-                    </div>
-                </div>
-                
-                <div class="bg-cyan-50 p-4 rounded-lg">
-                    <h4 class="font-semibold text-cyan-800 mb-3">Data Pejabat Penandatangan NDA</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                        <div><span class="font-medium">Nama:</span> ${formData.get('pejabat_nama') || '-'}</div>
-                        <div><span class="font-medium">NIP:</span> ${formData.get('pejabat_nip') || '-'}</div>
-                        <div><span class="font-medium">Pangkat:</span> ${formData.get('pejabat_pangkat') || '-'}</div>
-                        <div><span class="font-medium">Jabatan:</span> ${formData.get('pejabat_jabatan') || '-'}</div>
-                    </div>
-                </div>
-                
-                <div class="bg-yellow-50 p-4 rounded-lg">
-                    <h4 class="font-semibold text-yellow-800 mb-3">Teknis & Keamanan</h4>
-                    <div class="space-y-3 text-sm">
-                        <div><span class="font-medium">Tujuan Sistem:</span><br>${formData.get('tujuan_sistem') || '-'}</div>
-                        <div><span class="font-medium">Pengguna Sistem:</span><br>${formData.get('pengguna_sistem') || '-'}</div>
-                        <div><span class="font-medium">Hosting:</span><br>${formData.get('hosting') || '-'}</div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div><span class="font-medium">Framework:</span> ${formData.get('framework') || '-'}</div>
-                            <div><span class="font-medium">Jumlah Roles:</span> ${formData.get('jumlah_roles') || '-'}</div>
-                        </div>
-                        <div><span class="font-medium">Nama Roles:</span> ${formData.get('nama_roles') || '-'}</div>
-                        <div><span class="font-medium">Pengelola Sistem:</span><br>${formData.get('pengelola_sistem') || '-'}</div>
-                        <div><span class="font-medium">Mekanisme Account:</span><br>${formData.get('mekanisme_account') || '-'}</div>
-                        <div><span class="font-medium">Mekanisme Kredensial:</span><br>${formData.get('mekanisme_kredensial') || '-'}</div>
-                        <div><span class="font-medium">Fitur Reset Password:</span> ${formData.get('fitur_reset_password') ? 'Ya' : 'Tidak'}</div>
-                        <div><span class="font-medium">PIC Pengelola:</span> ${formData.get('pic_pengelola') || '-'}</div>
-                        <div><span class="font-medium">Keterangan Tambahan:</span><br>${formData.get('keterangan_tambahan') || '-'}</div>
-                    </div>
+        if (!validateCurrentStep()) {
+            allStepsValid = false;
+            currentStep = tempCurrentStep; // Kembali ke step asli
+            
+            // Pindah ke step yang bermasalah
+            currentStep = step;
+            updateStepDisplay();
+            
+            Swal.fire({
+                icon: 'warning',
+                title: 'Peringatan!',
+                text: `Mohon lengkapi semua field yang wajib diisi `,
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#3b82f6'
+            });
+            return;
+        }
+        
+        currentStep = tempCurrentStep;
+    }
+    
+    if (!allStepsValid) {
+        return;
+    }
+    
+    // Jika semua step valid, tampilkan preview
+    const formData = new FormData(form);
+    const previewContent = document.getElementById('preview-content');
+    
+    let html = `
+        <div class="space-y-6">
+            <div class="bg-blue-50 p-4 rounded-lg">
+                <h4 class="font-semibold text-blue-800 mb-3">Data Sistem</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div><span class="font-medium">Nama Aplikasi:</span> ${formData.get('nama_aplikasi') || '-'}</div>
+                    <div><span class="font-medium">Domain:</span> ${formData.get('domain_aplikasi') || '-'}</div>
+                    <div><span class="font-medium">Jenis IP:</span> ${formData.get('ip_jenis') || '-'}</div>
+                    <div><span class="font-medium">IP Address:</span> ${formData.get('ip_address') || '-'}</div>
                 </div>
             </div>
-        `;
-        
-        previewContent.innerHTML = html;
-        previewModal.classList.remove('hidden');
-    }
+            
+            <div class="bg-cyan-50 p-4 rounded-lg">
+                <h4 class="font-semibold text-cyan-800 mb-3">Data Pejabat Penandatangan NDA</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div><span class="font-medium">Nama:</span> ${formData.get('pejabat_nama') || '-'}</div>
+                    <div><span class="font-medium">NIP:</span> ${formData.get('pejabat_nip') || '-'}</div>
+                    <div><span class="font-medium">Pangkat:</span> ${formData.get('pejabat_pangkat') || '-'}</div>
+                    <div><span class="font-medium">Jabatan:</span> ${formData.get('pejabat_jabatan') || '-'}</div>
+                </div>
+            </div>
+            
+            <div class="bg-yellow-50 p-4 rounded-lg">
+                <h4 class="font-semibold text-yellow-800 mb-3">Teknis & Keamanan</h4>
+                <div class="space-y-3 text-sm">
+                    <div><span class="font-medium">Tujuan Sistem:</span><br>${formData.get('tujuan_sistem') || '-'}</div>
+                    <div><span class="font-medium">Pengguna Sistem:</span><br>${formData.get('pengguna_sistem') || '-'}</div>
+                    <div><span class="font-medium">Hosting:</span><br>${formData.get('hosting') || '-'}</div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div><span class="font-medium">Framework:</span> ${formData.get('framework') || '-'}</div>
+                        <div><span class="font-medium">Jumlah Roles:</span> ${formData.get('jumlah_roles') || '-'}</div>
+                    </div>
+                    <div><span class="font-medium">Nama Roles:</span> ${formData.get('nama_roles') || '-'}</div>
+                    <div><span class="font-medium">Pengelola Sistem:</span><br>${formData.get('pengelola_sistem') || '-'}</div>
+                    <div><span class="font-medium">Mekanisme Account:</span><br>${formData.get('mekanisme_account') || '-'}</div>
+                    <div><span class="font-medium">Mekanisme Kredensial:</span><br>${formData.get('mekanisme_kredensial') || '-'}</div>
+                    <div><span class="font-medium">Fitur Reset Password:</span> ${formData.get('fitur_reset_password') === '1' ? 'Ada' : 'Tidak'}</div>
+                    <div><span class="font-medium">PIC Pengelola:</span> ${formData.get('pic_pengelola') || '-'}</div>
+                    <div><span class="font-medium">Keterangan Tambahan:</span><br>${formData.get('keterangan_tambahan') || 'Tidak ada'}</div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    previewContent.innerHTML = html;
+    previewModal.classList.remove('hidden');
+}
     
     function hidePreview() {
         previewModal.classList.add('hidden');
