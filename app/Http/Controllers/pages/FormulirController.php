@@ -40,7 +40,7 @@ class FormulirController extends Controller
             'nama_roles' => 'nullable|string|max:255',
             'mekanisme_account' => 'nullable|string',
             'mekanisme_kredensial' => 'nullable|string',
-            'fitur_reset_password' => 'boolean',
+            'fitur_reset_password' => 'nullable|in:ada,tidak',
             'pic_pengelola' => 'nullable|string|max:255',
             'keterangan_tambahan' => 'nullable|string',
         ]);
@@ -61,7 +61,8 @@ class FormulirController extends Controller
                 ],
                 array_merge($request->all(), [
                     'user_id' => Auth::id(),
-                    'fitur_reset_password' => $request->has('fitur_reset_password'),
+                    // Perbaikan: langsung ambil nilai dari request
+                    'fitur_reset_password' => $request->input('fitur_reset_password'),
                     'status' => 'draft'
                 ])
             );
@@ -90,7 +91,8 @@ class FormulirController extends Controller
                 ],
                 array_merge($request->all(), [
                     'user_id' => Auth::id(),
-                    'fitur_reset_password' => $request->has('fitur_reset_password'),
+                    // Perbaikan: langsung ambil nilai dari request
+                    'fitur_reset_password' => $request->input('fitur_reset_password'),
                     'status' => 'draft'
                 ])
             );
@@ -161,7 +163,8 @@ class FormulirController extends Controller
             // Selalu buat record baru untuk setiap submission
             $formulir = Formulir::create(array_merge($request->all(), [
                 'user_id' => Auth::id(),
-                'fitur_reset_password' => $request->has('fitur_reset_password'),
+                // Perbaikan: langsung ambil nilai dari request
+                'fitur_reset_password' => $request->input('fitur_reset_password'),
                 'status' => 'diproses'
             ]));
 

@@ -39,7 +39,7 @@ return new class extends Migration {
             // 9 - 12
             $table->text('mekanisme_account')->nullable();
             $table->text('mekanisme_kredensial')->nullable();
-            $table->boolean('fitur_reset_password')->default(false);
+            $table->enum('fitur_reset_password', ['ada', 'tidak'])->nullable();
             $table->string('pic_pengelola')->nullable();
 
             // 13. Keterangan tambahan

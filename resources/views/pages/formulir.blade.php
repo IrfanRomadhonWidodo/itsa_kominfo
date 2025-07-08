@@ -252,11 +252,24 @@
             </div>
 
             <div>
-                <label class="flex items-center">
-                    <input type="checkbox" name="fitur_reset_password" id="fitur_reset_password" 
-                        class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                    <span class="ml-2 text-sm font-semibold text-gray-700">Sistem memiliki fitur reset password</span>
+                <label class="block text-sm font-semibold text-gray-700 mb-3">
+                    Sistem memiliki fitur reset password <span class="text-red-500">*</span>
                 </label>
+                <div class="flex space-x-6">
+                    <label class="flex items-center">
+                        <input type="radio" name="fitur_reset_password" value="1" 
+                            class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500" required>
+                        <span class="ml-2 text-sm text-gray-700">Ada</span>
+                    </label>
+                    <label class="flex items-center">
+                        <input type="radio" name="fitur_reset_password" value="0" 
+                            class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500" required>
+                        <span class="ml-2 text-sm text-gray-700">Tidak</span>
+                    </label>
+                </div>
+                <div id="fitur_reset_password_error" class="text-red-500 text-sm mt-1 hidden">
+                    Pilihan fitur reset password wajib dipilih
+                </div>
             </div>
 
             <div>
@@ -435,9 +448,8 @@ function updateStepDisplay() {
     submitBtn.classList.toggle('hidden', currentStep !== totalSteps);
 }
     
-    function validateCurrentStep() {
+        function validateCurrentStep() {
         const currentStepElement = document.getElementById(`step-${currentStep}`);
-        const requiredFields = currentStepElement.querySelectorAll('input[required], textarea[required]');
         let isValid = true;
         
         // Clear previous errors
@@ -449,12 +461,25 @@ function updateStepDisplay() {
             field.classList.remove('border-red-500');
         });
         
+        // Validasi khusus untuk step 1 (radio button)
+        if (currentStep === 1) {
+            const radioGroup = document.querySelectorAll('input[name="ip_jenis"]:checked');
+            if (radioGroup.length === 0) {
+                document.getElementById('ip_jenis_error').classList.remove('hidden');
+                isValid = false;
+            }
+        }
+        
+        // Validasi field required lainnya
+        const requiredFields = currentStepElement.querySelectorAll('input[required]:not([type="radio"]), textarea[required], select[required]');
+        
         requiredFields.forEach(field => {
             if (!field.value.trim()) {
                 field.classList.add('border-red-500');
-                const feedback = field.parentElement.querySelector('.invalid-feedback');
+                const errorId = `${field.id}_error`;
+                const feedback = document.getElementById(errorId) || field.parentElement.querySelector('.invalid-feedback');
                 if (feedback) {
-                    feedback.textContent = 'Field ini wajib diisi';
+                    feedback.textContent = 'Kolom ini wajib diisi';
                     feedback.classList.remove('hidden');
                 }
                 isValid = false;
