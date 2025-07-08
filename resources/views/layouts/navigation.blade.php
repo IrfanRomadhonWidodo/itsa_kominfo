@@ -140,10 +140,15 @@
                                 <img src="https://www.gravatar.com/avatar/{{ md5(strtolower(trim(Auth::user()->email))) }}?s=40&d=mp&r=g" 
                                      alt="{{ Auth::user()->name }}" 
                                      class="h-8 w-8 rounded-full border-2 border-white shadow-sm group-hover:border-[#00ADE5]/50 transition-all duration-300">
+                                <!-- User role -->
                                 <div class="hidden lg:block text-left">
                                     <div class="font-semibold text-gray-900">{{ Str::limit(Auth::user()->name, 15) }}</div>
-                                    <div class="text-xs text-gray-500">{{ __('Admin') }}</div>
+                                    
+                                    @if(Auth::user()->role === 'admin')
+                                        <div class="text-xs text-gray-500">Admin</div>
+                                    @endif
                                 </div>
+
                                 <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" 
                                      fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>

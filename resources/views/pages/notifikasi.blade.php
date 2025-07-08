@@ -1,105 +1,90 @@
 <x-app-layout>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <div class="flex justify-between items-center mb-6">
-                        <div>
-                            <p class="text-sm text-gray-600">
-                                {{ $unreadCount }} notifikasi belum dibaca
-                            </p>
-                        </div>
-                        @if($unreadCount > 0)
-                        <button onclick="markAllAsRead()" 
-                                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+    <div class="py-12 bg-gray-50 min-h-screen">
+        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white shadow-md rounded-xl p-6">
+                
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800">
+                        Notifikasi
+                    </h2>
+                    @if($unreadCount > 0)
+                        <button onclick="markAllAsRead()"
+                            class="flex items-center gap-2 bg-gradient-to-r from-[#00ADE5] to-[#016DAE] text-white px-4 py-2 rounded-lg hover:opacity-90 transition">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                 viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round"
+                                 d="M5 13l4 4L19 7"/></svg>
                             Tandai Semua Dibaca
                         </button>
-                        @endif
-                    </div>
+                    @endif
+                </div>
 
-                    <div class="space-y-4">
-                        @forelse($notifikasi as $item)
-                        <a href="{{ route('notifikasi.show', $item->id) }}" 
-                           class="block border rounded-lg p-4 transition duration-200 cursor-pointer
-                                  {{ $item->is_read ? 'bg-gray-50' : 'bg-blue-50 border-blue-200' }} 
-                                  hover:bg-blue-100 hover:shadow-md">
-                            <div class="flex items-start justify-between">
-                                <div class="flex-1">
-                                    <div class="flex items-center space-x-2">
-                                        <h4 class="font-medium text-gray-900">
+                <p class="text-sm text-gray-500 mb-4">{{ $unreadCount }} notifikasi belum dibaca</p>
+
+                <div class="space-y-4">
+                    @forelse($notifikasi as $item)
+                        <a href="{{ route('notifikasi.show', $item->id) }}"
+                           class="block p-4 rounded-xl border transition-all duration-200
+                                  {{ $item->is_read ? 'bg-white border-gray-200' : 'bg-blue-50 border-blue-200' }}
+                                  hover:shadow hover:bg-blue-100">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <h3 class="font-semibold text-gray-900 text-base">
                                             {{ $item->judul }}
-                                        </h4>
+                                        </h3>
                                         @if(!$item->is_read)
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                            Baru
-                                        </span>
+                                            <span class="text-xs bg-blue-100 text-blue-800 font-medium px-2 py-0.5 rounded-full">
+                                                Baru
+                                            </span>
                                         @endif
                                     </div>
-                                    <p class="text-sm text-gray-600 mt-1">
-                                        {{ $item->pesan }}
+                                    <p class="text-sm text-gray-700">
+                                        {{ Str::limit($item->pesan, 100) }}
                                     </p>
-                                    <div class="flex items-center space-x-4 mt-2">
-                                        <span class="text-xs text-gray-500">
-                                            {{ $item->created_at->diffForHumans() }}
-                                        </span>
-                                    </div>
                                 </div>
+                                <span class="text-xs text-gray-400 mt-1 whitespace-nowrap">
+                                    {{ $item->created_at->diffForHumans() }}
+                                </span>
                             </div>
                         </a>
-                        @empty
-                        <div class="text-center py-8">
-                            <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5-5-5h5v-12"></path>
+                    @empty
+                        <div class="text-center py-10 text-gray-500">
+                            <svg class="w-14 h-14 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor"
+                                 viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M15 17h5l-5 5-5-5h5v-12"/>
                             </svg>
-                            <p class="text-gray-500">Tidak ada notifikasi</p>
+                            Tidak ada notifikasi untuk ditampilkan.
                         </div>
-                        @endforelse
-                    </div>
+                    @endforelse
+                </div>
 
-                    @if($notifikasi->hasPages())
+                @if($notifikasi->hasPages())
                     <div class="mt-6">
                         {{ $notifikasi->links() }}
                     </div>
-                    @endif
-                </div>
+                @endif
             </div>
         </div>
     </div>
 
-@push('scripts')
-<script>
-    function markAsRead(id) {
-        fetch(`/notifikasi/${id}/mark-read`, {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                location.reload();
-            }
-        });
-    }
-
-    function markAllAsRead() {
-        fetch('/notifikasi/mark-all-read', {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                location.reload();
-            }
-        });
-    }
-</script>
-@endpush
-
+    @push('scripts')
+    <script>
+        function markAllAsRead() {
+            fetch('/notifikasi/mark-all-read', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    location.reload();
+                }
+            });
+        }
+    </script>
+    @endpush
 </x-app-layout>
