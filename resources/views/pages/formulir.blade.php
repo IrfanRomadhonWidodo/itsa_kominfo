@@ -595,49 +595,71 @@ function showPreview() {
     const formData = new FormData(form);
     const previewContent = document.getElementById('preview-content');
     
-    let html = `
-        <div class="space-y-6">
-            <div class="bg-blue-50 p-4 rounded-lg">
-                <h4 class="font-semibold text-blue-800 mb-3">Data Sistem</h4>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                    <div><span class="font-medium">Nama Aplikasi:</span> ${formData.get('nama_aplikasi') || '-'}</div>
-                    <div><span class="font-medium">Domain:</span> ${formData.get('domain_aplikasi') || '-'}</div>
-                    <div><span class="font-medium">Jenis IP:</span> ${formData.get('ip_jenis') || '-'}</div>
-                    <div><span class="font-medium">IP Address:</span> ${formData.get('ip_address') || '-'}</div>
-                </div>
-            </div>
-            
-            <div class="bg-cyan-50 p-4 rounded-lg">
-                <h4 class="font-semibold text-cyan-800 mb-3">Data Pejabat Penandatangan NDA</h4>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                    <div><span class="font-medium">Nama:</span> ${formData.get('pejabat_nama') || '-'}</div>
-                    <div><span class="font-medium">NIP:</span> ${formData.get('pejabat_nip') || '-'}</div>
-                    <div><span class="font-medium">Pangkat:</span> ${formData.get('pejabat_pangkat') || '-'}</div>
-                    <div><span class="font-medium">Jabatan:</span> ${formData.get('pejabat_jabatan') || '-'}</div>
-                </div>
-            </div>
-            
-            <div class="bg-yellow-50 p-4 rounded-lg">
-                <h4 class="font-semibold text-yellow-800 mb-3">Teknis & Keamanan</h4>
-                <div class="space-y-3 text-sm">
-                    <div><span class="font-medium">Tujuan Sistem:</span><br>${formData.get('tujuan_sistem') || '-'}</div>
-                    <div><span class="font-medium">Pengguna Sistem:</span><br>${formData.get('pengguna_sistem') || '-'}</div>
-                    <div><span class="font-medium">Hosting:</span><br>${formData.get('hosting') || '-'}</div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div><span class="font-medium">Framework:</span> ${formData.get('framework') || '-'}</div>
-                        <div><span class="font-medium">Jumlah Roles:</span> ${formData.get('jumlah_roles') || '-'}</div>
-                    </div>
-                    <div><span class="font-medium">Nama Roles:</span> ${formData.get('nama_roles') || '-'}</div>
-                    <div><span class="font-medium">Pengelola Sistem:</span><br>${formData.get('pengelola_sistem') || '-'}</div>
-                    <div><span class="font-medium">Mekanisme Account:</span><br>${formData.get('mekanisme_account') || '-'}</div>
-                    <div><span class="font-medium">Mekanisme Kredensial:</span><br>${formData.get('mekanisme_kredensial') || '-'}</div>
-                    <div><span class="font-medium">Fitur Reset Password:</span> ${formData.get('fitur_reset_password') === '1' ? 'Ada' : 'Tidak'}</div>
-                    <div><span class="font-medium">PIC Pengelola:</span> ${formData.get('pic_pengelola') || '-'}</div>
-                    <div><span class="font-medium">Keterangan Tambahan:</span><br>${formData.get('keterangan_tambahan') || 'Tidak ada'}</div>
-                </div>
+let html = `
+    <div class="space-y-4 text-sm text-gray-600">
+        <!-- Data Sistem -->
+        <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+            <h4 class="font-medium text-gray-900 mb-3 flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                Data Sistem
+            </h4>
+            <div class="space-y-2">
+                <div><span class="font-medium text-gray-700">Nama Aplikasi:</span> ${formData.get('nama_aplikasi') || '-'}</div>
+                <div><span class="font-medium text-gray-700">Domain:</span> ${formData.get('domain_aplikasi') || '-'}</div>
+                <div><span class="font-medium text-gray-700">Jenis IP:</span> ${formData.get('ip_jenis') || '-'}</div>
+                <div><span class="font-medium text-gray-700">IP Address:</span> ${formData.get('ip_address') || '-'}</div>
             </div>
         </div>
-    `;
+
+        <!-- Pejabat Penandatangan -->
+        <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+            <h4 class="font-medium text-gray-900 mb-3 flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                </svg>
+                Pejabat Penandatangan NDA
+            </h4>
+            <div class="space-y-2">
+                <div><span class="font-medium text-gray-700">Nama:</span> ${formData.get('pejabat_nama') || '-'}</div>
+                <div><span class="font-medium text-gray-700">NIP:</span> ${formData.get('pejabat_nip') || '-'}</div>
+                <div><span class="font-medium text-gray-700">Pangkat:</span> ${formData.get('pejabat_pangkat') || '-'}</div>
+                <div><span class="font-medium text-gray-700">Jabatan:</span> ${formData.get('pejabat_jabatan') || '-'}</div>
+            </div>
+        </div>
+
+        <!-- Teknis & Keamanan -->
+        <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+            <h4 class="font-medium text-gray-900 mb-3 flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+                Teknis & Keamanan
+            </h4>
+            <div class="space-y-3">
+                <div><span class="font-medium text-gray-700">Tujuan Sistem:</span><br>${formData.get('tujuan_sistem') || '-'}</div>
+                <div><span class="font-medium text-gray-700">Pengguna Sistem:</span><br>${formData.get('pengguna_sistem') || '-'}</div>
+                <div><span class="font-medium text-gray-700">Hosting:</span><br>${formData.get('hosting') || '-'}</div>
+                <div class="space-y-2">
+                    <div><span class="font-medium text-gray-700">Framework:</span> ${formData.get('framework') || '-'}</div>
+                    <div>
+                        <span class="font-medium text-gray-700">Roles:</span>
+                        ${formData.get('jumlah_roles') || '0'} peran
+                        (${formData.get('nama_roles') || '-'})
+                    </div>
+                </div>
+                <div><span class="font-medium text-gray-700">Pengelola Sistem:</span><br>${formData.get('pengelola_sistem') || '-'}</div>
+                <div><span class="font-medium text-gray-700">Mekanisme Account:</span><br>${formData.get('mekanisme_account') || '-'}</div>
+                <div><span class="font-medium text-gray-700">Mekanisme Kredensial:</span><br>${formData.get('mekanisme_kredensial') || '-'}</div>
+                <div><span class="font-medium text-gray-700">Fitur Reset Password:</span> ${formData.get('fitur_reset_password') === '1' ? 'Ada' : 'Tidak'}</div>
+                <div><span class="font-medium text-gray-700">PIC Pengelola:</span> ${formData.get('pic_pengelola') || '-'}</div>
+                <div><span class="font-medium text-gray-700">Keterangan Tambahan:</span><br>${formData.get('keterangan_tambahan') || 'Tidak ada'}</div>
+            </div>
+        </div>
+    </div>
+`;
+
     
     previewContent.innerHTML = html;
     previewModal.classList.remove('hidden');
