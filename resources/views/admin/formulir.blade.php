@@ -138,101 +138,310 @@
                         </td>
                     </tr>
 
-                    <!-- Modal View Formulir -->
-                    <div id="viewFormulirModal{{ $formulir->id }}" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-                        <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-                            <div class="px-6 py-4 border-b border-gray-200">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="text-lg font-semibold text-gray-900">Detail Formulir</h3>
-                                    <button onclick="closeModal('viewFormulirModal{{ $formulir->id }}')" class="text-gray-400 hover:text-gray-600">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                        </svg>
-                                    </button>
-                                </div>
+<!-- Modal View Formulir - Improved Version -->
+<div id="viewFormulirModal{{ $formulir->id }}" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg shadow-xl max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+        <!-- Modal Header -->
+        <div class="sticky top-0 bg-gradient-to-r from-[#EDBC19] to-[#8F181A] px-6 py-4 rounded-t-lg">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-xl font-bold text-white">Detail Formulir Aplikasi</h3>
+                    <p class="text-white/80 text-sm mt-1">{{ $formulir->nama_aplikasi }}</p>
+                </div>
+                <button onclick="closeModal('viewFormulirModal{{ $formulir->id }}')" class="text-white/80 hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Modal Content -->
+        <div class="px-6 py-6">
+            <!-- Status Badge -->
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center space-x-4">
+                    @php
+                        $statusColors = [
+                            'menunggu' => 'bg-yellow-100 text-yellow-800 border-yellow-200',
+                            'diproses' => 'bg-blue-100 text-blue-800 border-blue-200',
+                            'revisi' => 'bg-orange-100 text-orange-800 border-orange-200',
+                            'selesai' => 'bg-green-100 text-green-800 border-green-200'
+                        ];
+                    @endphp
+                    <span class="px-4 py-2 text-sm font-semibold rounded-full border {{ $statusColors[$formulir->status] }}">
+                        {{ ucfirst($formulir->status) }}
+                    </span>
+                </div>
+                <div class="text-sm text-gray-500">
+                    <span class="font-medium">Dibuat:</span> {{ $formulir->created_at->format('d M Y, H:i') }}
+                </div>
+            </div>
+
+            <!-- Content Sections -->
+            <div class="space-y-6">
+                
+                <!-- Section 1: Informasi Pengguna -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900">Informasi Pengguna</h4>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <div class="flex">
+                                <span class="font-medium text-gray-600 w-16">Nama:</span>
+                                <span class="text-gray-900">{{ $formulir->user->name }}</span>
                             </div>
-                            <div class="px-6 py-4">
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div>
-                                        <h4 class="font-medium text-gray-900 mb-3">Informasi Pengguna</h4>
-                                        <div class="space-y-2">
-                                            <div><span class="font-medium">Nama:</span> {{ $formulir->user->name }}</div>
-                                            <div><span class="font-medium">Email:</span> {{ $formulir->user->email }}</div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-medium text-gray-900 mb-3">Informasi Aplikasi</h4>
-                                        <div class="space-y-2">
-                                            <div><span class="font-medium">Nama Aplikasi:</span> {{ $formulir->nama_aplikasi }}</div>
-                                            <div><span class="font-medium">Domain:</span> {{ $formulir->domain_aplikasi }}</div>
-                                            <div><span class="font-medium">IP Jenis:</span> {{ $formulir->ip_jenis }}</div>
-                                            <div><span class="font-medium">IP Address:</span> {{ $formulir->ip_address }}</div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-medium text-gray-900 mb-3">Informasi Pejabat</h4>
-                                        <div class="space-y-2">
-                                            <div><span class="font-medium">Nama:</span> {{ $formulir->pejabat_nama }}</div>
-                                            <div><span class="font-medium">NIP:</span> {{ $formulir->pejabat_nip }}</div>
-                                            <div><span class="font-medium">Pangkat:</span> {{ $formulir->pejabat_pangkat }}</div>
-                                            <div><span class="font-medium">Jabatan:</span> {{ $formulir->pejabat_jabatan }}</div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-medium text-gray-900 mb-3">Detail Sistem</h4>
-                                        <div class="space-y-2">
-                                            <div><span class="font-medium">Tujuan Sistem:</span> {{ $formulir->tujuan_sistem }}</div>
-                                            <div><span class="font-medium">Pengguna Sistem:</span> {{ $formulir->pengguna_sistem }}</div>
-                                            <div><span class="font-medium">Hosting:</span> {{ $formulir->hosting }}</div>
-                                            <div><span class="font-medium">Framework:</span> {{ $formulir->framework }}</div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-medium text-gray-900 mb-3">Pengelolaan</h4>
-                                        <div class="space-y-2">
-                                            <div><span class="font-medium">Pengelola Sistem:</span> {{ $formulir->pengelola_sistem }}</div>
-                                            <div><span class="font-medium">Jumlah Roles:</span> {{ $formulir->jumlah_roles }}</div>
-                                            <div><span class="font-medium">Nama Roles:</span> {{ $formulir->nama_roles }}</div>
-                                            <div><span class="font-medium">PIC Pengelola:</span> {{ $formulir->pic_pengelola }}</div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-medium text-gray-900 mb-3">Keamanan</h4>
-                                        <div class="space-y-2">
-                                            <div><span class="font-medium">Mekanisme Account:</span> {{ $formulir->mekanisme_account }}</div>
-                                            <div><span class="font-medium">Mekanisme Kredensial:</span> {{ $formulir->mekanisme_kredensial }}</div>
-                                            <div><span class="font-medium">Fitur Reset Password:</span> {{ $formulir->fitur_reset_password }}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @if($formulir->keterangan_tambahan)
-                                <div class="mt-6">
-                                    <h4 class="font-medium text-gray-900 mb-3">Keterangan Tambahan</h4>
-                                    <p class="text-gray-700 whitespace-pre-wrap">{{ $formulir->keterangan_tambahan }}</p>
-                                </div>
-                                @endif
-                                @if($formulir->balasan_admin)
-                                <div class="mt-6">
-                                    <h4 class="font-medium text-gray-900 mb-3">Balasan Admin</h4>
-                                    <p class="text-gray-700 whitespace-pre-wrap">{{ $formulir->balasan_admin }}</p>
-                                </div>
-                                @endif
-                                <div class="mt-6">
-                                    <h4 class="font-medium text-gray-900 mb-3">Informasi Status</h4>
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div><span class="font-medium">Status:</span> {{ ucfirst($formulir->status) }}</div>
-                                        <div><span class="font-medium">Tanggal Dibuat:</span> {{ $formulir->created_at->format('d M Y H:i') }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="px-6 py-4 border-t border-gray-200">
-                                <button onclick="closeModal('viewFormulirModal{{ $formulir->id }}')" class="w-full px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">
-                                    Tutup
-                                </button>
+                            <div class="flex">
+                                <span class="font-medium text-gray-600 w-16">Email:</span>
+                                <span class="text-gray-900">{{ $formulir->user->email }}</span>
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <!-- Section 2: Informasi Aplikasi -->
+                <div class="bg-blue-50 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900">Informasi Aplikasi</h4>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-3">
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">Nama Aplikasi</span>
+                                <span class="text-gray-900 font-semibold">{{ $formulir->nama_aplikasi }}</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">Domain</span>
+                                <span class="text-gray-900">{{ $formulir->domain_aplikasi }}</span>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">IP Jenis</span>
+                                <span class="text-gray-900">{{ $formulir->ip_jenis }}</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">IP Address</span>
+                                <span class="text-gray-900 font-mono">{{ $formulir->ip_address }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Informasi Pejabat -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900">Informasi Pejabat</h4>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-3">
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">Nama Pejabat</span>
+                                <span class="text-gray-900 font-semibold">{{ $formulir->pejabat_nama }}</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">NIP</span>
+                                <span class="text-gray-900 font-mono">{{ $formulir->pejabat_nip }}</span>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">Pangkat</span>
+                                <span class="text-gray-900">{{ $formulir->pejabat_pangkat }}</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">Jabatan</span>
+                                <span class="text-gray-900">{{ $formulir->pejabat_jabatan }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Detail Sistem -->
+                <div class="bg-blue-50 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900">Detail Sistem</h4>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-3">
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">Tujuan Sistem</span>
+                                <span class="text-gray-900">{{ $formulir->tujuan_sistem }}</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">Pengguna Sistem</span>
+                                <span class="text-gray-900">{{ $formulir->pengguna_sistem }}</span>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">Hosting</span>
+                                <span class="text-gray-900">{{ $formulir->hosting }}</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">Framework</span>
+                                <span class="text-gray-900">{{ $formulir->framework }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 5: Pengelolaan -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900">Pengelolaan</h4>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-3">
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">Pengelola Sistem</span>
+                                <span class="text-gray-900">{{ $formulir->pengelola_sistem }}</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">Jumlah Roles</span>
+                                <span class="text-gray-900">{{ $formulir->jumlah_roles }}</span>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">Nama Roles</span>
+                                <span class="text-gray-900">{{ $formulir->nama_roles }}</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">PIC Pengelola</span>
+                                <span class="text-gray-900">{{ $formulir->pic_pengelola }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 6: Keamanan -->
+                <div class="bg-blue-50 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900">Keamanan</h4>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-3">
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">Mekanisme Account</span>
+                                <span class="text-gray-900">{{ $formulir->mekanisme_account }}</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">Mekanisme Kredensial</span>
+                                <span class="text-gray-900">{{ $formulir->mekanisme_kredensial }}</span>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">Fitur Reset Password</span>
+                                <span class="text-gray-900">{{ $formulir->fitur_reset_password }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 7: Keterangan Tambahan -->
+                @if($formulir->keterangan_tambahan)
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900">Keterangan Tambahan</h4>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border">
+                        <p class="text-gray-700 whitespace-pre-wrap leading-relaxed">{{ $formulir->keterangan_tambahan }}</p>
+                    </div>
+                </div>
+                @endif
+
+                <!-- Section 8: Balasan Admin -->
+                @if($formulir->balasan_admin)
+                <div class="bg-blue-50 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900">Balasan Admin</h4>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-blue-200">
+                        <p class="text-gray-700 whitespace-pre-wrap leading-relaxed">{{ $formulir->balasan_admin }}</p>
+                    </div>
+                </div>
+                @endif
+
+                <!-- Section 9: File ITSA -->
+                @if($formulir->file_hasil_itsa)
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900">File Hasil ITSA</h4>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border">
+                        <a href="{{ Storage::url($formulir->file_hasil_itsa) }}" target="_blank" 
+                           class="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            Download File ITSA
+                        </a>
+                    </div>
+                </div>
+                @endif
+
+            </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="sticky bottom-0 bg-white px-6 py-4 border-t border-gray-200 rounded-b-lg">
+            <div class="flex justify-end space-x-3">
+                <button onclick="closeModal('viewFormulirModal{{ $formulir->id }}')" 
+                        class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Modal Reply Formulir -->
 <div id="replyFormulirModal{{ $formulir->id }}" class="fixed inset-0 flex items-center justify-center z-50 hidden">

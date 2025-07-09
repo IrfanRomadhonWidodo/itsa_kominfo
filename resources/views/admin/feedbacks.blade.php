@@ -117,57 +117,129 @@
                         </td>
                     </tr>
 
-                    <!-- Modal View Feedback -->
-                    <div id="viewFeedbackModal{{ $feedback->id }}" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-                        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-                            <div class="px-6 py-4 border-b border-gray-200">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="text-lg font-semibold text-gray-900">Detail Feedback</h3>
-                                    <button onclick="closeModal('viewFeedbackModal{{ $feedback->id }}')" class="text-gray-400 hover:text-gray-600">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                        </svg>
-                                    </button>
-                                </div>
+<!-- Modal View Feedback - Improved Version -->
+<div id="viewFeedbackModal{{ $feedback->id }}" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+        <!-- Modal Header -->
+        <div class="sticky top-0 bg-gradient-to-r from-[#EDBC19] to-[#8F181A] px-6 py-4 rounded-t-lg">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-xl font-bold text-white">Detail Feedback</h3>
+                    <p class="text-white/80 text-sm mt-1">{{ $feedback->subjek_label }}</p>
+                </div>
+                <button onclick="closeModal('viewFeedbackModal{{ $feedback->id }}')" class="text-white/80 hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Modal Content -->
+        <div class="px-6 py-6">
+            <!-- Status Badge -->
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center space-x-4">
+                    @php
+                        $statusColors = [
+                            'menunggu' => 'bg-yellow-100 text-yellow-800 border-yellow-200',
+                            'diproses' => 'bg-blue-100 text-blue-800 border-blue-200',
+                            'selesai' => 'bg-green-100 text-green-800 border-green-200'
+                        ];
+                    @endphp
+                    <span class="px-4 py-2 text-sm font-semibold rounded-full border {{ $statusColors[$feedback->status] ?? 'bg-gray-100 text-gray-800 border-gray-200' }}">
+                        {{ ucfirst($feedback->status) }}
+                    </span>
+                </div>
+                <div class="text-sm text-gray-500">
+                    <span class="font-medium">Dibuat:</span> {{ $feedback->created_at->format('d M Y, H:i') }}
+                </div>
+            </div>
+
+            <!-- Content Sections -->
+            <div class="space-y-6">
+                
+                <!-- Section 1: Informasi Pengguna -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900">Informasi Pengguna</h4>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">Nama</span>
+                                <span class="text-gray-900 font-semibold">{{ $feedback->user->name }}</span>
                             </div>
-                            <div class="px-6 py-4">
-                                <div class="space-y-4">
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700">Pengguna</label>
-                                        <p class="mt-1 text-sm text-gray-900">{{ $feedback->user->name }} ({{ $feedback->user->email }})</p>
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700">Subjek</label>
-                                        <p class="mt-1 text-sm text-gray-900">{{ $feedback->subjek_label }}</p>
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700">Pesan</label>
-                                        <p class="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{{ $feedback->pesan }}</p>
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700">Status</label>
-                                        <p class="mt-1 text-sm text-gray-900">{{ ucfirst($feedback->status) }}</p>
-                                    </div>
-                                    @if($feedback->balasan_admin)
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700">Balasan Admin</label>
-                                        <p class="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{{ $feedback->balasan_admin }}</p>
-                                    </div>
-                                    @endif
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700">Tanggal Dibuat</label>
-                                        <p class="mt-1 text-sm text-gray-900">{{ $feedback->created_at->format('d M Y H:i') }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="px-6 py-4 border-t border-gray-200">
-                                <button onclick="closeModal('viewFeedbackModal{{ $feedback->id }}')" class="w-full px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">
-                                    Tutup
-                                </button>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-600 text-sm">Email</span>
+                                <span class="text-gray-900">{{ $feedback->user->email }}</span>
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <!-- Section 2: Detail Feedback -->
+                <div class="bg-blue-50 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900">Detail Feedback</h4>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex flex-col">
+                            <span class="font-medium text-gray-600 text-sm">Subjek</span>
+                            <span class="text-gray-900 font-semibold">{{ $feedback->subjek_label }}</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-medium text-gray-600 text-sm">Pesan</span>
+                            <div class="bg-white p-4 rounded-lg border border-blue-200 mt-2">
+                                <p class="text-gray-700 whitespace-pre-wrap leading-relaxed">{{ $feedback->pesan }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Balasan Admin -->
+                @if($feedback->balasan_admin)
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900">Balasan Admin</h4>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border">
+                        <p class="text-gray-700 whitespace-pre-wrap leading-relaxed">{{ $feedback->balasan_admin }}</p>
+                    </div>
+                </div>
+                @endif
+
+            </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="sticky bottom-0 bg-white px-6 py-4 border-t border-gray-200 rounded-b-lg">
+            <div class="flex justify-end space-x-3">
+                <button onclick="closeModal('viewFeedbackModal{{ $feedback->id }}')" 
+                        class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
                     <!-- Modal Reply Feedback -->
                     <div id="replyFeedbackModal{{ $feedback->id }}" class="fixed inset-0 flex items-center justify-center z-50 hidden">
                         <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
