@@ -70,8 +70,18 @@ class NotifikasiController extends Controller
             $notifikasi->markAsRead();
         }
 
-        return view('pages.notifikasi-detail', compact('notifikasi'));
+    // Pilih view berdasarkan type atau pola judul
+    if ($notifikasi->type == 'formulir') {
+        if (str_starts_with($notifikasi->judul, 'Revisi Formulir:')) {
+            return view('pages.notifikasi-formulir-revisi', compact('notifikasi'));
+        } elseif (str_starts_with($notifikasi->judul, 'File Hasil ITSA:')) {
+            return view('pages.notifikasi-formulir-hasil', compact('notifikasi'));
+        }
     }
+
+    // Default
+    return view('pages.notifikasi-detail', compact('notifikasi'));
+}
 
     /**
      * Lihat detail notifikasi dan balasan formulir.
