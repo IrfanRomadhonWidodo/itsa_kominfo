@@ -22,7 +22,6 @@ class FormulirAdminController extends Controller
             $searchTerm = '%' . $request->search . '%';
             $query->where('nama_aplikasi', 'like', $searchTerm)
                   ->orWhere('domain_aplikasi', 'like', $searchTerm)
-                  ->orWhere('ip_address', 'like', $searchTerm)
                   ->orWhere('status', 'like', $searchTerm)
                   ->orWhereHas('user', function($q) use ($searchTerm) {
                       $q->where('name', 'like', $searchTerm);
@@ -64,20 +63,20 @@ class FormulirAdminController extends Controller
         // Buat notifikasi untuk user
         Notifikasi::create([
             'user_id' => $formulir->user_id,
-            'judul' => 'Formulir Perlu Revisi: ' . $formulir->nama_aplikasi,
-            'pesan' => 'Admin telah memberikan balasan untuk formulir aplikasi "' . $formulir->nama_aplikasi . '". Silakan lakukan revisi sesuai catatan admin.',
+            'judul' => 'Balasan Formulir: ' . $formulir->nama_aplikasi,
+            'pesan' => 'Admin telah memberikan balasan untuk formulir aplikasi "' . $formulir->nama_aplikasi . '".',
             'type' => 'formulir',
             'formulir_id' => $formulir->id,
             'is_read' => false,
         ]);
 
-        return redirect()->route('admin.formulir.index')->with('success', 'Balasan berhasil dikirim dan status formulir diubah menjadi revisi.');
+        return redirect()->route('admin.formulir.index')->with('success', 'Balasan formulir berhasil dikirim dan notifikasi telah dikirim ke user.');
     }
 
     /**
      * Upload file hasil ITSA.
      */
-    public function uploadHasilItsa(Request $request, Formulir $formulir)
+    public function uploadFile(Request $request, Formulir $formulir)
     {
         $request->validate([
             'file_hasil_itsa' => ['required', 'file', 'mimes:pdf', 'max:10240'], // Max 10MB
@@ -89,37 +88,24 @@ class FormulirAdminController extends Controller
         }
 
         // Upload file baru
-        $fileName = time() . '_' . $request->file('file_hasil_itsa')->getClientOriginalName();
-        $filePath = $request->file('file_hasil_itsa')->storeAs('hasil_itsa', $fileName, 'public');
+        $filePath = $request->file('file_hasil_itsa')->store('formulir/hasil_itsa', 'public');
 
         $formulir->update([
             'file_hasil_itsa' => $filePath,
-            'status' => 'selesai', // Otomatis set ke selesai jika file hasil ITSA diupload
+            'status' => 'selesai', // Otomatis set ke selesai jika file sudah diupload
         ]);
 
         // Buat notifikasi untuk user
         Notifikasi::create([
             'user_id' => $formulir->user_id,
-            'judul' => 'File Hasil ITSA Tersedia: ' . $formulir->nama_aplikasi,
-            'pesan' => 'File hasil ITSA untuk aplikasi "' . $formulir->nama_aplikasi . '" telah tersedia dan dapat didownload.',
+            'judul' => 'File Hasil ITSA: ' . $formulir->nama_aplikasi,
+            'pesan' => 'File hasil ITSA untuk aplikasi "' . $formulir->nama_aplikasi . '" telah tersedia.',
             'type' => 'formulir',
             'formulir_id' => $formulir->id,
             'is_read' => false,
         ]);
 
-        return redirect()->route('admin.formulir.index')->with('success', 'File hasil ITSA berhasil diupload dan status formulir diubah menjadi selesai.');
-    }
-
-    /**
-     * Download file hasil ITSA.
-     */
-    public function downloadHasilItsa(Formulir $formulir)
-    {
-        if (!$formulir->file_hasil_itsa || !Storage::disk('public')->exists($formulir->file_hasil_itsa)) {
-            return redirect()->back()->with('error', 'File tidak ditemukan.');
-        }
-
-        return Storage::disk('public')->download($formulir->file_hasil_itsa);
+        return redirect()->route('admin.formulir.index')->with('success', 'File hasil ITSA berhasil diupload dan notifikasi telah dikirim ke user.');
     }
 
     /**
@@ -127,7 +113,7 @@ class FormulirAdminController extends Controller
      */
     public function destroy(Formulir $formulir)
     {
-        // Hapus file hasil ITSA jika ada
+        // Hapus file jika ada
         if ($formulir->file_hasil_itsa) {
             Storage::disk('public')->delete($formulir->file_hasil_itsa);
         }
