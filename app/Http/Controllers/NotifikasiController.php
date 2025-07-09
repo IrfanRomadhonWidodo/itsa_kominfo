@@ -15,6 +15,7 @@ class NotifikasiController extends Controller
     {
         $notifikasi = Notifikasi::where('user_id', Auth::id())
                                ->with('feedback')
+                               ->with('formulir')
                                ->latest()
                                ->paginate(10);
 
@@ -72,4 +73,8 @@ class NotifikasiController extends Controller
 
         return view('pages.notifikasi-detail', compact('notifikasi'));
     }
+
+    /**
+     * Lihat detail notifikasi dan balasan formulir.
+     */
 }
