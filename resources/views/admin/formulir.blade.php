@@ -234,54 +234,102 @@
                     </div>
 
                     <!-- Modal Reply Formulir -->
-                    <div id="replyFormulirModal{{ $formulir->id }}" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-                        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-                            <div class="sticky top-0 bg-white px-6 py-4 border-b border-gray-200 rounded-t-lg">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="text-lg font-semibold text-gray-900">Balas Formulir</h3>
-                                    <button onclick="closeModal('replyFormulirModal{{ $formulir->id }}')" class="text-gray-400 hover:text-gray-600">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            <form action="{{ route('admin.formulir.update', $formulir->id) }}" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <div class="px-6 py-4">
-                                    <div class="space-y-4">
-                                        <div class="bg-gray-50 p-4 rounded-lg">
-                                            <h4 class="font-medium text-gray-900 mb-2">Formulir dari {{ $formulir->user->name }}</h4>
-                                            <p class="text-sm text-gray-600 mb-2"><strong>Aplikasi:</strong> {{ $formulir->nama_aplikasi }}</p>
-                                            <p class="text-sm text-gray-600"><strong>Domain:</strong> {{ $formulir->domain_aplikasi }}</p>
-                                        </div>
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700">File Hasil ITSA (PDF)</label>
-                                            <input type="file" name="file_hasil_itsa" accept=".pdf" required
-                                                class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                            <p class="mt-2 text-sm text-gray-500">Format: PDF, Maksimal 10MB. Setelah upload, status akan otomatis berubah menjadi "Selesai"</p>
-                                        </div>
-                                        @if($formulir->file_hasil_itsa)
-                                        <div class="bg-blue-50 p-4 rounded-lg">
-                                            <p class="text-sm text-blue-800">File saat ini: 
-                                                <a href="{{ Storage::url($formulir->file_hasil_itsa) }}" target="_blank" class="underline">Lihat File</a>
-                                            </p>
-                                        </div>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="px-6 py-4 border-t border-gray-200 flex space-x-3">
-                                    <button type="submit" class="flex-1 px-4 py-2 bg-gradient-to-r from-[#EDBC19] to-[#8F181A] text-white rounded-md hover:opacity-90 transition">
-                                        Upload File
-                                    </button>
-                                    <button type="button" onclick="closeModal('uploadFileModal{{ $formulir->id }}')" class="flex-1 px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">
-                                        Batal
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+<!-- Modal Reply Formulir -->
+<div id="replyFormulirModal{{ $formulir->id }}" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+        <div class="sticky top-0 bg-white px-6 py-4 border-b border-gray-200 rounded-t-lg">
+            <div class="flex items-center justify-between">
+                <h3 class="text-lg font-semibold text-gray-900">Balas Formulir</h3>
+                <button onclick="closeModal('replyFormulirModal{{ $formulir->id }}')" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <form action="{{ route('admin.formulir.update', $formulir->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="px-6 py-4 space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-medium text-gray-900 mb-2">Formulir dari {{ $formulir->user->name }}</h4>
+                    <p class="text-sm text-gray-600"><strong>Aplikasi:</strong> {{ $formulir->nama_aplikasi }}</p>
+                    <p class="text-sm text-gray-600"><strong>Domain:</strong> {{ $formulir->domain_aplikasi }}</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Balasan Admin</label>
+                    <textarea name="balasan_admin" rows="4" required
+                        class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Tulis balasan Anda di sini...">{{ $formulir->balasan_admin }}</textarea>
+                    <p class="mt-2 text-sm text-gray-500">Status otomatis menjadi “Revisi” setelah balasan dikirim.</p>
+                </div>
+            </div>
+
+            <div class="sticky bottom-0 bg-white px-6 py-4 border-t border-gray-200 flex space-x-3 rounded-b-lg">
+                <button type="submit" class="flex-1 px-4 py-2 bg-gradient-to-r from-[#EDBC19] to-[#8F181A] text-white rounded-md hover:opacity-90 transition">
+                    Kirim Balasan
+                </button>
+                <button type="button" onclick="closeModal('replyFormulirModal{{ $formulir->id }}')" class="flex-1 px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">
+                    Batal
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Upload File -->
+<div id="uploadFileModal{{ $formulir->id }}" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+        <div class="sticky top-0 bg-white px-6 py-4 border-b border-gray-200 rounded-t-lg">
+            <div class="flex items-center justify-between">
+                <h3 class="text-lg font-semibold text-gray-900">Upload File ITSA</h3>
+                <button onclick="closeModal('uploadFileModal{{ $formulir->id }}')" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <form action="{{ route('admin.formulir.update', $formulir->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="px-6 py-4 space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-medium text-gray-900 mb-2">Formulir: {{ $formulir->nama_aplikasi }}</h4>
+                    <p class="text-sm text-gray-600"><strong>Domain:</strong> {{ $formulir->domain_aplikasi }}</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">File Hasil ITSA (PDF)</label>
+                    <input type="file" name="file_hasil_itsa" accept=".pdf" required
+                        class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <p class="mt-2 text-sm text-gray-500">PDF maks. 10 MB. Status otomatis “Selesai” setelah upload.</p>
+                </div>
+
+                @if($formulir->file_hasil_itsa)
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <p class="text-sm text-blue-800">
+                        File saat ini:
+                        <a href="{{ Storage::url($formulir->file_hasil_itsa) }}" target="_blank" class="underline">Lihat File</a>
+                    </p>
+                </div>
+                @endif
+            </div>
+
+            <div class="sticky bottom-0 bg-white px-6 py-4 border-t border-gray-200 flex space-x-3 rounded-b-lg">
+                <button type="submit" class="flex-1 px-4 py-2 bg-gradient-to-r from-[#EDBC19] to-[#8F181A] text-white rounded-md hover:opacity-90 transition">
+                    Upload File
+                </button>
+                <button type="button" onclick="closeModal('uploadFileModal{{ $formulir->id }}')" class="flex-1 px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">
+                    Batal
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 
                     @empty
                     <tr>
