@@ -233,13 +233,13 @@
                         </div>
                     </div>
 
-                    <!-- Modal Reply Formulir -->
+
 <!-- Modal Reply Formulir -->
 <div id="replyFormulirModal{{ $formulir->id }}" class="fixed inset-0 flex items-center justify-center z-50 hidden">
     <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
         <div class="sticky top-0 bg-white px-6 py-4 border-b border-gray-200 rounded-t-lg">
             <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold text-gray-900">Balas Formulir</h3>
+                <h3 class="text-lg font-semibold text-gray-900">Balas Revisi Formulir</h3>
                 <button onclick="closeModal('replyFormulirModal{{ $formulir->id }}')" class="text-gray-400 hover:text-gray-600">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -284,7 +284,7 @@
     <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
         <div class="sticky top-0 bg-white px-6 py-4 border-b border-gray-200 rounded-t-lg">
             <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold text-gray-900">Upload File ITSA</h3>
+                <h3 class="text-lg font-semibold text-gray-900">Upload File Hasil ITSA</h3>
                 <button onclick="closeModal('uploadFileModal{{ $formulir->id }}')" class="text-gray-400 hover:text-gray-600">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -293,12 +293,13 @@
             </div>
         </div>
 
-        <form action="{{ route('admin.formulir.update', $formulir->id) }}" method="POST" enctype="multipart/form-data">
+  <form action="{{ route('admin.formulir.uploadFile', $formulir->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="px-6 py-4 space-y-4">
                 <div class="bg-gray-50 p-4 rounded-lg">
-                    <h4 class="font-medium text-gray-900 mb-2">Formulir: {{ $formulir->nama_aplikasi }}</h4>
+                    <h4 class="font-medium text-gray-900 mb-2">Formulir dari {{ $formulir->user->name }}</h4>
+                    <p class="text-sm text-gray-600"><strong>Aplikasi:</strong> {{ $formulir->nama_aplikasi }}</p>
                     <p class="text-sm text-gray-600"><strong>Domain:</strong> {{ $formulir->domain_aplikasi }}</p>
                 </div>
 
