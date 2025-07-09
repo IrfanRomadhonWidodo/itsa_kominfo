@@ -46,10 +46,10 @@
             <div class="mt-8 pt-6 border-t border-gray-200">
                 <p class="text-sm text-gray-500 mb-2">Butuh bantuan?</p>
                 <div class="flex justify-center space-x-4 text-sm">
-                    <a href="mailto:support@example.com" class="text-blue-600 hover:text-blue-800">
+                    <a href="mailto:dinkominfo@banyumaskab.go.id" class="text-blue-600 hover:text-blue-800">
                         <i class="fas fa-envelope mr-1"></i>Email Support
                     </a>
-                    <a href="tel:+62123456789" class="text-blue-600 hover:text-blue-800">
+                    <a href="tel:+6285747055354" class="text-blue-600 hover:text-blue-800">
                         <i class="fas fa-phone mr-1"></i>Hubungi Kami
                     </a>
                 </div>

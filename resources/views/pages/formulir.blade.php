@@ -669,35 +669,54 @@ let html = `
         previewModal.classList.add('hidden');
     }
     
-    function submitForm() {
-        const formData = new FormData(form);
-        
-        fetch('/formulir/submit', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Formulir berhasil dikirim! Status: ' + data.message);
+function submitForm() {
+    const formData = new FormData(form);
+    
+    fetch('/formulir/submit', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: 'Formulir berhasil dikirim! Status: ' + data.message,
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#22c55e'
+            }).then(() => {
                 hidePreview();
                 // Optionally redirect to success page
                 window.location.href = '/formulir/success';
-            } else {
-                alert('Terjadi kesalahan: ' + data.message);
-                if (data.errors) {
-                    console.error('Validation errors:', data.errors);
-                }
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Terjadi Kesalahan!',
+                text: 'Terjadi kesalahan: ' + data.message,
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#ef4444'
+            });
+            if (data.errors) {
+                console.error('Validation errors:', data.errors);
             }
-        })
-        .catch(error => {
-            console.error('Submit error:', error);
-            alert('Terjadi kesalahan saat mengirim formulir');
+        }
+    })
+    .catch(error => {
+        console.error('Submit error:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Terjadi Kesalahan!',
+            text: 'Terjadi kesalahan saat mengirim formulir',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#ef4444'
         });
-    }
+    });
+}
     
     // Initialize display
     updateStepDisplay();
