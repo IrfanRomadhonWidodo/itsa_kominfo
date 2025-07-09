@@ -17,6 +17,7 @@ class Notifikasi extends Model
         'pesan',
         'type',
         'feedback_id',
+        'formulir_id',
         'is_read',
         'read_at',
     ];
@@ -70,4 +71,10 @@ class Notifikasi extends Model
     {
         return $query->where('is_read', true);
     }
+
+    public function formulir()
+{
+    return $this->belongsTo(Formulir::class);
+}
+
 }

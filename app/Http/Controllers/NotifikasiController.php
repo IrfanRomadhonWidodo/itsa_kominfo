@@ -14,7 +14,7 @@ class NotifikasiController extends Controller
     public function index()
     {
         $notifikasi = Notifikasi::where('user_id', Auth::id())
-                               ->with('feedback')
+                               ->with('feedback','formulir')
                                ->latest()
                                ->paginate(10);
 
@@ -60,7 +60,7 @@ class NotifikasiController extends Controller
      */
     public function show($id)
     {
-        $notifikasi = Notifikasi::with('feedback')
+        $notifikasi = Notifikasi::with('feedback','formulir')
                             ->where('id', $id)
                             ->where('user_id', Auth::id())
                             ->firstOrFail();
