@@ -77,10 +77,12 @@
                                 <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                                 <span class="font-medium">Formulir</span>
                             </a>
-                            <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-200 group">
-                                <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-                                <span class="font-medium">Riwayat</span>
-                            </a>
+    <a href="{{ route('riwayat.index') }}"
+       class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-200 group">
+        <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+        <span class="font-medium">Riwayat</span>
+    </a>
+
                             <a href="{{ route('download') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-200 group">
                                 <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                                 <span class="font-medium">Dokumen S&K</span>

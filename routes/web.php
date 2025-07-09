@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\FeedbackAdminController;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\Pages\FormulirController;
 use App\Http\Controllers\Admin\FormulirAdminController;
+use App\Http\Controllers\Pages\RiwayatController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -88,6 +89,12 @@ Route::middleware(['auth'])->group(function () {
         return view('pages.formulir-success');
     })->name('formulir.success');
 });
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/riwayat', [RiwayatController::class, 'index'])
+            ->name('riwayat.index');
+    });
+
 
 //Download PDF
 Route::get('/download', [DownloadController::class, 'index'])->name('download');
