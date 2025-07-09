@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\Admin\FeedbackAdminController;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\Pages\FormulirController;
+use App\Http\Controllers\Admin\FormulirAdminController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -24,6 +25,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     // Tambahkan route admin lainnya di sini
     Route::resource('users', UserAdminController::class);
     Route::resource('feedbacks', FeedbackAdminController::class);
+    Route::resource('formulir', FormulirAdminController::class);
     // Route::get('settings', [AdminSettingsController::class, 'index'])->name('settings');
     // Route::get('reports', [AdminReportsController::class, 'index'])->name('reports');
 });

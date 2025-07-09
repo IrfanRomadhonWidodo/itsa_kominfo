@@ -1,6 +1,6 @@
 <x-app-layout>
 <div class="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center py-12">
-    <div class="max-w-md w-full mx-4">
+    <div class="max-w-2xl w-full mx-4">
         <div class="bg-white rounded-xl shadow-lg p-8 text-center">
             <!-- Success Icon -->
             <div class="mb-6">

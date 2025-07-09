@@ -115,6 +115,20 @@
                                 <span class="font-medium" x-show="!sidebarCollapsed"
                                     x-transition>{{ __('Feedbacks') }}</span>
                             </a>
+                            <!-- Formulir -->
+                            <a href="{{ route('admin.formulir.index') }}"
+                                class="flex items-center text-gray-700 rounded-lg transition-all duration-300 group relative py-3 px-4 text-sm hover:bg-gradient-to-r hover:from-red-50 hover:to-yellow-50 hover:text-red-800 hover:translate-x-1
+                                    {{ request()->routeIs('admin.formulir.*') ? 'bg-gradient-to-r from-red-50 to-yellow-50 text-red-800' : '' }}">
+                                <div class="flex items-center justify-center w-4 h-4 mr-2">
+                                    <svg class="w-5 h-5 transition-transform {{ request()->routeIs('admin.formulir.*') ? 'opacity-100' : 'opacity-70 group-hover:opacity-100' }}"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M7 4h10a2 2 0 012 2v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2zm0 4h10M7 12h10M7 16h10" />
+                                    </svg>
+                                </div>
+                                <span class="font-medium" x-show="!sidebarCollapsed" x-transition>{{ __('Formulir') }}</span>
+                            </a>
+
                             {{-- <!-- Content Management -->
                             <a href="#" 
                                class="flex items-center text-gray-700 rounded-xl transition-all duration-300 group relative py-3 px-4 text-sm hover:bg-gradient-to-r hover:from-red-50 hover:to-yellow-50 hover:text-red-800 hover:translate-x-1">
