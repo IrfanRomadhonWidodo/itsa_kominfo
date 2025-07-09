@@ -63,7 +63,7 @@ class FormulirAdminController extends Controller
         // Buat notifikasi untuk user
         Notifikasi::create([
             'user_id' => $formulir->user_id,
-            'judul' => 'Balasan Formulir: ' . $formulir->nama_aplikasi,
+            'judul' => 'Revisi Formulir: ' . $formulir->nama_aplikasi,
             'pesan' => 'Admin telah memberikan balasan untuk formulir aplikasi "' . $formulir->nama_aplikasi . '".',
             'type' => 'formulir',
             'formulir_id' => $formulir->id,
