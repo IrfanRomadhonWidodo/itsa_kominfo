@@ -223,24 +223,151 @@
         </div>
     </div>
 
-    <!-- Detail Modal -->
-    <div id="detailModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
-        <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
-            <div class="mt-3">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-medium text-gray-900">Detail Pengajuan</h3>
-                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
-                </div>
-                <div id="modalContent" class="space-y-4">
-                    <!-- Content will be loaded here -->
-                </div>
+
+<!-- Detail Modal -->
+<div id="detailModal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm hidden overflow-y-auto h-full w-full z-50">
+    <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
+        <div class="mt-3">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-medium text-gray-900">Detail Pengajuan</h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="modalContent" class="space-y-4">
+                <!-- Content will be loaded here -->
             </div>
         </div>
     </div>
+</div>
+
+<script>
+function closeModal() {
+    document.getElementById('detailModal').classList.add('hidden');
+}
+
+// Example function to show modal
+function showModal() {
+    document.getElementById('detailModal').classList.remove('hidden');
+}
+
+// Example untuk JavaScript yang uniform
+function loadModalContent(item, createdAt) {
+    const modalContent = document.getElementById('modalContent');
+    modalContent.innerHTML = `
+        <!-- Status Badge -->
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center space-x-4">
+                <span class="px-4 py-2 text-sm font-semibold rounded-full border ${getStatusBadgeClass(item.status)}">
+                    ${getStatusText(item.status)}
+                </span>
+            </div>
+            <div class="text-sm text-gray-500">
+                <span class="font-medium">Dibuat:</span> ${createdAt}
+            </div>
+        </div>
+
+        <!-- Content Sections - Semua Rectangle Sama -->
+        <div class="space-y-6">
+            <!-- Section 1: Informasi Aplikasi -->
+            <div class="bg-gray-50 rounded-lg p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                        <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M20 9H4m16 6H4m11-7v8a2 2 0 01-2 2H9a2 2 0 01-2-2V8a2 2 0 012-2h6a2 2 0 012 2z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-900">Informasi Aplikasi</h4>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-3">
+                        <div>
+                            <span class="font-medium text-gray-600">Nama Aplikasi:</span>
+                            <p class="text-gray-900 mt-1">${item.nama_aplikasi}</p>
+                        </div>
+                        <div>
+                            <span class="font-medium text-gray-600">Domain Aplikasi:</span>
+                            <p class="text-gray-900 mt-1">${item.domain_aplikasi}</p>
+                        </div>
+                        <div>
+                            <span class="font-medium text-gray-600">IP Address:</span>
+                            <p class="text-gray-900 mt-1">${item.ip_address}</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <span class="font-medium text-gray-600">Hosting:</span>
+                            <p class="text-gray-900 mt-1">${item.hosting}</p>
+                        </div>
+                        <div>
+                            <span class="font-medium text-gray-600">Framework:</span>
+                            <p class="text-gray-900 mt-1">${item.framework}</p>
+                        </div>
+                        <div>
+                            <span class="font-medium text-gray-600">Tujuan Sistem:</span>
+                            <p class="text-gray-900 mt-1">${item.tujuan_sistem}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Penanggung Jawab -->
+            <div class="bg-gray-50 rounded-lg p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                        <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-900">Penanggung Jawab</h4>
+                </div>
+                <div class="space-y-2">
+                    <div>
+                        <span class="font-medium text-gray-600">Nama:</span>
+                        <span class="text-gray-900 ml-2">${item.pejabat_nama}</span>
+                    </div>
+                    <div>
+                        <span class="font-medium text-gray-600">Jabatan:</span>
+                        <span class="text-gray-900 ml-2">${item.pejabat_jabatan}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Balasan Admin (kalau ada) -->
+            ${item.balasan_admin ? `
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900">Balasan Admin</h4>
+                    </div>
+                    <p class="text-gray-900">${item.balasan_admin}</p>
+                </div>
+            ` : ''}
+        </div>
+    `;
+}
+
+// Example dummy functions
+function getStatusBadgeClass(status) {
+    const statusColors = {
+        'menunggu': 'bg-yellow-100 text-yellow-800 border-yellow-200',
+        'diproses': 'bg-blue-100 text-blue-800 border-blue-200',
+        'revisi': 'bg-orange-100 text-orange-800 border-orange-200',
+        'selesai': 'bg-green-100 text-green-800 border-green-200'
+    };
+    return statusColors[status] || 'bg-gray-100 text-gray-800 border-gray-200';
+}
+
+function getStatusText(status) {
+    return status.charAt(0).toUpperCase() + status.slice(1);
+}
+</script>
 
     <!-- Edit Modal -->
     <div id="editModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
@@ -305,55 +432,95 @@
             
             const modalContent = document.getElementById('modalContent');
             modalContent.innerHTML = `
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="space-y-3">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Nama Aplikasi</label>
-                            <p class="text-sm text-gray-900">${item.nama_aplikasi}</p>
+                <!-- Status Badge -->
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center space-x-4">
+                        <span class="px-4 py-2 text-sm font-semibold rounded-full border ${getStatusBadgeClass(item.status)}">
+                            ${getStatusText(item.status)}
+                        </span>
+                    </div>
+                    <div class="text-sm text-gray-500">
+                        <span class="font-medium">Dibuat:</span> ${createdAt}
+                    </div>
+                </div>
+
+                <!-- Content Sections -->
+                <div class="space-y-6">
+                    <!-- Section 1: Informasi Aplikasi -->
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M20 9H4m16 6H4m11-7v8a2 2 0 01-2 2H9a2 2 0 01-2-2V8a2 2 0 012-2h6a2 2 0 012 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-semibold text-gray-900">Informasi Aplikasi</h4>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Domain Aplikasi</label>
-                            <p class="text-sm text-gray-900">${item.domain_aplikasi}</p>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">IP Address</label>
-                            <p class="text-sm text-gray-900">${item.ip_address}</p>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Hosting</label>
-                            <p class="text-sm text-gray-900">${item.hosting}</p>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Framework</label>
-                            <p class="text-sm text-gray-900">${item.framework}</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-3">
+                                <div>
+                                    <span class="font-medium text-gray-600">Nama Aplikasi:</span>
+                                    <p class="text-gray-900 mt-1">${item.nama_aplikasi}</p>
+                                </div>
+                                <div>
+                                    <span class="font-medium text-gray-600">Domain Aplikasi:</span>
+                                    <p class="text-gray-900 mt-1">${item.domain_aplikasi}</p>
+                                </div>
+                                <div>
+                                    <span class="font-medium text-gray-600">IP Address:</span>
+                                    <p class="text-gray-900 mt-1">${item.ip_address}</p>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <div>
+                                    <span class="font-medium text-gray-600">Hosting:</span>
+                                    <p class="text-gray-900 mt-1">${item.hosting}</p>
+                                </div>
+                                <div>
+                                    <span class="font-medium text-gray-600">Framework:</span>
+                                    <p class="text-gray-900 mt-1">${item.framework}</p>
+                                </div>
+                                <div>
+                                    <span class="font-medium text-gray-600">Tujuan Sistem:</span>
+                                    <p class="text-gray-900 mt-1">${item.tujuan_sistem}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="space-y-3">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getStatusBadgeClass(item.status)}">
-                                ${getStatusText(item.status)}
-                            </span>
+
+                    <!-- Section 2: Penanggung Jawab -->
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-semibold text-gray-900">Penanggung Jawab</h4>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal Pengajuan</label>
-                            <p class="text-sm text-gray-900">${createdAt}</p>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Pejabat Penanggung Jawab</label>
-                            <p class="text-sm text-gray-900">${item.pejabat_nama}</p>
-                            <p class="text-xs text-gray-500">${item.pejabat_jabatan}</p>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Tujuan Sistem</label>
-                            <p class="text-sm text-gray-900">${item.tujuan_sistem}</p>
+                        <div class="space-y-2">
+                            <div>
+                                <span class="font-medium text-gray-600">Nama:</span>
+                                <span class="text-gray-900 ml-2">${item.pejabat_nama}</span>
+                            </div>
+                            <div>
+                                <span class="font-medium text-gray-600">Jabatan:</span>
+                                <span class="text-gray-900 ml-2">${item.pejabat_jabatan}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
+
                 ${item.balasan_admin ? `
-                    <div class="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                        <h4 class="font-medium text-yellow-800 mb-2">Balasan Admin:</h4>
+                    <div class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                        <div class="flex items-center mb-2">
+                            <div class="w-6 h-6 bg-yellow-200 rounded-full flex items-center justify-center mr-2">
+                                <svg class="w-3 h-3 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="font-medium text-yellow-800">Balasan Admin</h4>
+                        </div>
                         <p class="text-sm text-yellow-700">${item.balasan_admin}</p>
                     </div>
                 ` : ''}
@@ -496,7 +663,7 @@
                 case 'diproses':
                     return 'Diproses';
                 case 'revisi':
-                    return 'Perlu Revisi';
+                    return 'Revisi';
                 case 'selesai':
                     return 'Selesai';
                 default:

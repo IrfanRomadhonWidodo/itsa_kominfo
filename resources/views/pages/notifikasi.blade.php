@@ -49,11 +49,27 @@
                         </a>
                     @empty
                         <div class="text-center py-10 text-gray-500">
-                            <svg class="w-14 h-14 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor"
-                                 viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M15 17h5l-5 5-5-5h5v-12"/>
-                            </svg>
+<svg class="w-14 h-14 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <style>
+    .bell-animation {
+      animation: ring 2s ease-in-out infinite;
+      transform-origin: 50% 4px;
+    }
+    @keyframes ring {
+      0%, 50%, 100% { transform: rotate(0deg); }
+      10%, 30% { transform: rotate(-10deg); }
+      20%, 40% { transform: rotate(10deg); }
+    }
+  </style>
+  <g class="bell-animation">
+    <!-- Bell body -->
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+          d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+    <!-- Bell top -->
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+          d="M13.73 21a2 2 0 0 1-3.46 0"/>
+  </g>
+</svg>
                             Tidak ada notifikasi untuk ditampilkan.
                         </div>
                     @endforelse

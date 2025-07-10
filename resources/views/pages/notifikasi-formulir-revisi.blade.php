@@ -82,7 +82,7 @@
                             @if($notifikasi->formulir && $notifikasi->formulir->status === 'revisi')
                             <a href="{{ route('formulir.index') }}" 
                                class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition">
-                                Lihat Formulir Saya
+                                Isi Ulang Formulir
                             </a>
                             @endif
                         </div>
