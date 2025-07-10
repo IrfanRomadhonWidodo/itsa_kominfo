@@ -1,11 +1,11 @@
 <x-app-layout>
-    <x-slot name="header">
+    {{-- <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Riwayat Pengajuan') }}
             </h2>
         </div>
-    </x-slot>
+    </x-slot> --}}
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -370,7 +370,7 @@ function getStatusText(status) {
 </script>
 
     <!-- Edit Modal -->
-    <div id="editModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
+    <div id="editModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 backdrop-blur-sm hidden overflow-y-auto h-full w-full z-50">
         <div class="relative top-10 mx-auto p-5 border w-11/12 md:w-4/5 lg:w-3/4 shadow-lg rounded-md bg-white">
             <div class="mt-3">
                 <div class="flex items-center justify-between mb-4">
@@ -450,9 +450,10 @@ function getStatusText(status) {
                     <div class="bg-gray-50 rounded-lg p-6">
                         <div class="flex items-center mb-4">
                             <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
-                                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M20 9H4m16 6H4m11-7v8a2 2 0 01-2 2H9a2 2 0 01-2-2V8a2 2 0 012-2h6a2 2 0 012 2z"></path>
-                                </svg>
+                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 7V3m8 4V3M4 11h16M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
                             </div>
                             <h4 class="text-lg font-semibold text-gray-900">Informasi Aplikasi</h4>
                         </div>
@@ -530,112 +531,190 @@ function getStatusText(status) {
         }
         
         function showEditModal(id) {
-            const formulir = @json($formulir);
-            const item = formulir.find(f => f.id === id);
-            
-            if (!item) return;
-            
-            const editForm = document.getElementById('editForm');
-            editForm.action = `/riwayat/${id}`;
-            
-            const editContent = document.getElementById('editContent');
-            editContent.innerHTML = `
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Nama Aplikasi <span class="text-red-500">*</span></label>
-                            <input type="text" name="nama_aplikasi" value="${item.nama_aplikasi}" required
-                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+        const formulir = @json($formulir);
+        const item = formulir.find(f => f.id === id);
+        
+        if (!item) return;
+        
+        const editForm = document.getElementById('editForm');
+        editForm.action = `/riwayat/${id}`;
+        
+        const editContent = document.getElementById('editContent');
+        editContent.innerHTML = `
+            <!-- Status Badge -->
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center space-x-4">
+                    <span class="px-4 py-2 text-sm font-semibold rounded-full border ${getStatusBadgeClass(item.status)}">
+                        ${getStatusText(item.status)}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Content Sections -->
+            <div class="space-y-6">
+                <!-- Section 1: Informasi Aplikasi -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3M4 11h16M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Domain Aplikasi <span class="text-red-500">*</span></label>
-                            <input type="text" name="domain_aplikasi" value="${item.domain_aplikasi}" required
-                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Jenis IP <span class="text-red-500">*</span></label>
-                            <select name="ip_jenis" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
-                                <option value="">Pilih Jenis IP</option>
-                                <option value="static" ${item.ip_jenis === 'static' ? 'selected' : ''}>Static</option>
-                                <option value="dynamic" ${item.ip_jenis === 'dynamic' ? 'selected' : ''}>Dynamic</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">IP Address <span class="text-red-500">*</span></label>
-                            <input type="text" name="ip_address" value="${item.ip_address}" required
-                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
-                        </div>
-                        <>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Hosting <span class="text-red-500">*</span></label>
-                            <input type="text" name="hosting" value="${item.hosting}" required
-                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Hosting <span class="text-red-500">*</span></label>
-                            <input type="text" name="hosting" value="${item.hosting}" required
-                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Framework <span class="text-red-500">*</span></label>
-                            <input type="text" name="framework" value="${item.framework}" required
-                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Bahasa Pemrograman <span class="text-red-500">*</span></label>
-                            <input type="text" name="bahasa_pemrograman" value="${item.bahasa_pemrograman}" required
-                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Database <span class="text-red-500">*</span></label>
-                            <input type="text" name="database" value="${item.database}" required
-                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
-                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900">Informasi Aplikasi</h4>
                     </div>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Nama Pejabat Penanggung Jawab <span class="text-red-500">*</span></label>
-                            <input type="text" name="pejabat_nama" value="${item.pejabat_nama}" required
-                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nama Aplikasi <span class="text-red-500">*</span></label>
+                                <input type="text" name="nama_aplikasi" value="${item.nama_aplikasi}" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Domain Aplikasi</label>
+                                <input type="text" name="domain_aplikasi" value="${item.domain_aplikasi || ''}"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Jenis IP</label>
+                                <select name="ip_jenis"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+                                    <option value="">Pilih Jenis IP</option>
+                                    <option value="lokal" ${item.ip_jenis === 'lokal' ? 'selected' : ''}>Lokal</option>
+                                    <option value="public" ${item.ip_jenis === 'public' ? 'selected' : ''}>Publik</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">IP Address</label>
+                                <input type="text" name="ip_address" value="${item.ip_address || ''}"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Hosting</label>
+                                <input type="text" name="hosting" value="${item.hosting || ''}"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Framework</label>
+                                <input type="text" name="framework" value="${item.framework || ''}"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Tujuan Sistem</label>
+                                <textarea name="tujuan_sistem" rows="3"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">${item.tujuan_sistem || ''}</textarea>
+                            </div>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Jabatan <span class="text-red-500">*</span></label>
-                            <input type="text" name="pejabat_jabatan" value="${item.pejabat_jabatan}" required
-                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Tujuan Sistem <span class="text-red-500">*</span></label>
-                            <textarea name="tujuan_sistem" rows="3" required
-                                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">${item.tujuan_sistem}</textarea>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Stakeholder <span class="text-red-500">*</span></label>
-                            <textarea name="stakeholder" rows="3" required
-                                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">${item.stakeholder}</textarea>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Hasil yang Diharapkan <span class="text-red-500">*</span></label>
-                            <textarea name="hasil_harapan" rows="3" required
-                                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">${item.hasil_harapan}</textarea>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">File Dokumen Pendukung</label>
-                            <input type="file" name="file_dokumen" accept=".pdf,.doc,.docx,.zip,.rar"
-                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
-                            <p class="text-xs text-gray-500 mt-1">Format: PDF, DOC, DOCX, ZIP, RAR (Max: 10MB)</p>
-                            ${item.file_dokumen ? `<p class="text-xs text-green-600 mt-1">File saat ini: ${item.file_dokumen.split('/').pop()}</p>` : ''}
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Pengguna Sistem</label>
+                                <input type="text" name="pengguna_sistem" value="${item.pengguna_sistem || ''}"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Pengelola Sistem</label>
+                                <input type="text" name="pengelola_sistem" value="${item.pengelola_sistem || ''}"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Jumlah Roles</label>
+                                <input type="number" name="jumlah_roles" value="${item.jumlah_roles || ''}" min="0"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nama Roles</label>
+                                <input type="text" name="nama_roles" value="${item.nama_roles || ''}"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Mekanisme Akun</label>
+                                <input type="text" name="mekanisme_account" value="${item.mekanisme_account || ''}"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Mekanisme Kredensial</label>
+                                <input type="text" name="mekanisme_kredensial" value="${item.mekanisme_kredensial || ''}"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Fitur Reset Password</label>
+                                <select name="fitur_reset_password"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+                                    <option value="">Pilih</option>
+                                    <option value="ada" ${item.fitur_reset_password === 'ada' ? 'selected' : ''}>Ada</option>
+                                    <option value="tidak" ${item.fitur_reset_password === 'tidak' ? 'selected' : ''}>Tidak</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">PIC Pengelola</label>
+                                <input type="text" name="pic_pengelola" value="${item.pic_pengelola || ''}"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Keterangan Tambahan</label>
+                                <textarea name="keterangan_tambahan" rows="3"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">${item.keterangan_tambahan || ''}</textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                ${item.balasan_admin ? `
-                    <div class="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                        <h4 class="font-medium text-yellow-800 mb-2">Balasan Admin:</h4>
-                        <p class="text-sm text-yellow-700">${item.balasan_admin}</p>
+
+                <!-- Section 2: Penanggung Jawab -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900">Penanggung Jawab</h4>
                     </div>
-                ` : ''}
-            `;
-            
-            document.getElementById('editModal').classList.remove('hidden');
-        }
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nama Pejabat Penanggung Jawab <span class="text-red-500">*</span></label>
+                                <input type="text" name="pejabat_nama" value="${item.pejabat_nama}" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">NIP <span class="text-red-500">*</span></label>
+                                <input type="text" name="pejabat_nip" value="${item.pejabat_nip}" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Pangkat/Golongan <span class="text-red-500">*</span></label>
+                                <input type="text" name="pejabat_pangkat" value="${item.pejabat_pangkat}" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Jabatan <span class="text-red-500">*</span></label>
+                                <input type="text" name="pejabat_jabatan" value="${item.pejabat_jabatan}" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            ${item.balasan_admin ? `
+                <div class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <div class="flex items-center mb-2">
+                        <div class="w-6 h-6 bg-yellow-200 rounded-full flex items-center justify-center mr-2">
+                            <svg class="w-3 h-3 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="font-medium text-yellow-800">Balasan Admin</h4>
+                    </div>
+                    <p class="text-sm text-yellow-700">${item.balasan_admin}</p>
+                </div>
+            ` : ''}
+        `;
+        
+        document.getElementById('editModal').classList.remove('hidden');
+    }
         
         function closeModal() {
             document.getElementById('detailModal').classList.add('hidden');
@@ -690,28 +769,67 @@ function getStatusText(status) {
             
             // Create FormData for file upload
             const formData = new FormData(this);
+            formData.append('_method', 'POST'); // Laravel method override
             
             // Submit form via fetch
             fetch(this.action, {
                 method: 'POST',
                 body: formData,
                 headers: {
-                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                    'Accept': 'application/json', // Penting: minta response JSON
                 }
             })
-            .then(response => response.json())
+            .then(response => {
+                // Check if response is JSON
+                const contentType = response.headers.get('content-type');
+                if (!contentType || !contentType.includes('application/json')) {
+                    throw new Error('Server tidak mengembalikan JSON response. Kemungkinan terjadi error atau redirect.');
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data.success) {
-                    // Close modal and reload page
-                    closeEditModal();
-                    location.reload();
+                    // Show success message with SweetAlert
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'Data berhasil diupdate',
+                        icon: 'success',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#00ADE5'
+                    }).then((result) => {
+                        // Close modal and reload page
+                        closeEditModal();
+                        location.reload();
+                    });
                 } else {
-                    throw new Error(data.message || 'Terjadi kesalahan');
+                    // Show error message with SweetAlert
+                    let errorMessage = data.message || 'Terjadi kesalahan';
+                    
+                    // If there are validation errors, show them
+                    if (data.errors) {
+                        const errorList = Object.values(data.errors).flat();
+                        errorMessage += ':\n• ' + errorList.join('\n• ');
+                    }
+                    
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: errorMessage,
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#EF4444'
+                    });
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Terjadi kesalahan: ' + error.message);
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Terjadi kesalahan: ' + error.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#EF4444'
+                });
             })
             .finally(() => {
                 // Hide loading state
@@ -724,6 +842,31 @@ function getStatusText(status) {
                 document.getElementById('loadingOverlay').classList.remove('flex');
             });
         });
+
+        // Fungsi untuk menampilkan error validation secara lebih user-friendly
+        function showValidationErrors(errors) {
+            let errorHtml = '<div class="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">';
+            errorHtml += '<h4 class="font-semibold text-red-800 mb-2">Terjadi kesalahan validasi:</h4>';
+            errorHtml += '<ul class="text-sm text-red-700 space-y-1">';
+            
+            Object.values(errors).flat().forEach(error => {
+                errorHtml += `<li>• ${error}</li>`;
+            });
+            
+            errorHtml += '</ul></div>';
+            
+            // Insert error at the top of modal content
+            const modalContent = document.getElementById('editContent');
+            modalContent.insertAdjacentHTML('afterbegin', errorHtml);
+            
+            // Remove error after 5 seconds
+            setTimeout(() => {
+                const errorDiv = modalContent.querySelector('.bg-red-50');
+                if (errorDiv) {
+                    errorDiv.remove();
+                }
+            }, 5000);
+        }
         
         // Close modal when clicking outside
         document.getElementById('detailModal').addEventListener('click', function(e) {
@@ -776,5 +919,30 @@ function getStatusText(status) {
                 console.log('Auto-refresh failed:', error);
             });
         }, 30000);
+
+        // Fungsi untuk menampilkan error validation secara lebih user-friendly
+        function showValidationErrors(errors) {
+            let errorHtml = '<div class="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">';
+            errorHtml += '<h4 class="font-semibold text-red-800 mb-2">Terjadi kesalahan validasi:</h4>';
+            errorHtml += '<ul class="text-sm text-red-700 space-y-1">';
+            
+            Object.values(errors).flat().forEach(error => {
+                errorHtml += `<li>• ${error}</li>`;
+            });
+            
+            errorHtml += '</ul></div>';
+            
+            // Insert error at the top of modal content
+            const modalContent = document.getElementById('editContent');
+            modalContent.insertAdjacentHTML('afterbegin', errorHtml);
+            
+            // Remove error after 5 seconds
+            setTimeout(() => {
+                const errorDiv = modalContent.querySelector('.bg-red-50');
+                if (errorDiv) {
+                    errorDiv.remove();
+                }
+            }, 5000);
+        }
     </script>
 </x-app-layout>

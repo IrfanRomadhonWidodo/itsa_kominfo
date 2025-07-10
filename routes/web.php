@@ -94,6 +94,7 @@ Route::middleware(['auth'])->group(function () {
 // routes/web.php
 Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat.index');
 Route::get('/riwayat/{id}', [RiwayatController::class, 'show'])->name('riwayat.show');
+Route::post('/riwayat/{id}', [RiwayatController::class, 'update'])->name('riwayat.update');
 Route::get('/riwayat/{id}/download', [RiwayatController::class, 'downloadPdf'])->name('riwayat.download');
 
 
