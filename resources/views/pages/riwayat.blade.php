@@ -36,8 +36,10 @@
                                     <p class="text-2xl font-bold">{{ $formulir->count() }}</p>
                                 </div>
                                 <div class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    <svg class="w-10 h-10" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="24" cy="24" r="20" fill="#2196F3" fill-opacity="0.2" />
+                                    <circle cx="24" cy="24" r="12" fill="#FFFFFF"/>
+                                    <path d="M24 24l4-8-8 4 4 4z" fill="#1976D2"/>
                                     </svg>
                                 </div>
                             </div>
@@ -134,7 +136,6 @@
                                                         </div>
                                                         <div>
                                                             <div class="text-sm font-medium text-gray-900">{{ $item->nama_aplikasi }}</div>
-                                                            <div class="text-sm text-gray-500">ID: #{{ $item->id }}</div>
                                                         </div>
                                                     </div>
                                                 </td>

@@ -84,11 +84,11 @@ class RiwayatController extends Controller
             case 'Diproses':
                 return 'Diproses';
             case 'revisi':
-                return 'Perlu Revisi';
+                return 'Revisi';
             case 'selesai':
                 return 'Selesai';
             default:
-                return 'Tidak Diketahui';
+                return 'Diproses';
         }
     }
 }
