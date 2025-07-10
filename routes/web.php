@@ -90,10 +90,11 @@ Route::middleware(['auth'])->group(function () {
     })->name('formulir.success');
 });
 
-    Route::middleware('auth')->group(function () {
-        Route::get('/riwayat', [RiwayatController::class, 'index'])
-            ->name('riwayat.index');
-    });
+//Halaman Riwayat
+// routes/web.php
+Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat.index');
+Route::get('/riwayat/{id}', [RiwayatController::class, 'show'])->name('riwayat.show');
+Route::get('/riwayat/{id}/download', [RiwayatController::class, 'downloadPdf'])->name('riwayat.download');
 
 
 //Download PDF
