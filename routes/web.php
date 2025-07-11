@@ -12,6 +12,7 @@ use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\Pages\FormulirController;
 use App\Http\Controllers\Admin\FormulirAdminController;
 use App\Http\Controllers\Pages\RiwayatController;
+use App\Http\Controllers\Pages\FAQController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -71,6 +72,7 @@ Route::middleware(['auth'])->group(function () {
 
 //Tentang ITSA
 Route::get('/profil-itsa', [ProfilController::class, 'index'])->name('profil-itsa');
+Route::get('/faq', [FAQController::class, 'index'])->name('faq');
 
 //Untuk Formulir
 Route::middleware(['auth'])->group(function () {
