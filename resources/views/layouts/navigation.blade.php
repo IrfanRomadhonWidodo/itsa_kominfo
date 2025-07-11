@@ -77,11 +77,11 @@
                                 <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                                 <span class="font-medium">Formulir</span>
                             </a>
-    <a href="{{ route('riwayat.index') }}"
-       class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-200 group">
-        <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-        <span class="font-medium">Riwayat</span>
-    </a>
+                            <a href="{{ route('riwayat.index') }}"
+                            class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-200 group">
+                                <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                                <span class="font-medium">Riwayat</span>
+                            </a>
 
                             <a href="{{ route('download') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-200 group">
                                 <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
@@ -90,17 +90,60 @@
                         </div>
                     </div>
 
-                    <!-- Tentang Kami -->
-                    <a href="{{ route('tentang-kami') }}" 
-                       class="relative px-4 py-2 text-sm font-semibold transition-all duration-300 rounded-lg group
-                              {{ request()->routeIs('tentang-kami') 
-                                 ? 'text-[#016DAE] bg-[#00ADE5]/10' 
-                                 : 'text-gray-600 hover:text-[#016DAE] hover:bg-[#00ADE5]/5' }}">
-                        <span class="relative z-10">{{ __('Tentang Kami') }}</span>
-                        @if(request()->routeIs('tentang-kami'))
-                        <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#00ADE5] to-[#016DAE] rounded-full"></div>
-                        @endif
-                    </a>
+                    <!-- Tentang ITSA (Dropdown) -->
+                    @php
+                        $tentangActive = request()->routeIs('profil') || request()->routeIs('panduan') || request()->routeIs('faq');
+                    @endphp
+                    <div class="relative group" x-data="{ tentangDropdown: false }">
+                        <button @mouseenter="tentangDropdown = true"
+                                @mouseleave="tentangDropdown = false"
+                                class="relative px-4 py-2 text-sm font-semibold transition-all duration-300 rounded-lg flex items-center space-x-1
+                                    {{ $tentangActive 
+                                        ? 'text-[#016DAE] bg-[#00ADE5]/10' 
+                                        : 'text-gray-600 hover:text-[#016DAE] hover:bg-[#00ADE5]/5' }}">
+                            <span>Tentang ITSA</span>
+                            <svg class="w-4 h-4 transition-transform duration-300" 
+                                :class="{ 'rotate-180': tentangDropdown }"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                            @if($tentangActive)
+                            <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#00ADE5] to-[#016DAE] rounded-full"></div>
+                            @endif
+                        </button>
+
+                        <div x-show="tentangDropdown" 
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 scale-95"
+                            x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-150"
+                            x-transition:leave-start="opacity-100 scale-100"
+                            x-transition:leave-end="opacity-0 scale-95"
+                            @mouseenter="tentangDropdown = true" 
+                            @mouseleave="tentangDropdown = false"
+                            class="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 overflow-hidden">
+                            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#00ADE5] to-[#016DAE]"></div>
+
+                            <a href="{{ route('profil-itsa') }}" 
+                            class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-200 group">
+                                <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                                <span class="font-medium">Profil ITSA</span>
+                            </a>
+
+                            <a href="" 
+                            class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-200 group">
+                                <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                                <span class="font-medium">Panduan Penggunaan</span>
+                            </a>
+
+                            <a href="" 
+                            class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-200 group">
+                                <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                                <span class="font-medium">FAQ</span>
+                            </a>
+                        </div>
+                    </div>
+
 
                     <!-- Kontak -->
                     <a href="{{ route('kontak') }}" 
@@ -317,12 +360,45 @@
                 </div>
             </div>
 
-            <a href="#" class="flex items-center px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-300">
-                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                {{ __('Tentang Kami') }}
-            </a>
+            <!-- Mobile Tentang ITSA Dropdown -->
+            <div x-data="{ mobileTentangOpen: false }">
+                <button @click="mobileTentangOpen = !mobileTentangOpen"
+                        class="flex items-center justify-between w-full px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-300">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Tentang ITSA
+                    </div>
+                    <svg class="w-4 h-4 transition-transform duration-300" :class="{ 'rotate-180': mobileTentangOpen }"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                
+                <div x-show="mobileTentangOpen" 
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 max-h-0"
+                    x-transition:enter-end="opacity-100 max-h-48"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 max-h-48"
+                    x-transition:leave-end="opacity-0 max-h-0"
+                    class="ml-8 mt-2 space-y-1 overflow-hidden">
+                    <a href="" class="flex items-center px-4 py-2 text-sm text-gray-600 hover:text-[#016DAE] hover:bg-[#00ADE5]/5 rounded-lg transition-all duration-200">
+                        <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3"></div>
+                        Profil ITSA
+                    </a>
+                    <a href="" class="flex items-center px-4 py-2 text-sm text-gray-600 hover:text-[#016DAE] hover:bg-[#00ADE5]/5 rounded-lg transition-all duration-200">
+                        <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3"></div>
+                        Panduan Penggunaan
+                    </a>
+                    <a href="" class="flex items-center px-4 py-2 text-sm text-gray-600 hover:text-[#016DAE] hover:bg-[#00ADE5]/5 rounded-lg transition-all duration-200">
+                        <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3"></div>
+                        FAQ
+                    </a>
+                </div>
+            </div>
+
 
             <a href="{{ route('kontak') }}" class="flex items-center px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-300">
                 <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

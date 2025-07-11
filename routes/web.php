@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Pages\KontakController;
-use App\Http\Controllers\Pages\TentangKamiController;
+use App\Http\Controllers\Pages\ProfilController;
 use App\Http\Controllers\Pages\DownloadController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Admin\AdminController;
@@ -70,7 +70,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //Tentang ITSA
-Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tentang-kami');
+Route::get('/profil-itsa', [ProfilController::class, 'index'])->name('profil-itsa');
 
 //Untuk Formulir
 Route::middleware(['auth'])->group(function () {
