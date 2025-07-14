@@ -87,38 +87,54 @@
                                 <span class="font-medium" x-show="!sidebarCollapsed"
                                     x-transition>{{ __('Dashboard') }}</span>
                             </a>
+
                             <!-- Users Management -->
                             <a href="{{ route('admin.users.index') }}"
-                                class="flex items-center text-gray-700 rounded-lg transition-all duration-300 group relative py-3 px-4 text-sm hover:bg-gradient-to-r hover:from-red-50 hover:to-yellow-50 hover:text-red-800 hover:translate-x-1
-                                    {{ request()->routeIs('admin.users.*') ? 'bg-gradient-to-r from-red-50 to-yellow-50 text-red-800' : '' }}">
+                                class="relative flex items-center text-gray-700 rounded-lg transition-all duration-300 group py-3 px-4 text-sm hover:bg-gradient-to-r hover:from-red-50 hover:to-yellow-50 hover:text-red-800 hover:translate-x-1
+                                {{ request()->routeIs('admin.users.*') ? 'bg-gradient-to-r from-red-50 to-yellow-50 text-red-800' : '' }}">
+                                
                                 <div class="flex items-center justify-center w-4 h-4 mr-2">
-                                    <svg class="w-5 h-5 opacity-70 group-hover:opacity-100 transition-transform"
-                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A4 4 0 018 17h8a4 4 0 012.879 1.197
+                                    <svg class="w-5 h-5 opacity-70 group-hover:opacity-100 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5.121 17.804A4 4 0 018 17h8a4 4 0 012.879 1.197
                                             M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                 </div>
-                                <span class="font-medium" x-show="!sidebarCollapsed"
-                                    x-transition>{{ __('Users') }}</span>
+                                <span class="font-medium" x-show="!sidebarCollapsed" x-transition>{{ __('Users') }}</span>
+
+                                @if($notifUserBaru > 0)
+                                    <span
+                                        class="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full shadow-md">
+                                        {{ $notifUserBaru }}
+                                    </span>
+                                @endif
                             </a>
+
                             <!-- Feedback -->
                             <a href="{{ route('admin.feedbacks.index') }}"
-                                class="flex items-center text-gray-700 rounded-lg transition-all duration-300 group relative py-3 px-4 text-sm hover:bg-gradient-to-r hover:from-red-50 hover:to-yellow-50 hover:text-red-800 hover:translate-x-1
+                                class="relative flex items-center text-gray-700 rounded-lg transition-all duration-300 group py-3 px-4 text-sm hover:bg-gradient-to-r hover:from-red-50 hover:to-yellow-50 hover:text-red-800 hover:translate-x-1
                                     {{ request()->routeIs('admin.feedbacks.*') ? 'bg-gradient-to-r from-red-50 to-yellow-50 text-red-800' : '' }}">
+                                
                                 <div class="flex items-center justify-center w-4 h-4 mr-2">
-                                    <svg class="w-5 h-5 opacity-70 group-hover:opacity-100 transition-transform"
-                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-5 h-5 opacity-70 group-hover:opacity-100 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M7 8h10M7 12h4m1 8a9 9 0 100-18 9 9 0 000 18z" />
                                     </svg>
                                 </div>
-                                <span class="font-medium" x-show="!sidebarCollapsed"
-                                    x-transition>{{ __('Feedbacks') }}</span>
+                                <span class="font-medium" x-show="!sidebarCollapsed" x-transition>{{ __('Feedbacks') }}</span>
+
+                                @if($notifFeedbackBaru > 0)
+                                    <span class="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full shadow-md">
+                                        {{ $notifFeedbackBaru }}
+                                    </span>
+                                @endif
                             </a>
+
                             <!-- Formulir -->
                             <a href="{{ route('admin.formulir.index') }}"
-                                class="flex items-center text-gray-700 rounded-lg transition-all duration-300 group relative py-3 px-4 text-sm hover:bg-gradient-to-r hover:from-red-50 hover:to-yellow-50 hover:text-red-800 hover:translate-x-1
+                                class="relative flex items-center text-gray-700 rounded-lg transition-all duration-300 group py-3 px-4 text-sm hover:bg-gradient-to-r hover:from-red-50 hover:to-yellow-50 hover:text-red-800 hover:translate-x-1
                                     {{ request()->routeIs('admin.formulir.*') ? 'bg-gradient-to-r from-red-50 to-yellow-50 text-red-800' : '' }}">
+                                
                                 <div class="flex items-center justify-center w-4 h-4 mr-2">
                                     <svg class="w-5 h-5 transition-transform {{ request()->routeIs('admin.formulir.*') ? 'opacity-100' : 'opacity-70 group-hover:opacity-100' }}"
                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -127,7 +143,14 @@
                                     </svg>
                                 </div>
                                 <span class="font-medium" x-show="!sidebarCollapsed" x-transition>{{ __('Formulir') }}</span>
+
+                                @if($notifFormulirBaru > 0)
+                                    <span class="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full shadow-md">
+                                        {{ $notifFormulirBaru }}
+                                    </span>
+                                @endif
                             </a>
+
 
                             {{-- <!-- Content Management -->
                             <a href="#" 
