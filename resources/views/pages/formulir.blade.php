@@ -1,5 +1,5 @@
 <x-app-layout>
-<div class="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 py-8">
+<div class="min-h-screen bg-[#E0F7FE] py-8">
     <div class="container mx-auto px-4">
         <!-- Header -->
         <div class="text-center mb-8">

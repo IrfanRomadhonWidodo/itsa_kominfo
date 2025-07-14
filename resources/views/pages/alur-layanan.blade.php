@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="bg-gradient-to-br from-[#F0FAFD] via-white to-[#F0FAFD] min-h-screen py-20 px-4 sm:px-6 lg:px-8">
+<div class="bg-[#E0F7FE] min-h-screen py-20 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
             <!-- Header Section -->
             <div class="text-center mb-20">
