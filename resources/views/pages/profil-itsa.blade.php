@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="py-12">
+<div class="py-12 bg-[#E0F7FE]">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- Hero Section -->
             <div class="bg-gradient-to-r from-[#00ADE5] to-[#016DAE] overflow-hidden shadow-xl sm:rounded-lg mb-8">

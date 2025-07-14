@@ -1,5 +1,5 @@
 <x-app-layout>
-<div class="min-h-screen relative bg-gradient-to-br from-blue-50 to-slate-50">
+<div class="min-h-screen relative bg-[#E0F7FE]">
     <!-- Gradient Overlay -->
     <div class="absolute inset-0 bg-gradient-to-br from-blue-900/3 to-sky-500/3 z-0"></div>
     
