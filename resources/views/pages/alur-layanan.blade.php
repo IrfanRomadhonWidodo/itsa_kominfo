@@ -3,16 +3,9 @@
         <div class="max-w-7xl mx-auto">
             <!-- Header Section -->
             <div class="text-center mb-20">
-                <div class="inline-block p-4 bg-white rounded-full shadow-lg mb-6">
-                    <div class="w-16 h-16 bg-gradient-to-r from-[#016DAE] to-[#00ADE5] rounded-full flex items-center justify-center">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                    </div>
-                </div>
-                <h1 class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#016DAE] to-[#00ADE5] mb-4">
-                    Alur Layanan ITSA
-                </h1>
+            <h1 class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#016DAE] to-[#00ADE5] mb-4 pb-2 leading-[1.25]">
+                Alur Layanan ITSA
+            </h1>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                     Panduan lengkap proses layanan IT Security Assessment yang profesional dan terstruktur
                 </p>
@@ -22,8 +15,9 @@
             <!-- Timeline Container -->
             <div class="relative max-w-5xl mx-auto">
                 <!-- Main Timeline Line -->
-                <div class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-[#016DAE] via-[#00ADE5] to-[#016DAE] rounded-full" style="height: calc(100% - 2rem); top: 2rem;"></div>
-
+                <div class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-[#016DAE] via-[#00ADE5] to-[#016DAE] rounded-full"
+                    style="top: calc(4rem + 50px); bottom: calc(4rem + 60px);">
+                </div>
                 @php
                     $steps = [
                         [
