@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\FormulirAdminController;
 use App\Http\Controllers\Pages\RiwayatController;
 use App\Http\Controllers\Pages\FAQController;
 use App\Http\Controllers\Pages\PanduanController;
+use App\Http\Controllers\Pages\LayananController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -95,7 +96,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //Halaman Riwayat
-// routes/web.php
 Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat.index');
 Route::get('/riwayat/{id}', [RiwayatController::class, 'show'])->name('riwayat.show');
 Route::post('/riwayat/{id}', [RiwayatController::class, 'update'])->name('riwayat.update');
@@ -105,6 +105,9 @@ Route::get('/riwayat/{id}/download', [RiwayatController::class, 'downloadPdf'])-
 //Download PDF
 Route::get('/download', [DownloadController::class, 'index'])->name('download');
 Route::get('/download/file', [DownloadController::class, 'download'])->name('download.file');
+
+//Alur Layanan
+Route::get('/alur-layanan', [LayananController::class, 'index'])->name('alur-layanan');
 
 //Login dengan Google
 Route::get('/auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');

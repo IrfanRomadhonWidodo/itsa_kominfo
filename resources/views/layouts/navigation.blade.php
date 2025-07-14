@@ -70,7 +70,7 @@
                              @mouseleave="layananDropdown = false"
                              class="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 overflow-hidden">
                             <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#00ADE5] to-[#016DAE]"></div>
-                            <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-200 group">
+                            <a href="{{ route('alur-layanan') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-200 group">
                                 <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                                 <span class="font-medium">Alur Layanan</span>
                             <a href="{{ route('formulir.index') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-200 group">
@@ -82,7 +82,6 @@
                                 <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                                 <span class="font-medium">Riwayat</span>
                             </a>
-
                             <a href="{{ route('download') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-[#00ADE5]/5 hover:text-[#016DAE] transition-all duration-200 group">
                                 <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                                 <span class="font-medium">Dokumen S&K</span>
@@ -345,7 +344,7 @@
                      x-transition:leave-start="opacity-100 max-h-48"
                      x-transition:leave-end="opacity-0 max-h-0"
                      class="ml-8 mt-2 space-y-1 overflow-hidden">
-                    <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-600 hover:text-[#016DAE] hover:bg-[#00ADE5]/5 rounded-lg transition-all duration-200">
+                    <a href="{{ route('alur-layanan') }}" class="flex items-center px-4 py-2 text-sm text-gray-600 hover:text-[#016DAE] hover:bg-[#00ADE5]/5 rounded-lg transition-all duration-200">
                         <div class="w-2 h-2 rounded-full bg-[#00ADE5] mr-3"></div>
                         Alur Layanan
                     </a>
