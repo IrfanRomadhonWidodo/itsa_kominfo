@@ -39,7 +39,7 @@
 
                     <!-- Layanan (Dropdown) -->
                     @php
-                        $layananActive = request()->is('alur*') || request()->is('formulir*') || request()->is('riwayat*');
+                        $layananActive = request()->is('alur*') || request()->is('formulir*') || request()->is('riwayat*') || request()->is('download');
                     @endphp
                     <div class="relative group" x-data="{ layananDropdown: false }">
                         <button @mouseenter="layananDropdown = true" 
@@ -91,7 +91,7 @@
 
                     <!-- Tentang ITSA (Dropdown) -->
                     @php
-                        $tentangActive = request()->routeIs('profil') || request()->routeIs('panduan') || request()->routeIs('faq');
+                        $tentangActive = request()->routeIs('profil-itsa') || request()->routeIs('panduan') || request()->routeIs('faq');
                     @endphp
                     <div class="relative group" x-data="{ tentangDropdown: false }">
                         <button @mouseenter="tentangDropdown = true"
