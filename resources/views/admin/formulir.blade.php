@@ -27,7 +27,6 @@
                     </div>
                     <select name="status" class="pl-3 pr-8 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         <option value="">Semua Status</option>
-                        <option value="menunggu" {{ request('status') == 'menunggu' ? 'selected' : '' }}>Menunggu</option>
                         <option value="diproses" {{ request('status') == 'diproses' ? 'selected' : '' }}>Diproses</option>
                         <option value="revisi" {{ request('status') == 'revisi' ? 'selected' : '' }}>Revisi</option>
                         <option value="selesai" {{ request('status') == 'selesai' ? 'selected' : '' }}>Selesai</option>
@@ -94,7 +93,6 @@
                         <td class="px-6 py-4 whitespace-nowrap">
                             @php
                                 $statusColors = [
-                                    'menunggu' => 'bg-yellow-100 text-yellow-800',
                                     'diproses' => 'bg-blue-100 text-blue-800',
                                     'revisi' => 'bg-orange-100 text-orange-800',
                                     'selesai' => 'bg-green-100 text-green-800'
@@ -163,7 +161,6 @@
                 <div class="flex items-center space-x-4">
                     @php
                         $statusColors = [
-                            'menunggu' => 'bg-yellow-100 text-yellow-800 border-yellow-200',
                             'diproses' => 'bg-blue-100 text-blue-800 border-blue-200',
                             'revisi' => 'bg-orange-100 text-orange-800 border-orange-200',
                             'selesai' => 'bg-green-100 text-green-800 border-green-200'
