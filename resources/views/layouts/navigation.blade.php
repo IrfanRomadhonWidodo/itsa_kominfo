@@ -55,7 +55,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
                             @if($layananActive)
-                            <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#00ADE5] to-[#016DAE] rounded-full"></div>
+                            <div class="absolute bottom-0 left-0 right-1 h-0.5 bg-gradient-to-r from-[#00ADE5] to-[#016DAE] rounded-full"></div>
                             @endif
                         </button>
                         
@@ -107,7 +107,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
                             @if($tentangActive)
-                            <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#00ADE5] to-[#016DAE] rounded-full"></div>
+                            <div class="absolute bottom-0 left-0 right-1 h-0.5 bg-gradient-to-r from-[#00ADE5] to-[#016DAE] rounded-full"></div>
                             @endif
                         </button>
 
