@@ -45,4 +45,10 @@ class Formulir extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function hasilItsa()
+    {
+        return $this->hasOne(Hasil::class);
+    }
+
 }

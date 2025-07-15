@@ -150,6 +150,23 @@
                                     </span>
                                 @endif
                             </a>
+                            <!-- Hasil ITSA -->
+                            <a href="{{ route('admin.hasil.index') }}"
+                                class="relative flex items-center text-gray-700 rounded-lg transition-all duration-300 group py-3 px-4 text-sm hover:bg-gradient-to-r hover:from-red-50 hover:to-yellow-50 hover:text-red-800 hover:translate-x-1
+                                    {{ request()->routeIs('admin.hasil-itsa.*') ? 'bg-gradient-to-r from-red-50 to-yellow-50 text-red-800' : '' }}">
+
+                                <div class="flex items-center justify-center w-4 h-4 mr-2">
+                                    <!-- Ikon laporan profesional (dokumen + grafik batang) -->
+                                    <svg class="w-5 h-5 transition-transform {{ request()->routeIs('admin.hasil-itsa.*') ? 'opacity-100' : 'opacity-70 group-hover:opacity-100' }}"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M7 17V13M12 17V10M17 17V7M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z" />
+                                    </svg>
+                                </div>
+
+                                <span class="font-medium" x-show="!sidebarCollapsed" x-transition>{{ __('Hasil ITSA') }}</span>
+                            </a>
+
 
 
                             {{-- <!-- Content Management -->
