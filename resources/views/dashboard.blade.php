@@ -5,14 +5,12 @@
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(14,165,233,0.08)_0%,transparent_50%)] opacity-60"></div>
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_40%_80%,rgba(59,130,246,0.05)_0%,transparent_50%)] opacity-60"></div>
         
-        <!-- Elegant Top-Left Corner Circles -->
-        <!-- Pemanis Kiri Atas: Bulatan Besar -->
-<!-- Bulatan Besar (tanpa blur, terlihat penuh) -->
-<div class="absolute -top-20 -left-20 w-[26rem] h-[26rem] rounded-full 
-            bg-gradient-to-br from-blue-400/70 to-cyan-300/10 
-            border border-white/10 
-            shadow-[0_0_60px_rgba(56,189,248,0.15)]">
-</div>
+        <!-- Bulatan Besar (tanpa blur, terlihat penuh) -->
+        <div class="absolute -top-20 -left-20 w-[26rem] h-[26rem] rounded-full 
+                    bg-gradient-to-br from-blue-400/70 to-cyan-300/10 
+                    border border-white/10 
+                    shadow-[0_0_60px_rgba(56,189,248,0.15)]">
+        </div>
 
         
         <!-- Additional Decorative Elements -->
@@ -129,156 +127,380 @@
                     </div>
                 </div>
             </div>
+
+
+{{-- Data Section --}}
+<div class="mb-8">
+    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center tracking-tight">Ringkasan Data</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Card 1: Total Formulir -->
+        <div class="relative group overflow-hidden bg-slate-800/50 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl opacity-0 transform translate-y-8 transition-all duration-700 ease-out border border-slate-700/50" 
+             data-animate 
+             data-delay="100">
+            <div class="absolute inset-0 bg-gradient-to-br from-slate-800/80 to-slate-900/60"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/5"></div>
+            <div class="relative p-8">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/30">
+                        <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="flex items-center space-x-1">
+                        <div class="w-2 h-2 rounded-full animate-pulse bg-blue-400"></div>
+                        <div class="w-1 h-1 rounded-full animate-pulse bg-blue-400" style="animation-delay: 0.2s;"></div>
+                        <div class="w-1 h-1 rounded-full animate-pulse bg-blue-400" style="animation-delay: 0.4s;"></div>
+                    </div>
+                </div>
+                <p class="text-slate-400 text-sm font-medium mb-3 uppercase tracking-wide">Total Formulir yang Diajukan</p>
+                <p class="text-4xl font-bold counter tracking-tight text-blue-400" data-target="{{ $totalFormulir }}">0</p>
+                <div class="mt-4 flex items-center text-xs text-slate-500">
+                    <div class="flex items-center">
+                        <div class="w-2 h-2 rounded-full mr-2 bg-blue-400"></div>
+                        <span>Semua formulir</span>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-cyan-500"></div>
+        </div>
+
+        <!-- Card 2: Aplkasi Selesai -->
+        <div class="relative group overflow-hidden bg-slate-800/50 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl opacity-0 transform translate-y-8 transition-all duration-700 ease-out border border-slate-700/50" 
+             data-animate 
+             data-delay="200">
+            <div class="absolute inset-0 bg-gradient-to-br from-slate-800/80 to-slate-900/60"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-yellow-600/5"></div>
+            <div class="relative p-8">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-xl border" style="background: linear-gradient(135deg, rgba(237, 188, 25, 0.2), rgba(237, 188, 25, 0.1)); border-color: rgba(237, 188, 25, 0.3);">
+                        <svg class="w-6 h-6" style="color: #EDBC19;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="flex items-center space-x-1">
+                        <div class="w-2 h-2 rounded-full animate-pulse" style="background-color: #EDBC19;"></div>
+                        <div class="w-1 h-1 rounded-full animate-pulse" style="background-color: #EDBC19; animation-delay: 0.2s;"></div>
+                        <div class="w-1 h-1 rounded-full animate-pulse" style="background-color: #EDBC19; animation-delay: 0.4s;"></div>
+                    </div>
+                </div>
+                <p class="text-slate-400 text-sm font-medium mb-3 uppercase tracking-wide">Aplikasi Selesai Di ITSA </p>
+                <p class="text-4xl font-bold counter tracking-tight" style="color: #EDBC19;" data-target="{{ $formulirSelesai }}">0</p>
+                <div class="mt-4 flex items-center text-xs text-slate-500">
+                    <div class="flex items-center">
+                        <div class="w-2 h-2 rounded-full mr-2" style="background-color: #EDBC19;"></div>
+                        <span>Status selesai</span>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 h-1" style="background: linear-gradient(90deg, #EDBC19, #B8951A);"></div>
+        </div>
+
+        <!-- Card 3: Total Feedback -->
+        <div class="relative group overflow-hidden bg-slate-800/50 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl opacity-0 transform translate-y-8 transition-all duration-700 ease-out border border-slate-700/50" 
+             data-animate 
+             data-delay="300">
+            <div class="absolute inset-0 bg-gradient-to-br from-slate-800/80 to-slate-900/60"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-red-800/10 to-red-900/5"></div>
+            <div class="relative p-8">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-xl border" style="background: linear-gradient(135deg, rgba(143, 24, 26, 0.2), rgba(143, 24, 26, 0.1)); border-color: rgba(143, 24, 26, 0.3);">
+                        <svg class="w-6 h-6" style="color: #8F181A;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                        </svg>
+                    </div>
+                    <div class="flex items-center space-x-1">
+                        <div class="w-2 h-2 rounded-full animate-pulse" style="background-color: #8F181A;"></div>
+                        <div class="w-1 h-1 rounded-full animate-pulse" style="background-color: #8F181A; animation-delay: 0.2s;"></div>
+                        <div class="w-1 h-1 rounded-full animate-pulse" style="background-color: #8F181A; animation-delay: 0.4s;"></div>
+                    </div>
+                </div>
+                <p class="text-slate-400 text-sm font-medium mb-3 uppercase tracking-wide">Total Feedback Masuk</p>
+                <p class="text-4xl font-bold counter tracking-tight" style="color: #8F181A;" data-target="{{ $totalFeedback }}">0</p>
+                <div class="mt-4 flex items-center text-xs text-slate-500">
+                    <div class="flex items-center">
+                        <div class="w-2 h-2 rounded-full mr-2" style="background-color: #8F181A;"></div>
+                        <span>Semua feedback</span>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 h-1" style="background: linear-gradient(90deg, #8F181A, #6B1315);"></div>
+        </div>
+    </div>
+</div>
+
+
+
+{{-- Daftar Hasil ITSA --}}
+<div class="mt-12" data-animate data-delay="100">
+    <!-- Section Header -->
+    <div class="mb-8 opacity-0 translate-y-8 transition-all duration-700 ease-out" data-animate data-delay="200">
+        <h2 class="text-3xl font-bold bg-gradient-to-r from-[#00ADE5] to-[#016DAE] bg-clip-text text-transparent mb-3">
+            Daftar Hasil ITSA
+        </h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-[#00ADE5] to-[#016DAE] rounded-full"></div>
+    </div>
+
+    <!-- Results Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        @forelse($hasilList as $hasil)
+            <div class="bg-white border border-gray-100 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 ease-out overflow-hidden opacity-0 translate-y-8" data-animate data-delay="300">
+                <div class="relative overflow-hidden">
+                    @if($hasil->image)
+                        <img src="{{ asset('storage/' . $hasil->image) }}" alt="Gambar Hasil ITSA" class="w-full h-48 object-cover">
+                    @else
+                        <div class="w-full h-48 bg-gradient-to-br from-[#00ADE5]/10 to-[#016DAE]/10 flex items-center justify-center">
+                            <div class="text-[#00ADE5] opacity-50">
+                                <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                        </div>
+                    @endif
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-[#00ADE5] transition-colors duration-300">
+                        {{ $hasil->formulir->nama_aplikasi ?? 'Tanpa Nama' }}
+                    </h3>
+                    <p class="text-gray-600 mb-4 line-clamp-3">
+                        {{ $hasil->deskripsi }}
+                    </p>
+                    @if($hasil->tautan)
+                        <div class="flex items-center justify-between">
+                            <a href="{{ $hasil->tautan }}" class="inline-flex items-center text-[#016DAE] hover:text-[#00ADE5] font-medium text-sm transition-colors duration-300" target="_blank">
+                                Lihat Detail
+                                <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </a>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        @empty
+            <!-- Empty State -->
+            <div class="col-span-full opacity-0 translate-y-8 transition-all duration-700 ease-out" data-animate data-delay="300" id="empty-state">
+                <div class="text-center py-16">
+                    <div class="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-[#00ADE5]/10 to-[#016DAE]/10 rounded-full flex items-center justify-center">
+                        <svg class="w-12 h-12 text-[#00ADE5] opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-600 mb-2">Belum Ada Hasil ITSA</h3>
+                    <p class="text-gray-500 max-w-md mx-auto">
+                        Hasil ITSA akan ditampilkan di sini setelah tersedia. Silakan periksa kembali nanti.
+                    </p>
+                </div>
+            </div>
+        @endforelse
+    </div>
+</div>
+
+
+
         </div>
     </div>
 
     <script>
-        // Animation Observer
-        function createAnimationObserver() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const element = entry.target;
-                        requestAnimationFrame(() => {
-                            element.classList.remove('opacity-0', 'translate-y-8');
-                            element.classList.add('opacity-100', 'translate-y-0');
-                        });
-                        observer.unobserve(element);
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '100px'
-            });
-
-            return observer;
-        }
-
-        // Carousel functionality
-        class ImageCarousel {
-            constructor() {
-                this.currentSlide = 1;
-                this.totalSlides = 3;
-                this.autoPlayInterval = null;
-                this.isTransitioning = false;
+// Animation Observer - hanya untuk animasi masuk
+function createAnimationObserver() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const element = entry.target;
+                const delay = element.dataset.delay || 0;
                 
-                this.init();
-            }
-            
-            init() {
-                this.setupEventListeners();
-                this.startAutoPlay();
-            }
-            
-            setupEventListeners() {
-                // Dot navigation
-                document.querySelectorAll('.carousel-dot').forEach(dot => {
-                    dot.addEventListener('click', (e) => {
-                        const slideNum = parseInt(e.target.dataset.slide);
-                        this.goToSlide(slideNum);
-                    });
-                });
-                
-                // Arrow navigation
-                document.querySelector('.carousel-prev').addEventListener('click', () => {
-                    this.previousSlide();
-                });
-                
-                document.querySelector('.carousel-next').addEventListener('click', () => {
-                    this.nextSlide();
-                });
-                
-                // Pause auto-play on hover
-                const carousel = document.querySelector('.relative.rounded-3xl');
-                carousel.addEventListener('mouseenter', () => {
-                    this.pauseAutoPlay();
-                });
-                
-                carousel.addEventListener('mouseleave', () => {
-                    this.startAutoPlay();
-                });
-            }
-            
-            goToSlide(slideNum) {
-                if (this.isTransitioning || slideNum === this.currentSlide) return;
-
-                this.isTransitioning = true;
-
-                const currentSlideEl = document.getElementById(`slide-${this.currentSlide}`);
-                const targetSlideEl = document.getElementById(`slide-${slideNum}`);
-
-                // Reset posisi target slide di kanan
-                targetSlideEl.style.transform = 'translateX(100%)';
-                targetSlideEl.style.transition = 'none';
-                
-                // Force reflow
-                targetSlideEl.offsetHeight;
-
-                // Animate both slides (slide left)
-                currentSlideEl.style.transition = 'transform 0.7s ease-in-out';
-                targetSlideEl.style.transition = 'transform 0.7s ease-in-out';
-
-                currentSlideEl.style.transform = 'translateX(-100%)';
-                targetSlideEl.style.transform = 'translateX(0)';
-
-                // Update dots
-                this.updateDots(slideNum);
-                this.currentSlide = slideNum;
-
                 setTimeout(() => {
-                    this.isTransitioning = false;
-                }, 700);
+                    requestAnimationFrame(() => {
+                        element.classList.remove('opacity-0', 'translate-y-8');
+                        element.classList.add('opacity-100', 'translate-y-0');
+                        
+                        // Counter animation
+                        const counter = element.querySelector('.counter');
+                        if (counter) {
+                            animateCounter(counter);
+                        }
+                    });
+                }, delay);
+                
+                observer.unobserve(element);
             }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '100px'
+    });
 
-            
-            nextSlide() {
-                const nextSlide = this.currentSlide === this.totalSlides ? 1 : this.currentSlide + 1;
-                this.goToSlide(nextSlide);
-            }
-            
-            previousSlide() {
-                const prevSlide = this.currentSlide === 1 ? this.totalSlides : this.currentSlide - 1;
-                this.goToSlide(prevSlide);
-            }
-            
-            updateDots(activeSlide) {
-                document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
-                    if (index + 1 === activeSlide) {
-                        dot.classList.add('active');
-                        dot.classList.remove('bg-white/40');
-                        dot.classList.add('bg-white/60');
-                    } else {
-                        dot.classList.remove('active');
-                        dot.classList.remove('bg-white/60');
-                        dot.classList.add('bg-white/40');
-                    }
-                });
-            }
-            
-            startAutoPlay() {
-                this.autoPlayInterval = setInterval(() => {
-                    this.nextSlide();
-                }, 4000);
-            }
-            
-            pauseAutoPlay() {
-                if (this.autoPlayInterval) {
-                    clearInterval(this.autoPlayInterval);
-                    this.autoPlayInterval = null;
-                }
-            }
+    return observer;
+}
+
+// Counter Animation
+function animateCounter(element) {
+    const target = parseInt(element.dataset.target);
+    const duration = 1500;
+    const stepTime = 50;
+    const steps = duration / stepTime;
+    
+    let current = 0;
+    let step = 0;
+    
+    const timer = setInterval(() => {
+        step++;
+        const progress = step / steps;
+        const easeOutQuart = 1 - Math.pow(1 - progress, 3);
+        const displayValue = Math.floor(target * easeOutQuart);
+        
+        element.textContent = displayValue.toLocaleString();
+        
+        if (step >= steps) {
+            clearInterval(timer);
+            element.textContent = target.toLocaleString();
         }
+    }, stepTime);
+}
 
-        document.addEventListener('DOMContentLoaded', function () {
-            // Initialize animation observer
-            const observer = createAnimationObserver();
-            const animatedElements = document.querySelectorAll('[data-animate]');
-            animatedElements.forEach(element => {
-                observer.observe(element);
+// Carousel functionality (keeping original)
+class ImageCarousel {
+    constructor() {
+        this.currentSlide = 1;
+        this.totalSlides = 3;
+        this.autoPlayInterval = null;
+        this.isTransitioning = false;
+        
+        this.init();
+    }
+    
+    init() {
+        this.setupEventListeners();
+        this.startAutoPlay();
+    }
+    
+    setupEventListeners() {
+        // Dot navigation
+        document.querySelectorAll('.carousel-dot').forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                const slideNum = parseInt(e.target.dataset.slide);
+                this.goToSlide(slideNum);
+            });
+        });
+        
+        // Arrow navigation
+        const prevBtn = document.querySelector('.carousel-prev');
+        const nextBtn = document.querySelector('.carousel-next');
+        
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                this.previousSlide();
+            });
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                this.nextSlide();
+            });
+        }
+        
+        // Pause auto-play on hover
+        const carousel = document.querySelector('.relative.rounded-3xl');
+        if (carousel) {
+            carousel.addEventListener('mouseenter', () => {
+                this.pauseAutoPlay();
             });
             
-            // Initialize carousel
-            new ImageCarousel();
+            carousel.addEventListener('mouseleave', () => {
+                this.startAutoPlay();
+            });
+        }
+    }
+    
+    goToSlide(slideNum) {
+        if (this.isTransitioning || slideNum === this.currentSlide) return;
+
+        this.isTransitioning = true;
+
+        const currentSlideEl = document.getElementById(`slide-${this.currentSlide}`);
+        const targetSlideEl = document.getElementById(`slide-${slideNum}`);
+
+        if (currentSlideEl && targetSlideEl) {
+            // Reset posisi target slide di kanan
+            targetSlideEl.style.transform = 'translateX(100%)';
+            targetSlideEl.style.transition = 'none';
+            
+            // Force reflow
+            targetSlideEl.offsetHeight;
+
+            // Animate both slides (slide left)
+            currentSlideEl.style.transition = 'transform 0.7s ease-in-out';
+            targetSlideEl.style.transition = 'transform 0.7s ease-in-out';
+
+            currentSlideEl.style.transform = 'translateX(-100%)';
+            targetSlideEl.style.transform = 'translateX(0)';
+
+            // Update dots
+            this.updateDots(slideNum);
+            this.currentSlide = slideNum;
+
+            setTimeout(() => {
+                this.isTransitioning = false;
+            }, 700);
+        }
+    }
+    
+    nextSlide() {
+        const nextSlide = this.currentSlide === this.totalSlides ? 1 : this.currentSlide + 1;
+        this.goToSlide(nextSlide);
+    }
+    
+    previousSlide() {
+        const prevSlide = this.currentSlide === 1 ? this.totalSlides : this.currentSlide - 1;
+        this.goToSlide(prevSlide);
+    }
+    
+    updateDots(activeSlide) {
+        document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+            if (index + 1 === activeSlide) {
+                dot.classList.add('active');
+                dot.classList.remove('bg-white/40');
+                dot.classList.add('bg-white/60');
+            } else {
+                dot.classList.remove('active');
+                dot.classList.remove('bg-white/60');
+                dot.classList.add('bg-white/40');
+            }
         });
+    }
+    
+    startAutoPlay() {
+        this.autoPlayInterval = setInterval(() => {
+            this.nextSlide();
+        }, 4000);
+    }
+    
+    pauseAutoPlay() {
+        if (this.autoPlayInterval) {
+            clearInterval(this.autoPlayInterval);
+            this.autoPlayInterval = null;
+        }
+    }
+}
+
+// Initialize everything when DOM is ready
+document.addEventListener('DOMContentLoaded', function () {
+    // Initialize animation observer
+    const observer = createAnimationObserver();
+    const animatedElements = document.querySelectorAll('[data-animate]');
+    animatedElements.forEach(element => {
+        observer.observe(element);
+    });
+    
+    // Initialize carousel
+    new ImageCarousel();
+});
+
+
+
+
+
     </script>
 </x-app-layout>

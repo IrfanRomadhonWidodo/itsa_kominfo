@@ -16,6 +16,7 @@ use App\Http\Controllers\Pages\RiwayatController;
 use App\Http\Controllers\Pages\FAQController;
 use App\Http\Controllers\Pages\PanduanController;
 use App\Http\Controllers\Pages\LayananController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -35,8 +36,6 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::post('/admin/hasil', [HasilAdminController::class, 'store'])->name('admin.hasil.store');
 // Additional route for file upload
     Route::put('formulir/{formulir}/upload-file', [FormulirAdminController::class, 'uploadFile'])->name('formulir.uploadFile');
-    // Route::get('settings', [AdminSettingsController::class, 'index'])->name('settings');
-    // Route::get('reports', [AdminReportsController::class, 'index'])->name('reports');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -47,9 +46,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     // profil user
