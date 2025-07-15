@@ -16,9 +16,10 @@
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                         <!-- Left Content -->
                         <div class="text-left space-y-6">
-                            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-[#016DAE] via-[#00ADE5] to-[#016DAE] bg-clip-text text-transparent leading-tight">
-                                SELAMAT DATANG
-                            </h1>
+                        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r from-[#016DAE] via-[#00ADE5] to-[#016DAE] bg-clip-text text-transparent leading-tight">
+                            SELAMAT DATANG
+                        </h1>
+
                             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900">
                                 DI LAYANAN ITSA
                             </h2>
