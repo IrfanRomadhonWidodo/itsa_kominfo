@@ -31,6 +31,8 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('users', UserAdminController::class);
     Route::resource('feedbacks', FeedbackAdminController::class);
     Route::resource('formulir', FormulirAdminController::class);
+    Route::resource('hasil', HasilAdminController::class);
+    Route::post('/admin/hasil', [HasilAdminController::class, 'store'])->name('admin.hasil.store');
 // Additional route for file upload
     Route::put('formulir/{formulir}/upload-file', [FormulirAdminController::class, 'uploadFile'])->name('formulir.uploadFile');
     // Route::get('settings', [AdminSettingsController::class, 'index'])->name('settings');

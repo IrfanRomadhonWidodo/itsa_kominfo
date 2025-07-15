@@ -119,13 +119,14 @@ class HasilAdminController extends Controller
      */
     public function destroy(Hasil $hasil)
     {
-        // Delete image if exists
+        // Hapus gambar jika ada
         if ($hasil->image) {
             Storage::disk('public')->delete($hasil->image);
         }
 
         $hasil->delete();
 
-        return redirect()->route('admin.hasil.index')->with('success', 'Hasil berhasil dihapus!');
+        return redirect()->route('admin.hasil.index')
+                        ->with('success', 'Hasil berhasil dihapus!');
     }
 }
