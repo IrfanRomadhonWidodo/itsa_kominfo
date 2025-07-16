@@ -499,8 +499,5 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
-
-
     </script>
 </x-app-layout>

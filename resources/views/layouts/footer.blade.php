@@ -30,7 +30,6 @@
             <!-- Efek lingkaran dekoratif -->
             <div class="absolute -z-10 -inset-3 bg-white/10 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             
-
             <div class="flex justify-center items-center gap-x-10 px-4 py-4">
                 <img src="{{ asset('image/logo_banyumas.png') }}" alt="Logo Banyumas"
                     class="h-16 transition-transform duration-300 hover:scale-110" />
@@ -39,33 +38,34 @@
             </div>
         </div>
 
-        <!-- Kolom: Perusahaan -->
+        <!-- Kolom: Tentang ITSA -->
         <div>
-            <h4 class="font-bold text-lg mb-3">Perusahaan</h4>
+            <h4 class="font-bold text-lg mb-3">Tentang ITSA</h4>
             <ul class="space-y-1 text-sm text-white/90">
-                <li><a href="#" class="hover:underline hover:text-white">Tentang Kami</a></li>
-                <li><a href="#" class="hover:underline hover:text-white">Solusi</a></li>
-                <li><a href="#" class="hover:underline hover:text-white">Wawasan</a></li>
+                <li><a href="{{ route('profil-itsa') }}" class="hover:underline hover:text-white">Profil ITSA</a></li>
+                <li><a href="{{ route('panduan') }}" class="hover:underline hover:text-white">Panduan Penggunaan</a></li>
+                <li><a href="{{ route('faq') }}" class="hover:underline hover:text-white">FAQ</a></li>
             </ul>
         </div>
 
-        <!-- Kolom: Kategori -->
+        <!-- Kolom: Layanan -->
         <div>
-            <h4 class="font-bold text-lg mb-3">Kategori</h4>
+            <h4 class="font-bold text-lg mb-3">Layanan</h4>
             <ul class="space-y-1 text-sm text-white/90">
-                <li><a href="#" class="hover:underline hover:text-white">Rekrut Talent</a></li>
-                <li><a href="#" class="hover:underline hover:text-white">Kembangkan Talent</a></li>
-                <li><a href="#" class="hover:underline hover:text-white">Alat Gamifikasi</a></li>
+                <li><a href="{{ route('alur-layanan') }}" class="hover:underline hover:text-white">Alur Layanan</a></li>
+                <li><a href="{{ route('formulir.index') }}" class="hover:underline hover:text-white">Formulir</a></li>
+                <li><a href="{{ route('riwayat.index') }}" class="hover:underline hover:text-white">Riwayat</a></li>
+                <li><a href="{{ route('download') }}" class="hover:underline hover:text-white">Dokumen S&K</a></li>
             </ul>
         </div>
 
-        <!-- Kolom: Lainnya -->
+        <!-- Kolom: Navigasi Utama -->
         <div>
-            <h4 class="font-bold text-lg mb-3 invisible md:visible">&nbsp;</h4>
+            <h4 class="font-bold text-lg mb-3">Navigasi</h4>
             <ul class="space-y-1 text-sm text-white/90">
-                <li><a href="#" class="hover:underline hover:text-white">Kompetensi Digital</a></li>
-                <li><a href="#" class="hover:underline hover:text-white">Kompetensi Bisnis</a></li>
-                <li><a href="#" class="hover:underline hover:text-white">Kepemimpinan</a></li>
+                <li><a href="{{ route('dashboard') }}" class="hover:underline hover:text-white">Beranda</a></li>
+                <li><a href="{{ route('kontak') }}" class="hover:underline hover:text-white">Kontak</a></li>
+                <li><a href="{{ route('notifikasi.index') }}" class="hover:underline hover:text-white">Notifikasi</a></li>
             </ul>
         </div>
     </div>
@@ -75,9 +75,9 @@
         <div class="container mx-auto px-6 md:px-10 flex flex-col md:flex-row justify-between items-center text-sm text-white/80">
             <!-- Media Sosial -->
             <div class="flex space-x-4 mb-4 md:mb-0 text-xl">
-                <a href="#" class="hover:text-white transition-colors"><i class="fab fa-youtube"></i></a>
-                <a href="#" class="hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="hover:text-white transition-colors"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.youtube.com/@BETTERBANYUMAS" class="hover:text-white transition-colors"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/dinkominfo_kab.banyumas/" class="hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/kominfobanyumas" class="hover:text-white transition-colors"><i class="fab fa-x-twitter"></i></a>
             </div>
 
             <!-- Hak Cipta -->
