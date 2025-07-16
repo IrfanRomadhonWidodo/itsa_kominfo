@@ -79,7 +79,6 @@
                 <a href="https://www.instagram.com/dinkominfo_kab.banyumas/" class="hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
                 <a href="https://x.com/kominfobanyumas" class="hover:text-white transition-colors"><i class="fab fa-x-twitter"></i></a>
             </div>
-
             <!-- Hak Cipta -->
             <div class="flex flex-wrap justify-center gap-4 md:gap-6 text-center">
                 <a href="#" class="hover:underline hover:text-white">© 2025 ITSA</a>
