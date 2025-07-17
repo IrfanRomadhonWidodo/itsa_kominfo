@@ -91,7 +91,7 @@ class UserAdminController extends Controller
 
     $user->update($data);
 
-    // Kirim email jika status berubah ke disetujui atau ditolak
+    //EMAIL NOTIFICATION Kirim email jika status berubah ke disetujui atau ditolak
     if ($oldStatus !== $request->status) {
         if ($request->status === 'disetujui') {
             Mail::to($user->email)->send(new UserApprovedMail($user));
