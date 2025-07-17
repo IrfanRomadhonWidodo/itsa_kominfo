@@ -23,14 +23,15 @@ class ResetPasswordManualMail extends Mailable
     {
         $resetLink = url("/reset-password/{$this->token}?email=" . urlencode($this->user->email));
 
-        return $this->subject('Reset Password Akun ITSA Dinkominfo')
+        return $this->subject('Permintaan Pengaturan Ulang Kata Sandi Akun ITSA Dinkominfo')
             ->html("
-                <p>Halo <strong>{$this->user->name}</strong>,</p>
-                <p>Kami menerima permintaan untuk reset password akun Anda.</p>
-                <p>Klik link berikut untuk mengganti password:</p>
-                <p><a href=\"{$resetLink}\">Reset Password</a></p>
-                <p>Jika Anda tidak meminta ini, abaikan saja email ini.</p>
-                <p>Terima kasih.</p>
+                <p>Yth. <strong>{$this->user->name}</strong>,</p>
+                <p>Kami telah menerima permintaan untuk melakukan pengaturan ulang (reset) kata sandi akun Anda pada sistem ITSA Dinkominfo.</p>
+                <p>Silakan klik tautan di bawah ini untuk melanjutkan proses pengaturan ulang kata sandi Anda:</p>
+                <p><a href=\"{$resetLink}\">Atur Ulang Kata Sandi</a></p>
+                <p>Apabila Anda tidak pernah melakukan permintaan ini, mohon abaikan email ini. Tidak ada tindakan lebih lanjut yang diperlukan.</p>
+                <p>Terima kasih atas perhatian Anda.</p>
+                <p>Hormat kami,<br>Tim ITSA Dinkominfo</p>
             ");
     }
 }

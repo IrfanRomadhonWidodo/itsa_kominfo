@@ -1,5 +1,7 @@
 <x-app-layout>
     <div class="bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50 min-h-screen relative overflow-hidden">
+        <div class="bg-[#E0F7FE] min-h-screen py-20 px-4 sm:px-6 lg:px-8">
+
         <!-- Enhanced Background Pattern -->
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(59,130,246,0.08)_0%,transparent_50%)] opacity-60"></div>
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(14,165,233,0.08)_0%,transparent_50%)] opacity-60"></div>
@@ -131,105 +133,100 @@
 
 {{-- Data Section --}}
 <div class="mb-8">
-    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center tracking-tight">Ringkasan Data</h2>
+    <h2 class="text-4xl font-bold text-blue-800 mb-8 text-center tracking-tight">Ringkasan Data</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- Card 1: Total Formulir -->
-        <div class="relative group overflow-hidden bg-slate-800/50 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl opacity-0 transform translate-y-8 transition-all duration-700 ease-out border border-slate-700/50" 
+        <div class="relative group overflow-hidden bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl opacity-0 transform translate-y-8 transition-all duration-700 ease-out border border-gray-200/50" 
              data-animate 
              data-delay="100">
-            <div class="absolute inset-0 bg-gradient-to-br from-slate-800/80 to-slate-900/60"></div>
-            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/5"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-[#016DAE]/5 to-[#00ADE5]/5"></div>
             <div class="relative p-8">
                 <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/30">
-                        <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-[#016DAE]/10 to-[#00ADE5]/10 border border-[#016DAE]/20">
+                        <svg class="w-6 h-6 text-[#016DAE]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                         </svg>
                     </div>
                     <div class="flex items-center space-x-1">
-                        <div class="w-2 h-2 rounded-full animate-pulse bg-blue-400"></div>
-                        <div class="w-1 h-1 rounded-full animate-pulse bg-blue-400" style="animation-delay: 0.2s;"></div>
-                        <div class="w-1 h-1 rounded-full animate-pulse bg-blue-400" style="animation-delay: 0.4s;"></div>
+                        <div class="w-2 h-2 rounded-full animate-pulse bg-[#016DAE]"></div>
+                        <div class="w-1 h-1 rounded-full animate-pulse bg-[#016DAE]" style="animation-delay: 0.2s;"></div>
+                        <div class="w-1 h-1 rounded-full animate-pulse bg-[#016DAE]" style="animation-delay: 0.4s;"></div>
                     </div>
                 </div>
-                <p class="text-slate-400 text-sm font-medium mb-3 uppercase tracking-wide">Total Formulir yang Diajukan</p>
-                <p class="text-4xl font-bold counter tracking-tight text-blue-400" data-target="{{ $totalFormulir }}">0</p>
-                <div class="mt-4 flex items-center text-xs text-slate-500">
+                <p class="text-gray-600 text-sm font-medium mb-3 uppercase tracking-wide">Total Formulir yang Diajukan</p>
+                <p class="text-4xl font-bold counter tracking-tight text-[#016DAE]" data-target="{{ $totalFormulir }}">0</p>
+                <div class="mt-4 flex items-center text-xs text-gray-500">
                     <div class="flex items-center">
-                        <div class="w-2 h-2 rounded-full mr-2 bg-blue-400"></div>
+                        <div class="w-2 h-2 rounded-full mr-2 bg-[#016DAE]"></div>
                         <span>Semua formulir</span>
                     </div>
                 </div>
             </div>
-            <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-cyan-500"></div>
+            <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#016DAE] to-[#00ADE5]"></div>
         </div>
 
-        <!-- Card 2: Aplkasi Selesai -->
-        <div class="relative group overflow-hidden bg-slate-800/50 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl opacity-0 transform translate-y-8 transition-all duration-700 ease-out border border-slate-700/50" 
+        <!-- Card 2: Aplikasi Selesai -->
+        <div class="relative group overflow-hidden bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl opacity-0 transform translate-y-8 transition-all duration-700 ease-out border border-gray-200/50" 
              data-animate 
              data-delay="200">
-            <div class="absolute inset-0 bg-gradient-to-br from-slate-800/80 to-slate-900/60"></div>
-            <div class="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-yellow-600/5"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-[#00ADE5]/5 to-[#016DAE]/5"></div>
             <div class="relative p-8">
                 <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center justify-center w-12 h-12 rounded-xl border" style="background: linear-gradient(135deg, rgba(237, 188, 25, 0.2), rgba(237, 188, 25, 0.1)); border-color: rgba(237, 188, 25, 0.3);">
-                        <svg class="w-6 h-6" style="color: #EDBC19;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-[#00ADE5]/10 to-[#016DAE]/10 border border-[#00ADE5]/20">
+                        <svg class="w-6 h-6 text-[#00ADE5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </div>
                     <div class="flex items-center space-x-1">
-                        <div class="w-2 h-2 rounded-full animate-pulse" style="background-color: #EDBC19;"></div>
-                        <div class="w-1 h-1 rounded-full animate-pulse" style="background-color: #EDBC19; animation-delay: 0.2s;"></div>
-                        <div class="w-1 h-1 rounded-full animate-pulse" style="background-color: #EDBC19; animation-delay: 0.4s;"></div>
+                        <div class="w-2 h-2 rounded-full animate-pulse bg-[#00ADE5]"></div>
+                        <div class="w-1 h-1 rounded-full animate-pulse bg-[#00ADE5]" style="animation-delay: 0.2s;"></div>
+                        <div class="w-1 h-1 rounded-full animate-pulse bg-[#00ADE5]" style="animation-delay: 0.4s;"></div>
                     </div>
                 </div>
-                <p class="text-slate-400 text-sm font-medium mb-3 uppercase tracking-wide">Aplikasi Selesai Di ITSA </p>
-                <p class="text-4xl font-bold counter tracking-tight" style="color: #EDBC19;" data-target="{{ $formulirSelesai }}">0</p>
-                <div class="mt-4 flex items-center text-xs text-slate-500">
+                <p class="text-gray-600 text-sm font-medium mb-3 uppercase tracking-wide">Aplikasi Selesai Di ITSA</p>
+                <p class="text-4xl font-bold counter tracking-tight text-[#00ADE5]" data-target="{{ $formulirSelesai }}">0</p>
+                <div class="mt-4 flex items-center text-xs text-gray-500">
                     <div class="flex items-center">
-                        <div class="w-2 h-2 rounded-full mr-2" style="background-color: #EDBC19;"></div>
+                        <div class="w-2 h-2 rounded-full mr-2 bg-[#00ADE5]"></div>
                         <span>Status selesai</span>
                     </div>
                 </div>
             </div>
-            <div class="absolute bottom-0 left-0 right-0 h-1" style="background: linear-gradient(90deg, #EDBC19, #B8951A);"></div>
+            <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#00ADE5] to-[#016DAE]"></div>
         </div>
 
         <!-- Card 3: Total Feedback -->
-        <div class="relative group overflow-hidden bg-slate-800/50 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl opacity-0 transform translate-y-8 transition-all duration-700 ease-out border border-slate-700/50" 
+        <div class="relative group overflow-hidden bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl opacity-0 transform translate-y-8 transition-all duration-700 ease-out border border-gray-200/50" 
              data-animate 
              data-delay="300">
-            <div class="absolute inset-0 bg-gradient-to-br from-slate-800/80 to-slate-900/60"></div>
-            <div class="absolute inset-0 bg-gradient-to-br from-red-800/10 to-red-900/5"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-[#016DAE]/5 to-[#00ADE5]/5"></div>
             <div class="relative p-8">
                 <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center justify-center w-12 h-12 rounded-xl border" style="background: linear-gradient(135deg, rgba(143, 24, 26, 0.2), rgba(143, 24, 26, 0.1)); border-color: rgba(143, 24, 26, 0.3);">
-                        <svg class="w-6 h-6" style="color: #8F181A;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-[#016DAE]/10 to-[#00ADE5]/10 border border-[#016DAE]/20">
+                        <svg class="w-6 h-6 text-[#016DAE]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                         </svg>
                     </div>
                     <div class="flex items-center space-x-1">
-                        <div class="w-2 h-2 rounded-full animate-pulse" style="background-color: #8F181A;"></div>
-                        <div class="w-1 h-1 rounded-full animate-pulse" style="background-color: #8F181A; animation-delay: 0.2s;"></div>
-                        <div class="w-1 h-1 rounded-full animate-pulse" style="background-color: #8F181A; animation-delay: 0.4s;"></div>
+                        <div class="w-2 h-2 rounded-full animate-pulse bg-[#016DAE]"></div>
+                        <div class="w-1 h-1 rounded-full animate-pulse bg-[#016DAE]" style="animation-delay: 0.2s;"></div>
+                        <div class="w-1 h-1 rounded-full animate-pulse bg-[#016DAE]" style="animation-delay: 0.4s;"></div>
                     </div>
                 </div>
-                <p class="text-slate-400 text-sm font-medium mb-3 uppercase tracking-wide">Total Feedback Masuk</p>
-                <p class="text-4xl font-bold counter tracking-tight" style="color: #8F181A;" data-target="{{ $totalFeedback }}">0</p>
-                <div class="mt-4 flex items-center text-xs text-slate-500">
+                <p class="text-gray-600 text-sm font-medium mb-3 uppercase tracking-wide">Total Feedback Masuk</p>
+                <p class="text-4xl font-bold counter tracking-tight text-[#016DAE]" data-target="{{ $totalFeedback }}">0</p>
+                <div class="mt-4 flex items-center text-xs text-gray-500">
                     <div class="flex items-center">
-                        <div class="w-2 h-2 rounded-full mr-2" style="background-color: #8F181A;"></div>
+                        <div class="w-2 h-2 rounded-full mr-2 bg-[#016DAE]"></div>
                         <span>Semua feedback</span>
                     </div>
                 </div>
             </div>
-            <div class="absolute bottom-0 left-0 right-0 h-1" style="background: linear-gradient(90deg, #8F181A, #6B1315);"></div>
+            <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#016DAE] to-[#00ADE5]"></div>
         </div>
     </div>
 </div>
-
-
 
 {{-- Daftar Hasil ITSA --}}
 <div class="mt-12" data-animate data-delay="100">
