@@ -19,12 +19,15 @@ class UserApprovedMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Akun Anda Disetujui oleh ITSA Dinkominfo')
+        return $this->subject('Persetujuan Akun oleh ITSA Dinkominfo')
             ->html("
-                <p>Halo <strong>{$this->user->name}</strong>,</p>
-                <p>Akun Anda telah <strong>disetujui</strong> oleh <strong>ITSA Dinkominfo</strong>.</p>
-                <p>Silakan login untuk mulai menggunakan layanan kami.</p>
-                <p>Terima kasih.</p>
+                <p>Yth. <strong>{$this->user->name}</strong>,</p>
+                <p>Dengan hormat,</p>
+                <p>Kami informasikan bahwa akun Anda telah <strong>disetujui</strong> dan diaktifkan oleh <strong>Tim ITSA Dinkominfo</strong>.</p>
+                <p>Silakan masuk ke sistem untuk mulai mengakses dan menggunakan layanan yang tersedia.</p>
+                <p>Jika Anda membutuhkan bantuan lebih lanjut, jangan ragu untuk menghubungi kami.</p>
+                <p>Terima kasih atas perhatian dan kerja sama Anda.</p>
+                <p>Hormat kami,<br>Tim ITSA Dinkominfo</p>
             ");
     }
 }

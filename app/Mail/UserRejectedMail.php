@@ -19,11 +19,14 @@ class UserRejectedMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Akun Anda Ditolak oleh ITSA Dinkominfo')
+        return $this->subject('Pemberitahuan Penolakan Akun oleh ITSA Dinkominfo')
             ->html("
-                <p>Halo <strong>{$this->user->name}</strong>,</p>
-                <p>Mohon maaf, akun Anda telah <strong>ditolak</strong> oleh <strong>ITSA Dinkominfo</strong>.</p>
-                <p>Silakan hubungi admin jika membutuhkan bantuan atau informasi lebih lanjut.</p>
+                <p>Yth. <strong>{$this->user->name}</strong>,</p>
+                <p>Dengan hormat,</p>
+                <p>Kami informasikan bahwa permohonan pendaftaran akun Anda pada sistem <strong>ITSA Dinkominfo</strong> belum dapat disetujui pada saat ini.</p>
+                <p>Apabila Anda memerlukan informasi lebih lanjut terkait alasan penolakan atau ingin mengajukan kembali, silakan menghubungi admin melalui kontak yang tersedia.</p>
+                <p>Terima kasih atas perhatian dan pengertiannya.</p>
+                <p>Hormat kami,<br>Tim ITSA Dinkominfo</p>
             ");
     }
 }
