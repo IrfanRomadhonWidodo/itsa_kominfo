@@ -133,8 +133,7 @@
 
 {{-- Data Section --}}
 <div class="mb-8">
-    <h2 class="text-4xl font-bold text-blue-800 mb-8 text-center tracking-tight">Ringkasan Data</h2>
-
+    <h2 class="text-4xl font-bold text-[#016DAE] mb-8 text-center tracking-tight">Ringkasan Data</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- Card 1: Total Formulir -->
         <div class="relative group overflow-hidden bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl opacity-0 transform translate-y-8 transition-all duration-700 ease-out border border-gray-200/50" 

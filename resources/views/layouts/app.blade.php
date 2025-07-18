@@ -7,7 +7,11 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
-        <link rel="icon" type="image/png" href="{{ asset('image/LOGO_BARU.png') }}">
+        
+        <!-- ICON -->
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('logo_baru.png') }}">
+        <link rel="apple-touch-icon" href="{{ asset('logo_baru.png') }}">
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
