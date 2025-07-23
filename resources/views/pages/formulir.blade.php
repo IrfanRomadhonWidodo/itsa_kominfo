@@ -329,19 +329,42 @@
             </div>
             <div id="preview-content" class="p-6">
                 <!-- Preview content will be inserted here -->
+            </div> 
+            
+<!-- Enhanced Verification Section -->
+<div class="px-6 pb-4">
+    <div class="bg-gradient-to-br from-gray-50 to-blue-50 p-4 rounded-lg border border-gray-200">
+        <label for="verify-checkbox" class="relative flex items-center gap-2 cursor-pointer group mt-1">
+            <input type="checkbox" id="verify-checkbox" class="peer sr-only">
+
+            <div class="w-5 h-5 border-2 border-gray-300 rounded bg-white transition-all duration-200 
+                        peer-checked:bg-gradient-to-r peer-checked:from-red-600 peer-checked:to-red-500 
+                        peer-checked:border-red-500 peer-focus:ring-2 peer-focus:ring-red-200 
+                        group-hover:border-red-400 group-hover:shadow-md relative">
+                <svg class="w-3 h-3 text-white absolute top-0.5 left-0.5 opacity-0 peer-checked:opacity-100 transition-opacity duration-200 z-10" 
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
             </div>
+
+            <span class="text-sm text-gray-700 select-none">Saya telah memeriksa data dan menyetujuinya</span>
+        </label>
+    </div>
+</div>
+            
             <div class="p-6 border-t border-gray-200 flex justify-end space-x-4">
                 <button type="button" id="close-preview" class="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors duration-200">
                     Tutup
                 </button>
-                <button type="button" id="confirm-submit" class="px-6 py-3 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-lg hover:from-red-700 hover:to-red-600 transition-all duration-200">
+                <button type="button" id="confirm-submit" 
+                    class="px-6 py-3 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-lg hover:from-red-700 hover:to-red-600 transition-all duration-200 opacity-50 cursor-not-allowed" 
+                    disabled>
                     <i class="fas fa-paper-plane mr-2"></i>Kirim Formulir
                 </button>
             </div>
         </div>
     </div>
 </div>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     let currentStep = 1;
@@ -719,8 +742,34 @@ function submitForm() {
 }
     
     // Initialize display
+        // Initialize display
     updateStepDisplay();
+
+    // === Checkbox verifikasi kirim formulir ===
+    const checkbox = document.getElementById("verify-checkbox");
+    const submitConfirmBtn = document.getElementById("confirm-submit");
+
+    if (checkbox && submitConfirmBtn) {
+        checkbox.addEventListener("change", function () {
+            if (checkbox.checked) {
+                submitConfirmBtn.disabled = false;
+                submitConfirmBtn.classList.remove("opacity-50", "cursor-not-allowed");
+            } else {
+                submitConfirmBtn.disabled = true;
+                submitConfirmBtn.classList.add("opacity-50", "cursor-not-allowed");
+            }
+        });
+
+        // Reset saat modal ditutup
+        const closeBtn = document.getElementById("close-preview");
+        closeBtn.addEventListener("click", () => {
+            checkbox.checked = false;
+            submitConfirmBtn.disabled = true;
+            submitConfirmBtn.classList.add("opacity-50", "cursor-not-allowed");
+        });
+    }
 });
+
 </script>
 
 <!-- FontAwesome for icons -->
