@@ -43,6 +43,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/notifikasi/{id}', [NotifikasiController::class, 'show'])->name('notifikasi.show');
     Route::post('/notifikasi/{id}/mark-read', [NotifikasiController::class, 'markAsRead'])->name('notifikasi.mark-read');
     Route::post('/notifikasi/mark-all-read', [NotifikasiController::class, 'markAllAsRead'])->name('notifikasi.mark-all-read');
+    Route::delete('/notifikasi/{id}', [NotifikasiController::class, 'destroy'])->name('notifikasi.destroy');
+    Route::delete('/notifikasi', [NotifikasiController::class, 'destroyAll'])->name('notifikasi.destroyAll');
+    Route::post('/notifikasi/delete-multiple', [NotifikasiController::class, 'deleteMultiple'])->name('notifikasi.deleteMultiple');
 });
 
 

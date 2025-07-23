@@ -83,7 +83,51 @@ class NotifikasiController extends Controller
     return view('pages.notifikasi-detail', compact('notifikasi'));
 }
 
+        /**
+         * Hapus satu notifikasi.
+         */
+        public function destroy($id)
+        {
+            $notifikasi = Notifikasi::where('id', $id)
+                                    ->where('user_id', Auth::id())
+                                    ->first();
+
+            if ($notifikasi) {
+                $notifikasi->delete();
+                return response()->json(['success' => true, 'message' => 'Notifikasi berhasil dihapus.']);
+            }
+
+            return response()->json(['success' => false, 'message' => 'Notifikasi tidak ditemukan.'], 404);
+        }
+
     /**
-     * Lihat detail notifikasi dan balasan formulir.
+     * Hapus semua notifikasi milik user.
      */
+    public function destroyAll()
+    {
+        Notifikasi::where('user_id', Auth::id())->delete();
+        return response()->json(['success' => true, 'message' => 'Semua notifikasi berhasil dihapus.']);
+    }
+
+    /**
+     * Hapus beberapa notifikasi terpilih.
+     */
+    public function deleteMultiple(Request $request)
+    {
+        $ids = $request->input('ids');
+
+        if (!is_array($ids) || empty($ids)) {
+            return response()->json(['success' => false, 'message' => 'Tidak ada notifikasi yang dipilih.']);
+        }
+
+        try {
+            Notifikasi::where('user_id', Auth::id())
+                      ->whereIn('id', $ids)
+                      ->delete();
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Gagal menghapus notifikasi.']);
+        }
+    }
 }
