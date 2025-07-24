@@ -23,7 +23,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         
     </head>
-    <body class="font-sans antialiased bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <body class="bg-[#E0F7FE] ">
         <div class="min-h-screen">
             @include('layouts.navigation')
 
@@ -40,6 +40,11 @@
             <main>
                 {{ $slot }}
             </main>
+            <a href="https://wa.me/6285747055354" target="_blank"
+            class="fixed bottom-8 right-8 z-50 bg-green-500 text-white w-14 h-14 flex items-center justify-center rounded-full shadow-lg transition duration-300"
+            aria-label="Chat via WhatsApp">
+                <i class="fab fa-whatsapp text-2xl"></i>
+            </a>
 
             @include('layouts.footer')
         </div>

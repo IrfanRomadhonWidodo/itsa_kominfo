@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50 min-h-screen relative overflow-hidden">
-        <div class="bg-[#E0F7FE] min-h-screen py-20 px-4 sm:px-6 lg:px-8">
+        <div class="bg-[#E0F7FE] min-h-screen py-0 px-4 sm:px-6 lg:px-8">
 
         <!-- Enhanced Background Pattern -->
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(59,130,246,0.08)_0%,transparent_50%)] opacity-60"></div>
