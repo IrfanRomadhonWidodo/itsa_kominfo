@@ -331,22 +331,22 @@
                 <!-- Preview content will be inserted here -->
             </div> 
             
-<!-- Enhanced Verification Section -->
-<div class="px-6 pb-4">
-    <div class="bg-gradient-to-br from-gray-50 to-blue-50 p-4 rounded-lg border border-gray-200">
-<label for="verify-checkbox" class="relative flex items-center gap-2 cursor-pointer group mt-1">
-    <input type="checkbox" id="verify-checkbox" class="hidden">
-    <div id="checkbox-visual" class="w-5 h-5 border-2 border-gray-300 rounded bg-white transition-all duration-200 
-                group-hover:border-red-400 group-hover:shadow-md relative">
-        <svg id="checkbox-check" class="w-3 h-3 text-white absolute top-0.5 left-0.5 opacity-0 transition-opacity duration-200" 
-            fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-        </svg>
-    </div>
-    <span class="text-sm text-gray-700 select-none">Saya telah memeriksa data dan menyetujuinya</span>
-</label>        
-    </div>
-</div>
+            <!-- Enhanced Verification Section -->
+            <div class="px-6 pb-4">
+                <div class="bg-gradient-to-br from-gray-50 to-blue-50 p-4 rounded-lg border border-gray-200">
+            <label for="verify-checkbox" class="relative flex items-center gap-2 cursor-pointer group mt-1">
+                <input type="checkbox" id="verify-checkbox" class="hidden">
+                <div id="checkbox-visual" class="w-5 h-5 border-2 border-gray-300 rounded bg-white transition-all duration-200 
+                            group-hover:border-red-400 group-hover:shadow-md relative">
+                    <svg id="checkbox-check" class="w-3 h-3 text-white absolute top-0.5 left-0.5 opacity-0 transition-opacity duration-200" 
+                        fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <span class="text-sm text-gray-700 select-none">Saya telah memeriksa data dan menyetujuinya</span>
+            </label>        
+                </div>
+            </div>
             
             <div class="p-6 border-t border-gray-200 flex justify-end space-x-4">
                 <button type="button" id="close-preview" class="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors duration-200">

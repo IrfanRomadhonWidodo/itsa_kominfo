@@ -29,5 +29,6 @@ class DatabaseSeeder extends Seeder
         'role' => 'admin',
         'status' => 'disetujui',
     ]);
+    $this->call(FormulirSeeder::class);
 }
 }
