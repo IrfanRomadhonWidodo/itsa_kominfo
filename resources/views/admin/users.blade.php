@@ -1,6 +1,6 @@
 <x-app-admin>
     <div id="modalBackdrop" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40 hidden"></div>
-
+    
     <div class="flex justify-between items-center mb-8">
         <div>
             <h2 class="text-3xl font-bold text-gray-900">Manajemen Pengguna</h2>

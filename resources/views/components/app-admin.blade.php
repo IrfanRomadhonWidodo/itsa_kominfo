@@ -23,6 +23,18 @@
 </head>
 
 <body class="font-sans antialiased bg-gradient-to-br from-gray-50 via-red-50 to-yellow-50 min-h-screen">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 bg-white z-[9999] flex items-center justify-center transition-opacity duration-700">
+        <div class="relative w-32 h-32">
+            <!-- Logo -->
+            <img id="loading-logo" src="{{ asset('image/LOGO_WITH_OUTER.png') }}" alt="Logo"
+                class="w-20 h-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+            
+            <!-- Circular Loading Animation -->
+            <div class="w-32 h-32 rounded-full border-4 border-t-[#ce6e32] border-r-transparent border-b-transparent border-l-transparent animate-spin"></div>
+        </div>
+    </div>
+
     <div class="min-h-screen flex" x-data="{ sidebarCollapsed: false, mobileSidebarOpen: false }">
         <!-- Sidebar -->
         <div class="fixed inset-y-0 left-0 z-50 transition-all duration-300 ease-in-out"
@@ -311,6 +323,19 @@
         </div>
     </div>
     @stack('scripts')
+        <script>
+        const loadingScreen = document.getElementById('loading-screen');
+        const loadingLogo = document.getElementById('loading-logo');
+
+        loadingLogo.onload = function () {
+            window.addEventListener('load', () => {
+                loadingScreen.classList.add('opacity-0');
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 1000);
+            });
+        };
+    </script>
 </body>
 
 </html>
