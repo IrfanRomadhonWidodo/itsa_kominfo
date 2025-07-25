@@ -16,6 +16,8 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <!-- Tambahkan ini sebelum tag penutup </body> atau di bagian head -->
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div>

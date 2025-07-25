@@ -230,7 +230,7 @@
 {{-- Daftar Hasil ITSA --}}
 <div class="mt-12" data-animate data-delay="100">
     <!-- Section Header -->
-    <div class="mb-8 opacity-0 translate-y-8 transition-all duration-700 ease-out" data-animate data-delay="200">
+    <div id="hasil-itsa" class="mb-8 opacity-0 translate-y-8 transition-all duration-700 ease-out" data-animate data-delay="200">
         <h2 class="text-3xl font-bold bg-gradient-to-r from-[#00ADE5] to-[#016DAE] bg-clip-text text-transparent mb-3">
             Daftar Hasil ITSA
         </h2>
@@ -259,19 +259,41 @@
                     <h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-[#00ADE5] transition-colors duration-300">
                         {{ $hasil->formulir->nama_aplikasi ?? 'Tanpa Nama' }}
                     </h3>
-                    <p class="text-gray-600 mb-4 line-clamp-3">
+                <div x-data="{ expanded: false }">
+                    <p 
+                        class="text-gray-600 mb-1 transition-all duration-300 ease-in-out"
+                        :class="expanded ? 'line-clamp-none' : 'line-clamp-3'"
+                    >
                         {{ $hasil->deskripsi }}
                     </p>
-                    @if($hasil->tautan)
-                        <div class="flex items-center justify-between">
-                            <a href="{{ $hasil->tautan }}" class="inline-flex items-center text-[#016DAE] hover:text-[#00ADE5] font-medium text-sm transition-colors duration-300" target="_blank">
-                                Lihat Detail
-                                <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                                </svg>
-                            </a>
-                        </div>
-                    @endif
+                    <button 
+                        @click="expanded = !expanded"
+                        class="text-sm text-[#016DAE] hover:text-[#00ADE5] focus:outline-none"
+                    >
+                        <span x-show="!expanded">Lihat Selengkapnya</span>
+                        <span x-show="expanded">Tutup</span>
+                    </button>
+                </div>
+                <div x-data="{ show: false }">
+                    <button @click="show = !show"></button>
+                    <p x-show="show"></p>
+                </div>
+                @if($hasil->tautan)
+                    <div class="flex items-center justify-between">
+                        <a href="{{ $hasil->tautan }}" 
+                        class="inline-flex items-center text-[#016DAE] hover:text-[#00ADE5] font-medium text-sm transition-colors duration-300" 
+                        target="_blank" 
+                        rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M2 12h20" />
+                                <path d="M12 2a15 15 0 0 1 0 20" />
+                                <path d="M12 2a15 15 0 0 0 0 20" />
+                            </svg>
+                            Lihat Website
+                        </a>
+                    </div>
+                @endif
                 </div>
             </div>
         @empty
@@ -291,6 +313,9 @@
             </div>
         @endforelse
     </div>
+    <div class="mt-8 flex justify-center opacity-0 translate-y-8 transition-all duration-700 ease-out" data-animate data-delay="400">
+    {{ $hasilList->withQueryString()->fragment('hasil-itsa')->links() }}
+</div>
 </div>
 
 

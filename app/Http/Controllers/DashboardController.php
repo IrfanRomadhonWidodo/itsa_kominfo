@@ -14,7 +14,7 @@ class DashboardController extends Controller
         $formulirSelesai = Formulir::where('status', 'selesai')->count(); // status selesai
         $totalFeedback = Feedback::count(); // semua feedback
 
-        $hasilList = Hasil::with('formulir')->latest()->get(); // ambil semua hasil ITSA
+        $hasilList = Hasil::with('formulir')->latest()->paginate(6); // ambil semua hasil ITSA
 
         return view('dashboard', compact(
             'totalFormulir',
