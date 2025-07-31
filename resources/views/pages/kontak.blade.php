@@ -112,7 +112,7 @@
                                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00ADE5] focus:border-transparent @error('pesan') border-red-500 @enderror transform transition-all duration-300 hover:shadow-md" 
                                           placeholder="Tuliskan pesan Anda...">{{ old('pesan') }}</textarea>
                                 @error('pesan')
-                                    <p class="mt-1 text-sm text-red-600">{{ $messages }}</p>
+                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
                             </div>
 

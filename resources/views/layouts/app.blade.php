@@ -49,7 +49,7 @@
                 </div>
 
                 <!-- Tombol WA -->
-                <a href="https://wa.me/6285747055354" target="_blank"
+                <a href="https://wa.me/6282225584976" target="_blank"
                     class="bg-green-500 text-white w-14 h-14 flex items-center justify-center rounded-full shadow-xl transform group-hover:scale-110 transition-all duration-300 ease-in-out"
                     aria-label="Chat via WhatsApp">
                     <i class="fab fa-whatsapp text-2xl"></i>

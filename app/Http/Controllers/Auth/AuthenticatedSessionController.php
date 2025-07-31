@@ -81,4 +81,14 @@ class AuthenticatedSessionController extends Controller
         // Jika status disetujui, lanjutkan ke dashboard
         return redirect()->intended(route('dashboard'));
     }
+
+    public function rules(): array
+{
+    return [
+        'email' => ['required', 'string', 'email'],
+        'password' => ['required', 'string'],
+        'g-recaptcha-response' => ['required', 'captcha'],
+    ];
+}
+
 }

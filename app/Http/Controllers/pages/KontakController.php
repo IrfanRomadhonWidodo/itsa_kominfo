@@ -25,7 +25,7 @@ class KontakController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'subjek' => 'required|in:masalah_teknis,keluhan_layanan,saran_pengembangan,pertanyaan_informasi',
-            'pesan' => 'required|string|min:10|max:1000',
+            'pesan' => 'required',
         ], [
             'subjek.required' => 'Silakan pilih subjek feedback.',
             'subjek.in' => 'Subjek yang dipilih tidak valid.',

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Http;
 
 class LoginRequest extends FormRequest
 {
@@ -26,9 +27,20 @@ class LoginRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+    return [
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+            'g-recaptcha-response' => ['required', function ($attribute, $value, $fail) {
+                $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                    'secret' => env('RECAPTCHA_SECRET_KEY'),
+                    'response' => $value,
+                    'remoteip' => request()->ip(),
+                ]);
+
+                if (!($response->json()['success'] ?? false)) {
+                    $fail('Verifikasi reCAPTCHA gagal.');
+                }
+            }],
         ];
     }
 
@@ -82,4 +94,11 @@ class LoginRequest extends FormRequest
     {
         return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
     }
+    public function messages()
+    {
+        return [
+            'g-recaptcha-response.required' => 'Mohon centang kotak reCAPTCHA untuk verifikasi.',
+        ];
+    }
+
 }
