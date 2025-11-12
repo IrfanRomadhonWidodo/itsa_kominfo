@@ -163,14 +163,14 @@
                             {{ __('Remember me') }}
                         </label>
                     </div>
-                    <div class="mt-4">
+                    {{-- <div class="mt-4">
                         <div style="max-width: 120px;">
                             <div class="g-recaptcha" data-sitekey="6Lcpdo4rAAAAAO6qY7hXk4cjdxW5IMk7xnKfstN4"></div>
                         </div>
                         @error('g-recaptcha-response')
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
-                    </div>
+                    </div> --}}
                     <!-- Submit Button -->
                     <div class="mt-6">
                         <a href="{{ route('google.login') }}"

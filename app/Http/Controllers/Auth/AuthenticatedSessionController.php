@@ -87,7 +87,7 @@ class AuthenticatedSessionController extends Controller
     return [
         'email' => ['required', 'string', 'email'],
         'password' => ['required', 'string'],
-        'g-recaptcha-response' => ['required', 'captcha'],
+        // 'g-recaptcha-response' => ['required', 'captcha'],
     ];
 }
 

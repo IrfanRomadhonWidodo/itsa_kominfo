@@ -30,17 +30,17 @@ class LoginRequest extends FormRequest
     return [
             'email' => ['required', 'email'],
             'password' => ['required'],
-            'g-recaptcha-response' => ['required', function ($attribute, $value, $fail) {
-                $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-                    'secret' => env('RECAPTCHA_SECRET_KEY'),
-                    'response' => $value,
-                    'remoteip' => request()->ip(),
-                ]);
+            // 'g-recaptcha-response' => ['required', function ($attribute, $value, $fail) {
+            //     $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            //         'secret' => env('RECAPTCHA_SECRET_KEY'),
+            //         'response' => $value,
+            //         'remoteip' => request()->ip(),
+            //     ]);
 
-                if (!($response->json()['success'] ?? false)) {
-                    $fail('Verifikasi reCAPTCHA gagal.');
-                }
-            }],
+            //     if (!($response->json()['success'] ?? false)) {
+            //         $fail('Verifikasi reCAPTCHA gagal.');
+            //     }
+            // }],
         ];
     }
 
